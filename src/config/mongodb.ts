@@ -38,7 +38,7 @@ import mongoose from "mongoose";
 const connectDB = async () => {
     try {
         // Kết nối đến cơ sở dữ liệu MongoDB
-        await mongoose.connect('mongodb://localhost:27017/MyStore');
+        await mongoose.connect('mongodb://localhost:27017/loopme');
         // Nếu kết nối thành công, in ra thông báo
         console.log('Connect Mongodb successful');
     } catch (error) {

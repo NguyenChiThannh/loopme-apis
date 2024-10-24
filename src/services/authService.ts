@@ -1,112 +1,112 @@
+import { CustomError } from '@/config/customError';
 import { genarateToken } from '@/config/token';
-import UserModel from '@/models/user';
+import UserModel, { IUser } from '@/models/user';
+import { RegisterReq } from '@/validations/AuthReq';
+import { otpService } from '@/services/otpService';
+import { generateRandomString } from '@/utils/algorithms';
+import { ResponseMessages } from '@/utils/messages';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 
-interface User {
-    _id?: string;
-    email?: string;
-    password: string;
-    displayName?: string;
-    avatar?: string;
-    admin?: boolean;
-}
-
-
-interface RegisterUserBody {
-    email: string;
-    password: string;
-}
-
-interface LoginResponse extends User {
-    accessToken: string;
-    refreshToken: string;
-}
-
 let refreshTokens: string[] = [];
 
-// Đăng ký user
-const registerUser = async (reqBody: RegisterUserBody) => {
+const registerUser = async (data: RegisterReq): Promise<number> => {
     try {
         const user = await UserModel.findOne({
-            email: reqBody?.email
+            email: data?.email
         });
-        if (user) return 'USER ALREADY EXISTS';
+
+        if (user) throw new CustomError(409, ResponseMessages.USER.USER_ALREADY_EXISTS);
 
         const salt = await bcrypt.genSalt(10);
-        const hashed = await bcrypt.hash(reqBody.password, salt);
-
-
+        const hashed = await bcrypt.hash(data.password, salt);
 
         const newUser = new UserModel({
-            email: reqBody.email,
+            email: data.email,
             password: hashed,
-            displayName: reqBody.email.match(/^(.*?)@/)![1],
-            avatar: `https://ui-avatars.com/api/?name=${reqBody.email.match(/^(.*?)@/)![1]}&length=1`,
+            displayName: data.displayName,
+            avatar: `https://ui-avatars.com/api/?name=${data.email.match(/^(.*?)@/)![1]}&length=1`,
         });
         await newUser.save();
-        return newUser
+
+        const otp = otpService.createOtp(newUser.email)
+
+        return otp
     } catch (error) {
-        throw new Error(error as string);
+        throw error
     }
 };
 
-// Đăng nhập user
-const loginUser = async (reqBody: RegisterUserBody) => {
+const verifyAccount = async (email: String): Promise<{ accessToken: string; refreshToken: string }> => {
+    try {
+
+        const user = await UserModel.findOne({
+            email
+        })
+        if (user) {
+            user.isActive = true;
+            await user.save();
+        }
+        const accessToken = genarateToken.genarateAccessToken(user)
+        const refreshToken = genarateToken.genarateRefreshToken(user)
+        return { accessToken, refreshToken }
+    } catch (error) {
+        throw error
+    }
+}
+
+const loginUser = async (reqBody) => {
     try {
         const user = await UserModel.findOne({
             email: reqBody?.email
-        });
-        if (!user) return 'NOT FOUND EMAIL';
+        }).lean();
+        if (!user) throw new CustomError(404, ResponseMessages.USER.LOGIN_FAIL);
 
         const comparePassword = await bcrypt.compare(reqBody.password, user.password);
-        if (!comparePassword) return 'PASSWORD IS WRONG';
+        if (!comparePassword) throw new CustomError(404, ResponseMessages.USER.LOGIN_FAIL);
 
-        if (user && comparePassword) {
-            const accessToken = genarateToken.genarateAccessToken(user);
-            const refreshToken = genarateToken.genarateRefreshToken(user);
-            refreshTokens.push(refreshToken);
-            return {
-                ...user,
-                accessToken,
-                refreshToken,
-            };
-        }
-    } catch (error) {
-        throw new Error(error as string);
+        const accessToken = genarateToken.genarateAccessToken(user);
+        const refreshToken = genarateToken.genarateRefreshToken(user);
+        refreshTokens.push(refreshToken);
+        return {
+            ...user,
+            accessToken,
+            refreshToken,
+        };
+    }
+    catch (error) {
+        throw error
     }
 };
 
-// Yêu cầu token mới khi có refresh token
-const requestRefreshToken = async (refreshToken: string): Promise<{ newAccessToken: string; newRefreshToken: string } | null> => {
+const requestRefreshToken = async (refreshToken: string): Promise<{ newAccessToken: string; newRefreshToken: string }> => {
     try {
         if (!refreshTokens.includes(refreshToken)) {
-            return null;
+            throw new CustomError(401, ResponseMessages.USER.UNAUTHORIZED)
         }
 
         return jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN, (err, user) => {
             if (err) {
-                throw new Error(err.message);
+                throw new CustomError(401, ResponseMessages.USER.UNAUTHORIZED)
             }
 
             refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
 
-            const newAccessToken = genarateToken.genarateAccessToken(user as User);
-            const newRefreshToken = genarateToken.genarateRefreshToken(user as User);
+            const newAccessToken = genarateToken.genarateAccessToken(user as IUser);
+            const newRefreshToken = genarateToken.genarateRefreshToken(user as IUser);
             refreshTokens.push(newRefreshToken);
 
             return {
                 newAccessToken,
                 newRefreshToken,
             };
-        }) as Promise<{ newAccessToken: string; newRefreshToken: string }>;
+        });
     } catch (error) {
-        throw new Error(error as string);
+        throw error
     }
 };
 
-// Đăng xuất user
 const logoutUser = async (refreshToken: string): Promise<void> => {
     try {
         refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
@@ -115,8 +115,22 @@ const logoutUser = async (refreshToken: string): Promise<void> => {
     }
 };
 
-// Tìm user theo email
-const findOneUserByEmail = async (email: string): Promise<User | null> => {
+const verifyForgotPassword = async (email: string): Promise<String> => {
+    try {
+        const newPassword = generateRandomString(9)
+        const salt = await bcrypt.genSalt(10);
+        const hashed = await bcrypt.hash(newPassword, salt);
+        await UserModel.findOneAndUpdate(
+            { email },
+            { "$set": { password: hashed } }
+        )
+        return newPassword
+    } catch (error) {
+        throw error
+    }
+}
+
+const findOneUserByEmail = async (email: string): Promise<IUser | null> => {
     try {
         return await UserModel.findOne({
             email,
@@ -126,8 +140,7 @@ const findOneUserByEmail = async (email: string): Promise<User | null> => {
     }
 };
 
-// Tìm user theo ID
-const findOneUserById = async (id: string): Promise<User | null> => {
+const findOneUserById = async (id: string): Promise<IUser | null> => {
     try {
         return await UserModel.findById(id);
     } catch (error) {
@@ -137,9 +150,11 @@ const findOneUserById = async (id: string): Promise<User | null> => {
 
 export const authService = {
     registerUser,
+    verifyAccount,
     loginUser,
     requestRefreshToken,
     logoutUser,
+    verifyForgotPassword,
     findOneUserByEmail,
     findOneUserById,
 };

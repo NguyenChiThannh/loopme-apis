@@ -3,31 +3,38 @@ import { Request, Response, NextFunction } from 'express'
 // import { GMAIL_TYPE } from '~/mail/gmailType'
 import { genarateToken } from '@/config/token'
 import { authService } from '@/services/authService';
+import { LoginReq, RegisterReq } from '@/validations/AuthReq';
+import { successResponse } from '@/utils/responses';
+import { ResponseMessages } from '@/utils/messages';
+import { otpService } from '@/services/otpService';
+import { AuthenticatedRequest } from '@/types';
 
-// Định nghĩa interface cho User (nếu cần)
-interface User {
-    id: string;
-    email: string;
-    password?: string;
-    loginType?: string;
-    createdAt?: Date;
-    admin?: boolean;
-    accessToken?: string;
-    refreshToken?: string;
+
+const registerUser = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const otp: number = await authService.registerUser(req.body as RegisterReq)
+        successResponse({
+            message: ResponseMessages.USER.REGISTER_SUCCESS,
+            res,
+            status: 201,
+            data: {
+                otp,
+            }
+        })
+        return
+    } catch (error) {
+        next(error)
+    }
 }
 
-const registerUser = async (req: Request, res: Response, next: NextFunction)
-
-const loginUser = async (req: Request, res: Response, next: NextFunction) => {
+const verifyAccount = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const token = await authService.loginUser(req.body)
-        if (token == 'NOT FOUND EMAIL' || token == 'PASSWORD IS WRONG') {
-            res.status(400).json({ message: token })
-            return
-        }
+        const { otp } = req.body
+        const email = await otpService.verifyOtp(Number(otp))
+        const token = await authService.verifyAccount(email)
+
         res.cookie('accessToken', token.accessToken, {
             httpOnly: true,
-
             secure: true,
             path: '/',
             sameSite: 'strict',
@@ -38,16 +45,43 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
             path: '/',
             sameSite: 'strict',
         })
+        successResponse({
+            message: ResponseMessages.OTP.VERIFY_OTP_SUCCESS,
+            res,
+            status: 200
+        })
+        return
+    } catch (error) {
+        next(error)
+    }
+}
 
-        const { password, provider, createdAt, admin, accessToken, refreshToken, ...filterUser } = token
 
-        if (filterUser) {
-            res.status(200).json(filterUser)
-            return
-        } else {
-            res.status(401).json({ message: token })
-            return
-        }
+const loginUser = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const data = await authService.loginUser(req.body as LoginReq)
+        res.cookie('accessToken', data.accessToken, {
+            httpOnly: true,
+            secure: true,
+            path: '/',
+            sameSite: 'strict',
+        })
+        res.cookie('refreshToken', data.refreshToken, {
+            httpOnly: true,
+            secure: true,
+            path: '/',
+            sameSite: 'strict',
+        })
+
+        const { password, provider, updatedAt, admin, accessToken, refreshToken, ...filterUser } = data
+
+        successResponse({
+            message: ResponseMessages.USER.LOGIN_SUCCESSFUL,
+            res,
+            status: 200,
+        })
+        return
+
     } catch (error) {
         next(error)
     }
@@ -57,44 +91,91 @@ const requestRefreshToken = async (req: Request, res: Response, next: NextFuncti
     try {
         const refreshToken = req.cookies?.refreshToken
         const token = await authService.requestRefreshToken(refreshToken)
-        if (token) {
-            res.cookie('accessToken', token.newAccessToken, {
-                httpOnly: true,
-                secure: true,
-                path: '/',
-                sameSite: 'strict',
-            })
-            res.cookie('refreshToken', token.newRefreshToken, {
-                httpOnly: true,
-                secure: true,
-                path: '/',
-                sameSite: 'strict',
-            })
-            res.status(200).json({ message: 'Request token successful' })
-        } else {
-            res.status(401).json({ message: 'Token not valid' })
-        }
+
+        res.cookie('accessToken', token.newAccessToken, {
+            httpOnly: true,
+            secure: true,
+            path: '/',
+            sameSite: 'strict',
+        })
+        res.cookie('refreshToken', token.newRefreshToken, {
+            httpOnly: true,
+            secure: true,
+            path: '/',
+            sameSite: 'strict',
+        })
+        successResponse({
+            message: ResponseMessages.USER.REFRESH_TOKEN_SUCCESSFUL,
+            res,
+            status: 200,
+        })
+        return
     } catch (error) {
         next(error)
     }
 }
 
-const logoutUser = async (req: Request, res: Response, next: NextFunction) => {
+const logoutUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const refreshToken = req.cookies?.refreshToken
         authService.logoutUser(refreshToken)
         res.clearCookie('refreshToken')
         res.clearCookie('accessToken')
 
-        res.status(200).json({ message: 'Logout successful' })
+        successResponse({
+            message: ResponseMessages.USER.LOGOUT_SUCCESSFUL,
+            res,
+            status: 200,
+        })
+        return
     } catch (error) {
         next(error)
     }
 }
 
+const forgotPassword = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { email } = req.body
+        const otp: number = await otpService.createOtp(email)
+        successResponse({
+            message: ResponseMessages.USER.FORGOT_PASSWORD,
+            res,
+            status: 201,
+            data: {
+                otp,
+            }
+        })
+        return
+    } catch (error) {
+        next(error)
+    }
+}
+
+const verifyForgotPassword = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { otp } = req.body
+        const email = await otpService.verifyOtp(Number(otp))
+        const newPassword = await authService.verifyForgotPassword(email)
+        successResponse({
+            message: ResponseMessages.USER.VERIFY_FORGOT_PASSWORD,
+            res,
+            status: 201,
+            data: {
+                newPassword,
+            }
+        })
+        return
+    } catch (error) {
+        next(error)
+    }
+}
 
 export const authController = {
+    registerUser,
+    verifyAccount,
     loginUser,
     requestRefreshToken,
     logoutUser,
+    forgotPassword,
+    verifyForgotPassword,
 }

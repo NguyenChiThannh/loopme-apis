@@ -1,17 +1,10 @@
 import jwt, { SignOptions } from 'jsonwebtoken'
 
-interface User {
-    _id?: string;
-    id?: string;
-    admin: boolean;
-    email: string;
-    password: string;
-}
 
 const genarateAccessToken = (user: any): string => {
     return jwt.sign(
         {
-            id: user._id ? user._id.toString() : user.id!.toString(),
+            _id: user._id.toString(),
             admin: user.admin
         },
         process.env.JWT_ACCESS_TOKEN as string,
@@ -22,7 +15,7 @@ const genarateAccessToken = (user: any): string => {
 const genarateRefreshToken = (user: any): string => {
     return jwt.sign(
         {
-            id: user._id ? user._id.toString() : user.id!.toString(),
+            _id: user._id.toString(),
             admin: user.admin
         },
         process.env.JWT_REFRESH_TOKEN as string,
@@ -30,7 +23,7 @@ const genarateRefreshToken = (user: any): string => {
     )
 }
 
-const encryptInfo = (user: User): string => {
+const encryptInfo = (user): string => {
     return jwt.sign(
         {
             email: user.email,
