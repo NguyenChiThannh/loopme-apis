@@ -1,2 +1,12 @@
-node_modules
-dist
+core-service/node_modules
+logger-service/node_modules
+getway-api/node_modules
+
+core-service/dist
+logger-service/dist
+getway-api/dist
+
+
+core-service/.env
+logger-service/.env
+getway-api/.env
