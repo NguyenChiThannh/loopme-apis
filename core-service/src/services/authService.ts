@@ -8,6 +8,8 @@ import { generateRandomString } from '../utils/algorithms';
 import { ResponseMessages } from '../utils/messages';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { sendMail } from '@/mail/sendMail';
+import { GMAIL_TYPE } from '@/mail/gmailType';
 
 
 let refreshTokens: string[] = [];
@@ -21,7 +23,7 @@ const registerUser = async (data: RegisterReq): Promise<number> => {
         if (user) throw new CustomError(409, ResponseMessages.USER.USER_ALREADY_EXISTS);
 
         const salt = await bcrypt.genSalt(10);
-        const hashed = await bcrypt.hash(data.password, salt);
+        const hashed: string = await bcrypt.hash(data.password, salt);
 
         const newUser = new UserModel({
             email: data.email,
@@ -31,8 +33,9 @@ const registerUser = async (data: RegisterReq): Promise<number> => {
         });
         await newUser.save();
 
-        const otp = otpService.createOtp(newUser.email)
+        const otp: number = await otpService.createOtp(newUser.email)
 
+        sendMail(GMAIL_TYPE.COMFIRM_OTP, otp, newUser.email)
         return otp
     } catch (error) {
         throw error
@@ -81,7 +84,7 @@ const loginUser = async (reqBody: LoginReq) => {
     }
 };
 
-const requestRefreshToken = async (refreshToken: string) => {
+const requestRefreshToken = async (refreshToken: string): Promise<{ newAccessToken: string; newRefreshToken: string }> => {
     try {
         if (!refreshTokens.includes(refreshToken)) {
             throw new CustomError(401, ResponseMessages.USER.UNAUTHORIZED)
@@ -124,6 +127,7 @@ const verifyForgotPassword = async (email: string): Promise<string> => {
             { email },
             { "$set": { password: hashed } }
         )
+        sendMail(GMAIL_TYPE.NEW_PASSWORD, newPassword, email)
         return newPassword
     } catch (error) {
         throw error

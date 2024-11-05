@@ -3,7 +3,10 @@
 export const ResponseMessages = {
     NOT_FOUND: "NOT_FOUND",
     OK: "OK",
+    FORBIDDEN: "FORBIDDEN",
+    UNAUTHORIZED: "Unauthorized",
     USER: {
+        TOKEN_EXPIRED: "JWT Expired",
         UNAUTHORIZED: "Unauthorized",
         USER_ALREADY_EXISTS: "User already exists. Please use a different email address.",
         REGISTER_SUCCESS: "Registered successfully. Please enter the OTP to verify your account.",
@@ -15,6 +18,7 @@ export const ResponseMessages = {
         LOGOUT_SUCCESSFUL: "Logout successful.",
         FORGOT_PASSWORD: "Please enter the OTP to set a new password.",
         VERIFY_FORGOT_PASSWORD: "Forgot password successful.",
+        SEARCH_USER_SUCCESS: "Search user successful."
     },
     OTP: {
         VERIFY_OTP_FAIL: "OTP is invalid or has expired.",
@@ -22,20 +26,25 @@ export const ResponseMessages = {
         REFRESH_OTP_SUCCESS: "Verify OTP successful",
     },
     GROUP: {
-        CREATE_GROUP_SUCCESS: "Create goup successful.",
+        CREATE_GROUP_SUCCESS: "Create group successful.",
+        GET_GROUP_SUCCESS: "Get group successful.",
         ADD_PENDING_INVITATIONS_SUCCESS: "Add pending invitations successful.",
         ACCEPT_PENDING_INVITATIONS_SUCCESS: "Accept pending invitations successful.",
         REMOVE_PENDING_INVITATIONS_SUCCESS: "Remove pending invitations successful.",
         ADD_MEMBER_TO_GROUP_SUCCESS: "Add member to group successful.",
         REMOVE_MEMBER_FROM_GROUP_SUCCESS: "Remove member from group successful.",
         GET_ALL_PENDING_INVITATIONS_SUCCESS: "Get all pending invitations successful",
-        GET_ALL_MEMBERS_GROUP_SUCCESS: "Get all members in group successful"
+        GET_ALL_MEMBERS_GROUP_SUCCESS: "Get all members in group successful",
+        SEARCH_GROUP_SUCCESS: "Search group successful"
     },
     POST: {
         CREATE_POST_SUCCESS: "Upvote post successful",
+        GET_POST_SUCCESS: "Get post successful",
         UPVOTE_POST_SUCCESS: "Upvote post successful",
         DOWNVOTE_POST_SUCCESS: "Downvote post successful",
         REMOVEVOTE_POST_SUCCESS: "Removevote post successful",
+        ADD_COMMENT_POST_SUCCESS: "Add comment post successful",
+        DELETE_COMMENT_POST_SUCCESS: "Delete comment post successful",
     },
     FRIEND: {
         ADD_PENDING_INVITATIONS_SUCCESS: "Add pending invitations successful.",
@@ -44,5 +53,12 @@ export const ResponseMessages = {
         REMOVE_FRIEND_SUCCESS: 'Remove friend successful.',
         GET_ALL_FRIEND_SUCCESS: 'Get all friend successful.',
         GET_ALL_INVITATIONS_FRIEND_SUCCESS: "Get all invitations successful."
+    },
+    NOTIFICATIONS: {
+        GET_ALL_NOTIFICATIONS_SUCCESS: "Get all notifications successful"
+    },
+    MESSAGE: {
+        GET_MESSAGE_SUCCESS: "Get message success",
+        SEND_MESSAGE_SUCCESS: "Send messsage success"
     }
 }

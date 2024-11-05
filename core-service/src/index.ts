@@ -29,9 +29,9 @@ const START_SEVER = () => {
     // Middleware xử lý lỗi tập trung
     app.use(errorHandlingMiddleware)
 
-    app.listen(5000, () => {
+    app.listen(Number(process.env.APP_PORT), process.env.APP_HOST, () => {
         // eslint-disable-next-line no-console
-        console.log(`3.I am  running at PORT :5000/`)
+        console.log(`3.I am  running at PORT ${process.env.APP_HOST}:${process.env.APP_PORT}`)
     })
     exitHook(() => {
         // CLOSE_DB()

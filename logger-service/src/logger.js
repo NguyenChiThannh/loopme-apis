@@ -1,23 +1,37 @@
 import winston from 'winston'
 import axios from 'axios'
 import 'dotenv/config'
+import { formatDate } from './utils.js';
 
 // Set up Winston logger
 const logger = winston.createLogger({
-    level: "info",
+    level: 'info',
     format: winston.format.combine(
         winston.format.timestamp(),
-        winston.format.json()
+        winston.format.printf(({ timestamp, level, message, status }) => {
+            return JSON.stringify({
+                timestamp,    // Ensure timestamp is first
+                level,
+                status,
+                message,
+            });
+        })
     ),
     transports: [
         new winston.transports.Console(),
+        new winston.transports.File({
+            filename: 'info.log',
+            level: 'info',
+        }),
     ],
 });
+
 
 // Function to send error logs to Discord
 async function sendLogToDiscord(logData) {
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
-    const discordMessage = `🐞 **Server Error**\n**Time:** ${logData.timestamp}\n**Level:** ${logData.level}\n**Message:** ${logData.message}\n**Stack Trace:**\n\`\`\`${logData.stack}\`\`\``;
+    const formattedDate = formatDate(new Date(logData.timestamp));
+    const discordMessage = `🐞 **Server Error**\n**Time:** ${formattedDate}\n**Level:** ${logData.level}\n**Message:** ${logData.message}\n**Stack Trace:**\n\`\`\`${logData.stack}\`\`\``;
 
     try {
         await axios.post(webhookUrl, {
@@ -42,5 +56,13 @@ export const logError = ({ message, stack }) => {
         stack,
         level: 'error',
         timestamp: new Date().toISOString()
+    });
+};
+
+export const logInfo = ({ message, status }) => {
+    logger.info({
+        timestamp: new Date().toISOString(),
+        status,
+        message
     });
 };

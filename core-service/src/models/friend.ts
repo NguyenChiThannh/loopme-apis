@@ -2,16 +2,16 @@ import { IUser } from './user';
 import mongoose, { Schema, Document, Types } from 'mongoose';
 interface IFriend extends Document {
     _id: Types.ObjectId;
-    senderId: Types.ObjectId | IUser;
-    receiverId: Types.ObjectId | IUser;
+    sender: Types.ObjectId | IUser;
+    receiver: Types.ObjectId | IUser;
     status: 'pending' | 'accepted'
     sentAt: Date;
     acceptedAt?: Date;
 }
 
 const FriendSchema = new Schema({
-    senderId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    receiverId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    sender: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    receiver: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     status: {
         type: String,
         enum: ['pending', 'accepted'],

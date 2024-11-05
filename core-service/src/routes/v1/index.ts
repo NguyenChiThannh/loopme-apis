@@ -5,6 +5,9 @@ import { groupRoute } from './groupRoute'
 import { otpRoute } from './otpRoute'
 import { postRoute } from './postRoute'
 import express, { Request, Response } from 'express'
+import { userRoute } from '@/routes/v1/userRoute'
+import { messageRoute } from '@/routes/v1/messageRoute'
+import { notificationRoute } from '@/routes/v1/notificationRoute'
 
 const logger = new Logger();
 const Router = express.Router()
@@ -26,7 +29,7 @@ Router.get('/test-error-logger', (req: Request, res: Response) => {
 Router.use('/auth', authRoute)
 
 // User api
-// Router.use('/user', userRoute)
+Router.use('/user', userRoute)
 
 // OTP api
 Router.use('/otps', otpRoute)
@@ -39,5 +42,11 @@ Router.use('/groups', groupRoute)
 
 // Friend api
 Router.use('/friends', friendRoute)
+
+// Message api
+Router.use('/messages', messageRoute)
+
+// Notification api
+Router.use('/notifications', notificationRoute)
 
 export const APIs_V1 = Router

@@ -1,3 +1,4 @@
+import { notificationService } from "@/services/notificationService"
 import { CustomError } from "../config/customError"
 import GroupModel from "../models/group"
 import { ResponseMessages } from "../utils/messages"
@@ -7,12 +8,24 @@ const create = async (data) => {
     try {
         const group = new GroupModel({
             ...data,
-            ownerId: data.userId,
+            owner: data.userId,
         })
-        group.save()
+        await group.save()
         return group.toObject()
     } catch (error) {
         throw error
+    }
+}
+
+const getGroupById = async (groupId: string) => {
+    try {
+        const groupObjId = new mongoose.Types.ObjectId(groupId)
+        const group = await GroupModel.findOne({
+            _id: groupObjId
+        }).populate('owner', 'displayName avatar _id').populate("members.user", 'displayName avatar _id')
+        return group
+    } catch (error) {
+
     }
 }
 
@@ -29,8 +42,8 @@ const isMemberGroup = async (userId: string, groupId: string): Promise<boolean> 
                 $project: {
                     isMember: {
                         $or: [
-                            { $in: [userObjId, "$members.userId"] },
-                            { $eq: [userObjId, "$ownerId"] },
+                            { $in: [userObjId, "$members.user"] },
+                            { $eq: [userObjId, "$owner"] },
                         ]
                     },
                     _id: 0,
@@ -55,7 +68,7 @@ const isOwnerGroup = async (userId: string, groupId: string): Promise<boolean> =
 
         const group = await GroupModel.findOne({
             _id: groupObjId,
-            ownerId: userObjId,
+            owner: userObjId,
         });
 
         return group !== null;
@@ -68,16 +81,29 @@ const addPendingInvitations = async (userId: string, groupId: string): Promise<v
     try {
         const userObjId = new mongoose.Types.ObjectId(userId)
         const groupObjId = new mongoose.Types.ObjectId(groupId)
-        console.log('🚀 ~ addPendingInvitations ~ groupObjId:', groupObjId)
+
+        const group = await GroupModel.findById(groupObjId).select('owner');
+
+        if (!group) {
+            throw new CustomError(404, ResponseMessages.NOT_FOUND);
+        }
+
         await GroupModel.updateOne(
             {
                 _id: groupObjId,
-                "members.userId": { $ne: userObjId },
-                "pendingInvitations.userId": { $ne: userObjId }
+                "members.user": { $ne: userObjId },
+                "pendingInvitations.user": { $ne: userObjId }
             },
             {
-                $push: { pendingInvitations: { userId: userObjId, joinAt: new Date() } }
+                $push: { pendingInvitations: { user: userObjId, joinAt: new Date() } }
             })
+
+        await notificationService.create({
+            actor: userId,
+            recipient: group.owner.toString(),
+            groupId: groupId,
+            type: 'request_to_join_group',
+        })
         return
     } catch (error) {
         throw error
@@ -88,16 +114,31 @@ const acceptPendingInvitations = async (userId: string, groupId: string): Promis
     try {
         const userObjId = new mongoose.Types.ObjectId(`${userId}`)
         const groupObjId = new mongoose.Types.ObjectId(`${groupId}`)
+
+        const group = await GroupModel.findById(groupObjId).select('owner');
+
+        if (!group) {
+            throw new CustomError(404, ResponseMessages.NOT_FOUND);
+        }
+
         await GroupModel.updateOne(
             {
                 _id: groupObjId,
-                "pendingInvitations.userId": { $eq: userObjId }
+                "pendingInvitations.user": { $eq: userObjId }
             },
             {
-                $pull: { pendingInvitations: { userId: userObjId } },
-                $push: { members: { userId: userObjId, joinAt: new Date() } }
+                $pull: { pendingInvitations: { user: userObjId } },
+                $push: { members: { user: userObjId, joinAt: new Date() } }
             }
         )
+
+        await notificationService.create({
+            actor: group.owner.toString(),
+            recipient: userId,
+            groupId: groupId,
+            type: 'accept_join_group',
+        })
+
         return
     } catch (error) {
         throw error
@@ -111,10 +152,10 @@ const removePendingInvitations = async (userId: string, groupId: string): Promis
         await GroupModel.updateOne(
             {
                 _id: groupObjId,
-                "pendingInvitations.userId": { $eq: userObjId }
+                "pendingInvitations.user": { $eq: userObjId }
             },
             {
-                $pull: { pendingInvitations: { userId: userObjId } },
+                $pull: { pendingInvitations: { user: userObjId } },
             }
         )
         return
@@ -130,10 +171,10 @@ const addMemberToGroup = async (userId: string, groupId: string): Promise<void> 
         await GroupModel.updateOne(
             {
                 _id: groupObjId,
-                "members.userId": { $ne: userObjId }
+                "members.user": { $ne: userObjId }
             },
             {
-                $push: { members: { userId: userObjId, joinAt: new Date() } }
+                $push: { members: { user: userObjId, joinAt: new Date() } }
             }
         )
         return
@@ -149,10 +190,10 @@ const removeMemberFromGroup = async (userId: string, groupId: string): Promise<v
         await GroupModel.updateOne(
             {
                 _id: groupObjId,
-                "members.userId": { $eq: userObjId }
+                "members.user": { $eq: userObjId }
             },
             {
-                $pull: { members: { userId: userObjId } }
+                $pull: { members: { user: userObjId } }
             }
         )
         return
@@ -164,7 +205,7 @@ const removeMemberFromGroup = async (userId: string, groupId: string): Promise<v
 const getAllPendingInvitations = async (groupId: string) => {
     try {
         const group = await GroupModel.findById(groupId, 'pendingInvitations')
-            .populate('pendingInvitations.userId', 'displayName avatar')
+            .populate('pendingInvitations.user', 'displayName avatar')
             .exec();
 
         if (!group) throw new CustomError(404, ResponseMessages.NOT_FOUND)
@@ -178,7 +219,7 @@ const getAllPendingInvitations = async (groupId: string) => {
 const getAllMembers = async (groupId: string) => {
     try {
         const group = await GroupModel.findById(groupId, 'members')
-            .populate('members.userId', 'displayName avatar')
+            .populate('members.user', 'displayName avatar')
             .exec();
 
         if (!group) throw new CustomError(404, ResponseMessages.NOT_FOUND)
@@ -188,6 +229,56 @@ const getAllMembers = async (groupId: string) => {
         throw error
     }
 }
+
+const searchGroups = async (userId: string, search : string) => {
+    try {
+        const userObjectId = new mongoose.Types.ObjectId(userId);
+
+        const groups = await GroupModel.aggregate([
+            {
+                $match: {
+                    name: { $regex: search, $options: "i" }
+                }
+            },
+            {
+                $addFields: {
+                    isMember: { $in: [userObjectId, "$members.user"] },
+                    isPending: { $in: [userObjectId, "$pendingInvitations.user"] }
+                }
+            },
+            {
+                $addFields: {
+                    status: {
+                        $cond: {
+                            if: "$isMember",
+                            then: "joined",
+                            else: {
+                                $cond: {
+                                    if: "$isPending",
+                                    then: "pending",
+                                    else: "not_joined"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    owner: 1,
+                    background_cover: 1,
+                    isPublic: 1,
+                    status: 1
+                }
+            }
+        ]);
+        return groups;
+    } catch (error) {
+        throw error;
+    }
+};
 
 export const groupService = {
     create,
@@ -200,4 +291,6 @@ export const groupService = {
     removeMemberFromGroup,
     getAllPendingInvitations,
     getAllMembers,
+    getGroupById,
+    searchGroups,
 }

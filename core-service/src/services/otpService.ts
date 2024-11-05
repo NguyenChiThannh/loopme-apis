@@ -1,7 +1,9 @@
+import { sendMail } from "@/mail/sendMail";
 import { CustomError } from "../config/customError";
 import OtpModel from "../models/otp";
 import { generateOTP } from "../utils/algorithms";
 import { ResponseMessages } from "../utils/messages";
+import { GMAIL_TYPE } from "@/mail/gmailType";
 
 
 const createOtp = async (email: string): Promise<number> => {
@@ -19,8 +21,8 @@ const createOtp = async (email: string): Promise<number> => {
             email,
             otp,
         });
-
         await newOtp.save()
+        sendMail(GMAIL_TYPE.COMFIRM_OTP, otp, email)
         return otp
     } catch (error) {
         throw error

@@ -26,11 +26,10 @@ export const errorHandlingMiddleware = (err: any, req: Request, res: Response, n
 
     if (process.env.BUILD_MODE !== 'dev') delete responseError.stack;
 
-
-    logger.publishMessage("Error", {
-        message: err.message || 'Internal Server Error',
-        stack: err.stack
-    })
+    // logger.publishMessage("Error", {
+    //     message: err.message || 'Internal Server Error',
+    //     stack: err.stack
+    // })
 
     res.status(responseError.statusCode).json(responseError);
     return

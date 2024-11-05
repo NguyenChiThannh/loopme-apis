@@ -2,16 +2,22 @@ import mongoose, { Schema, Document, Types } from 'mongoose';
 
 type VoteValue = 'UPVOTE' | 'DOWNVOTE';
 
-export interface IVote {
-    userId: Types.ObjectId;
-    value: VoteValue; // Nếu bạn muốn giới hạn giá trị
+interface IVote {
+    user: Types.ObjectId;
+    value: VoteValue;
+}
+
+interface IComment {
+    user: Types.ObjectId;
+    value: string;
 }
 
 export interface IPost extends Document {
-    groupId?: Types.ObjectId;
+    group?: Types.ObjectId;
     content: string;
-    userId: Types.ObjectId;
+    user: Types.ObjectId;
     images: string[];
+    comments: IComment[]
     privacy: 'public' | 'private' | 'friends';
     votes: IVote[];
     createdAt: Date;
@@ -19,7 +25,7 @@ export interface IPost extends Document {
 }
 
 const PostSchema: Schema = new Schema({
-    groupId: {
+    group: {
         type: Schema.Types.ObjectId,
         ref: 'Group',
         default: null,
@@ -28,7 +34,7 @@ const PostSchema: Schema = new Schema({
         type: String,
         required: [true, 'Content is required'],
     },
-    userId: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: [true, 'User ID is required'],
@@ -44,7 +50,7 @@ const PostSchema: Schema = new Schema({
     },
     votes: [{
         _id: false,
-        userId: {
+        user: {
             type: Schema.Types.ObjectId,
             ref: 'User',
             required: true,
@@ -53,6 +59,17 @@ const PostSchema: Schema = new Schema({
             type: String,
             required: true,
             enum: ['UPVOTE', 'DOWNVOTE'], // Giới hạn giá trị
+        },
+    }],
+    comments: [{
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
+        value: {
+            type: String,
+            required: true,
         },
     }],
 }, { timestamps: true });

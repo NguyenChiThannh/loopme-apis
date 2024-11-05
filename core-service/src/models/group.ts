@@ -2,13 +2,13 @@ import mongoose, { Schema, Document, Types } from 'mongoose';
 
 export interface IGroup extends Document {
     name: string;
-    ownerId: Types.ObjectId;
+    owner: Types.ObjectId;
     members: Array<{
-        userId: Types.ObjectId;
+        user: Types.ObjectId;
         joinAt: Date;
     }>;
     pendingInvitations: Array<{
-        userId: Types.ObjectId;
+        user: Types.ObjectId;
         joinAt: Date;
     }>;
     background_cover?: string;
@@ -17,13 +17,12 @@ export interface IGroup extends Document {
     updatedAt: Date;
 }
 
-
 const GroupSchema: Schema = new Schema({
     name: {
         type: String,
         required: true,
     },
-    ownerId: {
+    owner: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
@@ -31,7 +30,7 @@ const GroupSchema: Schema = new Schema({
     members: [
         {
             _id: false,
-            userId: {
+            user: {
                 type: Schema.Types.ObjectId,
                 ref: 'User',
                 required: true,
@@ -46,7 +45,7 @@ const GroupSchema: Schema = new Schema({
     pendingInvitations: [
         {
             _id: false,
-            userId: {
+            user: {
                 type: Schema.Types.ObjectId,
                 ref: 'User',
                 required: true,
@@ -64,7 +63,7 @@ const GroupSchema: Schema = new Schema({
     },
     isPublic: {
         type: Boolean,
-        default: true,
+        default: false,
     },
 }, { timestamps: true });
 

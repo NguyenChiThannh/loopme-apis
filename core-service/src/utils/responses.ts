@@ -1,3 +1,4 @@
+import Logger from "@/utils/amqp";
 import type { Response } from "express";
 
 interface reponsePrams {
@@ -7,8 +8,12 @@ interface reponsePrams {
     data?: any,
 }
 
-
+const logger = new Logger();
 export function successResponse({ res, message, status, data }: reponsePrams) {
+    // logger.publishMessage("Info", {
+    //     status,
+    //     message
+    // })
     return res.status(status).json({ success: true, message, data: data });
 }
 

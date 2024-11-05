@@ -1,5 +1,5 @@
 import amqp from 'amqplib'
-import { logError } from './logger.js';
+import { logError, logInfo } from './logger.js';
 
 export const consumeMessages = async () => {
     const connection = await amqp.connect(process.env.AMQP_PORT);
@@ -7,13 +7,23 @@ export const consumeMessages = async () => {
 
     await channel.assertExchange(process.env.ExchangeName, "direct");
 
-    const q = await channel.assertQueue("ErrorQueue");
+    await channel.assertQueue("ErrorQueue");
+    await channel.assertQueue("InfoQueue");
 
-    await channel.bindQueue(q.queue, process.env.ExchangeName, "Error");
+    await channel.bindQueue("ErrorQueue", process.env.ExchangeName, "Error");
+    await channel.bindQueue("InfoQueue", process.env.ExchangeName, "Info");
 
-    await channel.consume(q.queue, (msg) => {
+    channel.consume("ErrorQueue", (msg) => {
         const message = JSON.parse(msg.content);
-        logError(message)
+        console.log('🚀 ~ channel.consume ~ message:', message)
+        logError(message);
+        channel.ack(msg);
+    });
+
+    channel.consume("InfoQueue", (msg) => {
+        const message = JSON.parse(msg.content);
+        console.log('🚀 ~ channel.consume ~ message:', message)
+        logInfo(message);
         channel.ack(msg);
     });
 }

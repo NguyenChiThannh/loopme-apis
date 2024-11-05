@@ -1,41 +1,48 @@
+import UserModel from "@/models/user"
 import FriendModel from "../models/friend"
 import mongoose from "mongoose"
+import { notificationService } from "@/services/notificationService"
 
-const addPendingInvitations = async (userId1: string, userId2: string) => {
+const addPendingInvitations = async (myId: string, friendId: string): Promise<void> => {
     try {
-        const userObjId1 = new mongoose.Types.ObjectId(userId1)
-        const userObjId2 = new mongoose.Types.ObjectId(userId2)
+        const myObjectId = new mongoose.Types.ObjectId(myId)
+        const friendObjectId = new mongoose.Types.ObjectId(friendId)
         await FriendModel.updateOne(
             {
                 $or: [
-                    { senderId: userObjId1, receiverId: userObjId2, status: 'pending' },
-                    { senderId: userObjId2, receiverId: userObjId1, status: 'pending' }
+                    { sender: myObjectId, receiver: friendObjectId, status: 'pending' },
+                    { sender: friendObjectId, receiver: myObjectId, status: 'pending' }
                 ]
             },
             {
                 $setOnInsert: {
-                    senderId: userObjId1,
-                    receiverId: userObjId2,
+                    sender: myObjectId,
+                    receiver: friendObjectId,
                     status: 'pending',
                     sentAt: new Date()
                 }
             },
             { upsert: true }
         );
+        await notificationService.create({
+            actor: myId,
+            recipient: friendId,
+            type: 'friend_request',
+        })
     } catch (error) {
         throw error
     }
 }
 
-const removePendingInvitations = async (userId1: string, userId2: string) => {
+const removePendingInvitations = async (myId: string, friendId: string): Promise<void> => {
     try {
-        const userObjId1 = new mongoose.Types.ObjectId(userId1)
-        const userObjId2 = new mongoose.Types.ObjectId(userId2)
+        const myObjectId = new mongoose.Types.ObjectId(myId)
+        const friendObjectId = new mongoose.Types.ObjectId(friendId)
         await FriendModel.deleteOne(
             {
                 $or: [
-                    { senderId: userObjId1, receiverId: userObjId2, status: 'pending' },
-                    { senderId: userObjId2, receiverId: userObjId1, status: 'pending' }
+                    { sender: myObjectId, receiver: friendObjectId, status: 'pending' },
+                    { sender: friendObjectId, receiver: myObjectId, status: 'pending' }
                 ]
             }
         );
@@ -45,13 +52,13 @@ const removePendingInvitations = async (userId1: string, userId2: string) => {
     }
 }
 
-const acceptInvitations = async (userId1: string, userId2: string) => {
+const acceptInvitations = async (myId: string, friendId: string): Promise<void> => {
     try {
-        const userObjId1 = new mongoose.Types.ObjectId(userId1)
-        const userObjId2 = new mongoose.Types.ObjectId(userId2)
+        const myObjectId = new mongoose.Types.ObjectId(myId)
+        const friendObjectId = new mongoose.Types.ObjectId(friendId)
         await FriendModel.updateOne(
             {
-                senderId: userObjId1, receiverId: userObjId2, status: 'pending'
+                receiver: myObjectId, sender: friendObjectId, status: 'pending'
             },
             {
                 $set: {
@@ -60,20 +67,26 @@ const acceptInvitations = async (userId1: string, userId2: string) => {
                 }
             }
         );
+
+        await notificationService.create({
+            actor: myId,
+            recipient: friendId,
+            type: 'accept_friend',
+        })
     } catch (error) {
         throw error
     }
 }
 
-const removeFriend = async (userId1: string, userId2: string) => {
+const removeFriend = async (myId: string, friendId: string): Promise<void> => {
     try {
-        const userObjId1 = new mongoose.Types.ObjectId(userId1)
-        const userObjId2 = new mongoose.Types.ObjectId(userId2)
+        const myObjectId = new mongoose.Types.ObjectId(myId)
+        const friendObjectId = new mongoose.Types.ObjectId(friendId)
         await FriendModel.deleteOne(
             {
                 $or: [
-                    { senderId: userObjId1, receiverId: userObjId2, status: 'accepted' },
-                    { senderId: userObjId2, receiverId: userObjId1, status: 'accepted' }
+                    { sender: myObjectId, receiver: friendObjectId, status: 'accepted' },
+                    { sender: friendObjectId, receiver: myObjectId, status: 'accepted' }
                 ]
             })
     } catch (error) {
@@ -81,44 +94,83 @@ const removeFriend = async (userId1: string, userId2: string) => {
     }
 }
 
-const getAllFriend = async (userId: string) => {
+const getAllFriend = async ({ userId, page, size }: {
+    userId: string,
+    page: number,
+    size: number
+}) => {
     try {
         const userObjId = new mongoose.Types.ObjectId(userId)
+        const skip: number = (page - 1) * size;
         const friendsList = await FriendModel.aggregate([
             {
                 $match: {
-                    $or: [
-                        { senderId: userObjId },
-                        { receiverId: userObjId }
+                    $and: [
+                        {
+                            $or: [
+                                { sender: userObjId },
+                                { receiver: userObjId }
+                            ]
+                        },
+                        {
+                            status: "accepted"
+                        }
                     ]
                 }
             },
             {
-                $lookup: {
-                    from: 'users',
-                    localField: 'friends',
-                    foreignField: '_id',
-                    as: 'friendsDetails'
+                $project: {
+                    userId: {
+                        $cond: {
+                            if: { $eq: ["$sender", userObjId] },
+                            then: "$receiver",
+                            else: "$sender"
+                        }
+                    },
+                    acceptedAt: 1,
+                    _id: 0
                 }
             },
             {
-                $unwind: '$friendsDetails'
+                $lookup: {
+                    from: "users",
+                    localField: "userId",
+                    foreignField: "_id",
+                    as: "user"
+                }
             },
             {
-                $match: {
-                    $expr: {
-                        $ne: ['$friendsDetails._id', userObjId]
-                    }
+                $replaceWith: {
+                    $mergeObjects: [{ $arrayElemAt: ["$user", 0] }, "$$ROOT"]
                 }
             },
             {
                 $project: {
-                    'friendsDetails.name': 1,
-                    'friendsDetails.avatar': 1,
-                    'friendsDetails._id': 1
+                    _id: 1,
+                    displayName: 1,
+                    avatar: 1,
+                    acceptedAt: 1,
                 }
-            }
+            },
+            { $skip: skip },
+            { $limit: size }
         ]);
+
+        // const totalFriends : number = await FriendModel.countDocuments({
+        //     $and: [
+        //         {
+        //             $or: [
+        //                 { sender: userObjId },
+        //                 { receiver: userObjId }
+        //             ]
+        //         },
+        //         {
+        //             status: "accepted"
+        //         }
+        //     ]
+        // });
+
+        // const totalPages :number = Math.ceil(totalFriends / size);
         return friendsList
     } catch (error) {
         throw error
@@ -127,26 +179,83 @@ const getAllFriend = async (userId: string) => {
 
 const getAllInvitationsFriend = async (userId: string) => {
     try {
-
+        const userObjectId = new mongoose.Types.ObjectId(userId)
         const invitations = await FriendModel.find({
-            receiverId: userId,
+            receiver: userObjectId,
             status: 'pending'
         })
-            .populate('senderId', 'displayName avatar _id')
-            .select('-receiverId');
-
+            .populate('sender', 'displayName avatar _id')
+            .select('-receiver -_id -status');
         return invitations;
     } catch (error) {
         throw error
     }
 }
 
-const suggestMutualFriends = async () => {
+const suggestMutualFriends = async (userId: string) => {
     try {
-        return
+        const userObjectId = new mongoose.Types.ObjectId(userId)
+        const friendIds = await getFriendIds(userObjectId)
+        const mutualFriends = await UserModel.find(
+            {
+                $and: [
+                    { _id: { $nin: friendIds } },
+                    { _id: { $ne: userObjectId } }
+                ]
+            },
+            { displayName: 1, avatar: 1 }
+        )
+            .limit(4);
+        return mutualFriends
     } catch (error) {
         throw error
     }
+}
+
+const getFriendIds = async (userObjectId) => {
+    const friendIdsResult = await FriendModel.aggregate([
+        {
+            $match: {
+                $and: [
+                    {
+                        $or: [
+                            { sender: userObjectId },
+                            { receiver: userObjectId }
+                        ]
+                    },
+                    {
+                        status: "accepted"
+                    }
+                ]
+            }
+        },
+        {
+            $project: {
+                userId: {
+                    $cond: {
+                        if: { $eq: ["$sender", userObjectId] },
+                        then: "$receiver",
+                        else: "$sender"
+                    }
+                },
+                _id: 0
+            }
+        },
+        {
+            $group: {
+                _id: null,
+                friendIds: { $push: "$userId" }
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                friendIds: 1
+            }
+        }
+    ])
+    const friendIds = friendIdsResult.length > 0 ? friendIdsResult[0].friendIds : [];
+    return friendIds
 }
 
 export const friendService = {
@@ -157,4 +266,5 @@ export const friendService = {
     getAllFriend,
     getAllInvitationsFriend,
     suggestMutualFriends,
+    getFriendIds,
 }

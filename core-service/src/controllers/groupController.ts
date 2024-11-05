@@ -25,11 +25,31 @@ const create = async (req: AuthenticatedRequest, res: Response, next: NextFuncti
 }
 
 const getGroupById = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        const { groupId } = req.params
+        const group = await groupService.getGroupById(groupId)
+        successResponse({
+            message: ResponseMessages.GROUP.GET_GROUP_SUCCESS,
+            res,
+            status: 200,
+            data: group,
+        })
+    } catch (error) {
+        next(error)
+    }
 
 }
 
 const getPostsInGroup = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-
+    try {
+        successResponse({
+            message: ResponseMessages.GROUP.GET_GROUP_SUCCESS,
+            res,
+            status: 200,
+        })
+    } catch (error) {
+        next(error)
+    }
 }
 
 const addPendingInvitations = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
@@ -65,8 +85,7 @@ const acceptPendingInvitations = async (req: AuthenticatedRequest, res: Response
 
 const removePendingInvitations = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
-        const userId: string = req.user._id
-        const { groupId } = req.params
+        const { groupId, userId } = req.params
         await groupService.removePendingInvitations(userId, groupId)
         successResponse({
             message: ResponseMessages.GROUP.REMOVE_PENDING_INVITATIONS_SUCCESS,
@@ -112,11 +131,15 @@ const removeMemberFromGroup = async (req: AuthenticatedRequest, res: Response, n
 const getAllPendingInvitations = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const { groupId } = req.params
-        await groupService.getAllPendingInvitations(groupId)
+        const invitations = await groupService.getAllPendingInvitations(groupId)
         successResponse({
             message: ResponseMessages.GROUP.GET_ALL_PENDING_INVITATIONS_SUCCESS,
             res,
             status: 200,
+            data: {
+                invitations
+            }
+
         })
         return
     } catch (error) {
@@ -142,6 +165,23 @@ const getAllMembers = async (req: AuthenticatedRequest, res: Response, next: Nex
     }
 }
 
+const searchGroups = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.user._id
+        const search = req.query.q as string
+        const groups = await groupService.searchGroups(userId, search)
+        successResponse({
+            message: ResponseMessages.GROUP.SEARCH_GROUP_SUCCESS,
+            res,
+            status: 200,
+            data: groups,
+        })
+        return
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const groupController = {
     create,
     getGroupById,
@@ -153,4 +193,5 @@ export const groupController = {
     getAllPendingInvitations,
     getAllMembers,
     getPostsInGroup,
+    searchGroups,
 }

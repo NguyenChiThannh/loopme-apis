@@ -1,6 +1,9 @@
+import { verifyMiddleware } from "@/middlewares/verifyMiddleware";
 import { friendController } from "../../controllers/friendController"
 import express from "express"
 const Router = express.Router()
+
+Router.use(verifyMiddleware.verifyToken);
 
 Router.route('/pending-invitations/:userId')
     .post(friendController.addPendingInvitations)

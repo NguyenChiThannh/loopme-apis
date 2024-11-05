@@ -12,6 +12,8 @@ export interface IUser extends Document {
     updatedAt?: Date;
 }
 
+export type UserUpdateData = Pick<IUser, 'displayName' | 'avatar' | 'password'>;
+
 const validateEmail = function (email) {
     const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(email)
@@ -54,3 +56,4 @@ const UserSchema = new Schema({
 const UserModel = mongoose.model<IUser>('User', UserSchema);
 
 export default UserModel;
+

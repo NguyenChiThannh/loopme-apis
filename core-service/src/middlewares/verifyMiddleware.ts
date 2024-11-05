@@ -11,9 +11,10 @@ const verifyToken = async (req: AuthenticatedRequest, res: Response, next: NextF
         if (accessToken) {
             jwt.verify(accessToken, process.env.JWT_ACCESS_TOKEN, (err, user) => {
                 if (err) {
+                    if (err.message.includes('jwt expired'))
+                        throw new CustomError(401, ResponseMessages.USER.TOKEN_EXPIRED)
                     throw new CustomError(401, ResponseMessages.USER.UNAUTHORIZED)
                 }
-                console.log('🚀 ~ jwt.verify ~ user:', user)
                 req.user = user
                 next()
             })

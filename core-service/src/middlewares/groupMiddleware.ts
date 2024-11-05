@@ -6,13 +6,13 @@ import { NextFunction, Response } from "express";
 
 const checkGroupMembership = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
-        const groupId = req.body.groupId || req.params.groupId
+        const groupId : string = req.body.groupId || req.params.groupId
         if (!groupId) {
             throw new CustomError(404, ResponseMessages.NOT_FOUND)
         }
-        const isMember = await groupService.isMemberGroup(req.user._id, groupId);
+        const isMember : boolean = await groupService.isMemberGroup(req.user._id, groupId);
         if (!isMember) {
-            throw new CustomError(401, ResponseMessages.USER.UNAUTHORIZED)
+            throw new CustomError(403, ResponseMessages.FORBIDDEN)
         }
         next();
     } catch (error) {
@@ -22,14 +22,14 @@ const checkGroupMembership = async (req: AuthenticatedRequest, res: Response, ne
 
 const checkGroupOwner = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
-        const groupId = req.body.groupId || req.params.groupId
+        const groupId : string = req.body.groupId || req.params.groupId
         if (!groupId) {
             throw new CustomError(404, ResponseMessages.NOT_FOUND)
         }
 
-        const isMember = await groupService.isOwnerGroup(req.user._id, groupId);
+        const isMember : boolean = await groupService.isOwnerGroup(req.user._id, groupId);
         if (!isMember) {
-            throw new CustomError(401, ResponseMessages.USER.UNAUTHORIZED)
+            throw new CustomError(403, ResponseMessages.FORBIDDEN)
         }
         next();
     } catch (error) {
