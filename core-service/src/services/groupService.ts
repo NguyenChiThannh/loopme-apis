@@ -3,6 +3,7 @@ import { CustomError } from "../config/customError"
 import GroupModel from "../models/group"
 import { ResponseMessages } from "../utils/messages"
 import mongoose from "mongoose"
+import { PaginatedResponse } from "@/dtos/PaginatedResponse"
 
 const create = async (data) => {
     try {
@@ -97,7 +98,7 @@ const addPendingInvitations = async (userId: string, groupId: string): Promise<v
             {
                 $push: { pendingInvitations: { user: userObjId, joinAt: new Date() } }
             })
-
+        // Create notificaitons
         await notificationService.create({
             actor: userId,
             recipient: group.owner.toString(),
@@ -131,7 +132,7 @@ const acceptPendingInvitations = async (userId: string, groupId: string): Promis
                 $push: { members: { user: userObjId, joinAt: new Date() } }
             }
         )
-
+        // Create notifications
         await notificationService.create({
             actor: group.owner.toString(),
             recipient: userId,
@@ -202,35 +203,88 @@ const removeMemberFromGroup = async (userId: string, groupId: string): Promise<v
     }
 }
 
-const getAllPendingInvitations = async (groupId: string) => {
+const getAllPendingInvitations = async ({ groupId, page, size, sort }: {
+    groupId: string,
+    page: number,
+    size: number,
+    sort: 1 | -1
+}): Promise<PaginatedResponse> => {
     try {
-        const group = await GroupModel.findById(groupId, 'pendingInvitations')
-            .populate('pendingInvitations.user', 'displayName avatar')
-            .exec();
+        const groupObjectId = new mongoose.Types.ObjectId(groupId)
+        const group = await GroupModel.findOne({
+            _id: groupObjectId,
+        })
 
         if (!group) throw new CustomError(404, ResponseMessages.NOT_FOUND)
 
-        return group.pendingInvitations;
+        const invitations = await GroupModel
+            .findOne({ _id: groupObjectId })
+            .select('pendingInvitations -_id')
+            .populate('pendingInvitations.user', 'displayName avatar _id')
+            .skip((page - 1) * size)
+            .limit(size)
+            .sort({ createdAt: sort })
+
+        const totalInvitations = group.pendingInvitations.length
+        const totalPages = Math.ceil(totalInvitations / size);
+        return {
+            data: invitations.pendingInvitations,
+            currentPage: page,
+            totalPages,
+            hasNextPage: page < totalPages,
+            nextCursor: page < totalPages ? page + 1 : null,
+            totalElement: totalInvitations,
+        };
     } catch (error) {
         throw error
     }
 }
 
-const getAllMembers = async (groupId: string) => {
+const getAllMembers = async ({ groupId, page, size, sort }: {
+    groupId: string,
+    page: number,
+    size: number,
+    sort: 1 | -1
+}): Promise<PaginatedResponse> => {
     try {
-        const group = await GroupModel.findById(groupId, 'members')
-            .populate('members.user', 'displayName avatar')
-            .exec();
+
+        const groupObjectId = new mongoose.Types.ObjectId(groupId)
+        const group = await GroupModel.findOne({
+            _id: groupObjectId,
+        })
 
         if (!group) throw new CustomError(404, ResponseMessages.NOT_FOUND)
 
-        return group.members;
+        const members = await GroupModel
+            .findOne({ _id: groupObjectId })
+            .select('members -_id')
+            .populate('members.user', 'displayName avatar _id')
+            .skip((page - 1) * size)
+            .limit(size)
+            .sort({ createdAt: sort })
+
+        const totalMembers = group.members.length
+        const totalPages = Math.ceil(totalMembers / size);
+        return {
+            data: members.members,
+            currentPage: page,
+            totalPages,
+            hasNextPage: page < totalPages,
+            nextCursor: page < totalPages ? page + 1 : null,
+            totalElement: totalMembers,
+        };
     } catch (error) {
         throw error
     }
 }
 
-const searchGroups = async (userId: string, search : string) => {
+const searchGroups = async ({ userId, search, page, size, sort }: {
+    userId: string,
+    search: string,
+    page: number,
+    size: number,
+    sort: 1 | -1
+}): Promise<PaginatedResponse> => {
     try {
         const userObjectId = new mongoose.Types.ObjectId(userId);
 
@@ -272,9 +326,30 @@ const searchGroups = async (userId: string, search : string) => {
                     isPublic: 1,
                     status: 1
                 }
+            },
+            {
+                $skip: (page - 1) * size
+            },
+            {
+                $limit: size
+            },
+            {
+                $sort: { name: sort }
             }
         ]);
-        return groups;
+
+        const totalGroups = await GroupModel.countDocuments({
+            name: { $regex: search, $options: "i" }
+        });
+        const totalPages = Math.ceil(totalGroups / size);
+
+        return {
+            data: groups,
+            currentPage: page,
+            totalPages,
+            hasNextPage: page < totalPages,
+            nextCursor: page < totalPages ? page + 1 : null,
+        };
     } catch (error) {
         throw error;
     }

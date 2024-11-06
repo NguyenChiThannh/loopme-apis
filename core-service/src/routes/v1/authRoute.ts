@@ -8,9 +8,13 @@ const Router = express.Router()
 
 Router.post('/register', validate(RegisterReqSchema), authController.registerUser)
 Router.post('/verify-account', authController.verifyAccount)
+
 Router.post('/login', validate(LoginReqSchema), authController.loginUser)
+
 Router.post('/refresh-token', authController.requestRefreshToken)
+
 Router.post('/logout', verifyMiddleware.verifyToken, authController.logoutUser)
+
 Router.post('/forgot-password', authController.forgotPassword)
 Router.post('/verify-forgot-password', authController.verifyForgotPassword)
 

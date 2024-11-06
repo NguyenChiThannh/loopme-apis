@@ -10,6 +10,8 @@ interface IVote {
 interface IComment {
     user: Types.ObjectId;
     value: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 export interface IPost extends Document {
@@ -58,7 +60,7 @@ const PostSchema: Schema = new Schema({
         value: {
             type: String,
             required: true,
-            enum: ['UPVOTE', 'DOWNVOTE'], // Giới hạn giá trị
+            enum: ['UPVOTE', 'DOWNVOTE'],
         },
     }],
     comments: [{
@@ -70,6 +72,14 @@ const PostSchema: Schema = new Schema({
         value: {
             type: String,
             required: true,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+        },
+        updatedAt: {
+            type: Date,
+            default: Date.now,
         },
     }],
 }, { timestamps: true });

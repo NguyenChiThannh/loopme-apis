@@ -1,3 +1,4 @@
+import { PaginatedResponse } from "@/dtos/PaginatedResponse"
 import { messageService } from "@/services/messageService"
 import { AuthenticatedRequest } from "@/types"
 import { ResponseMessages } from "@/utils/messages"
@@ -8,12 +9,15 @@ const getAll = async (req: AuthenticatedRequest, res: Response, next: NextFuncti
     try {
         const myId = req.user._id
         const friendId = req.params.userId
-        const messsages = await messageService.getAllMessage(myId, friendId)
+        const page = Number(req.query.page) || 1
+        const size = Number(req.query.size) || 5
+        const sort = req.query.sort === 'asc' ? 1 : req.query.sort === 'desc' ? -1 : 1
+        const data: PaginatedResponse = await messageService.getAllMessage({ myId, friendId, page, size, sort })
         successResponse({
             message: ResponseMessages.MESSAGE.GET_MESSAGE_SUCCESS,
             res,
             status: 200,
-            data: messsages,
+            data,
         })
     } catch (error) {
         next(error)

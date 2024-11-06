@@ -57,7 +57,6 @@ const getById = async (postId: string, userId: string) => {
                     preserveNullAndEmptyArrays: true
                 }
             },
-            // Lookup to populate comments' user details
             {
                 $lookup: {
                     from: "users",
@@ -66,7 +65,6 @@ const getById = async (postId: string, userId: string) => {
                     as: "commentUserDetails"
                 }
             },
-            // Map comments to include only specific user fields
             {
                 $addFields: {
                     comments: {
@@ -181,11 +179,12 @@ const getById = async (postId: string, userId: string) => {
     }
 }
 
-const getPostsByGroupId = async ({ groupId, userId, page, size }: {
+const getPostsByGroupId = async ({ groupId, userId, page, size, sort }: {
     groupId: string;
     userId: string;
     page: number;
     size: number;
+    sort: 1 | -1
 }) => {
     try {
         const groupObjectId = new mongoose.Types.ObjectId(groupId);
@@ -291,6 +290,9 @@ const getPostsByGroupId = async ({ groupId, userId, page, size }: {
             },
             {
                 $limit: size
+            },
+            {
+                $sort: { createdAt: sort },
             }
         ]);
         const totalPosts = await PostModel.countDocuments({ group: groupObjectId });
@@ -309,10 +311,11 @@ const getPostsByGroupId = async ({ groupId, userId, page, size }: {
 
 }
 
-const getPosts = async ({ userId, page, size }: {
+const getPosts = async ({ userId, page, size, sort }: {
     userId: string;
     page: number;
     size: number;
+    sort: 1 | -1
 }) => {
     try {
         const userObjectId = new mongoose.Types.ObjectId(userId);
@@ -445,6 +448,9 @@ const getPosts = async ({ userId, page, size }: {
             },
             {
                 $limit: size
+            },
+            {
+                $sort: { createdAt: sort },
             }
         ]);
 
@@ -513,7 +519,7 @@ const upvote = async (postId: string, userId: string): Promise<void> => {
                 }
             ]
         )
-
+        // Send notifications
         await notificationService.create({
             actor: userId,
             recipient: post.user.toString(),
@@ -569,7 +575,7 @@ const downvote = async (postId: string, userId: string): Promise<void> => {
                 }
             ]
         );
-
+        // Send notifications
         await notificationService.create({
             actor: userId,
             recipient: post.user.toString(),

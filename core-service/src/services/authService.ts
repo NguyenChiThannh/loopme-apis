@@ -64,14 +64,14 @@ const loginUser = async (reqBody: LoginReq) => {
     try {
         const user = await UserModel.findOne({
             email: reqBody.email
-        }).lean();
+        }).lean()
         if (!user) throw new CustomError(404, ResponseMessages.USER.LOGIN_FAIL);
 
         const comparePassword = await bcrypt.compare(reqBody.password, user.password);
         if (!comparePassword) throw new CustomError(404, ResponseMessages.USER.LOGIN_FAIL);
+        const accessToken = user.isActive ? genarateToken.genarateAccessToken(user) : ''
+        const refreshToken = user.isActive ? genarateToken.genarateRefreshToken(user) : ''
 
-        const accessToken = genarateToken.genarateAccessToken(user);
-        const refreshToken = genarateToken.genarateRefreshToken(user);
         refreshTokens.push(refreshToken);
         return {
             ...user,

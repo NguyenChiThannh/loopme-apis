@@ -4,4 +4,6 @@ export interface PaginatedResponse {
     totalPages: number;
     hasNextPage: boolean;
     nextCursor?: number;
+
+    totalElement?: number,
 }

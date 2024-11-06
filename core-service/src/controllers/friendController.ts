@@ -1,3 +1,4 @@
+import { PaginatedResponse } from "@/dtos/PaginatedResponse"
 import { friendService } from "../services/friendSerive"
 import { AuthenticatedRequest } from "../types"
 import { ResponseMessages } from "../utils/messages"
@@ -19,6 +20,7 @@ const addPendingInvitations = async (req: AuthenticatedRequest, res: Response, n
         next(error)
     }
 }
+
 const removePendingInvitations = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const myId = req.user._id
@@ -34,6 +36,7 @@ const removePendingInvitations = async (req: AuthenticatedRequest, res: Response
         next(error)
     }
 }
+
 const acceptInvitations = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const myId = req.user._id
@@ -49,6 +52,7 @@ const acceptInvitations = async (req: AuthenticatedRequest, res: Response, next:
         next(error)
     }
 }
+
 const removeFriend = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const myId = req.user._id
@@ -64,44 +68,46 @@ const removeFriend = async (req: AuthenticatedRequest, res: Response, next: Next
         next(error)
     }
 }
+
 const getAllFriend = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const userId = req.user._id
         const page = Number(req.query.page) || 1
         const size = Number(req.query.size) || 5
-        const friends = await friendService.getAllFriend({ userId, page, size })
+        const sort = req.query.sort === 'asc' ? 1 : req.query.sort === 'desc' ? -1 : 1
+        const data: PaginatedResponse = await friendService.getAllFriend({ userId, page, size, sort })
         successResponse({
             res,
             message: ResponseMessages.FRIEND.GET_ALL_FRIEND_SUCCESS,
             status: 200,
-            data: {
-                friends,
-                total: friends.length
-            }
+            data,
         })
         return
     } catch (error) {
         next(error)
     }
 }
+
 const getAllInvitationsFriend = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const userId = req.user._id
-        const invitaions = await friendService.getAllInvitationsFriend(userId)
+        const page = Number(req.query.page) || 1
+        const size = Number(req.query.size) || 5
+        const sort = req.query.sort === 'asc' ? 1 : req.query.sort === 'desc' ? -1 : 1
+        const data: PaginatedResponse = await friendService.getAllInvitationsFriend({ userId, page, size, sort })
         successResponse({
             res,
             message: ResponseMessages.FRIEND.GET_ALL_INVITATIONS_FRIEND_SUCCESS,
             status: 200,
-            data: {
-                invitaions,
-                total: invitaions.length
-            }
+            data,
         })
+
         return
     } catch (error) {
         next(error)
     }
 }
+
 const suggestMutualFriends = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const mutualFriends = await friendService.suggestMutualFriends(req.user._id)

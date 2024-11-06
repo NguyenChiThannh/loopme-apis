@@ -39,10 +39,11 @@ const getById = async (req: AuthenticatedRequest, res: Response, next: NextFunct
 
 const getPosts = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
-        const userId : string = req.user._id
-        const page : number = Number(req.query.page) || 1
-        const size : number = Number(req.query.size) || 5
-        const data: PaginatedResponse = await postService.getPosts({ userId, page, size })
+        const userId: string = req.user._id
+        const page: number = Number(req.query.page) || 1
+        const size: number = Number(req.query.size) || 5
+        const sort = req.query.sort === 'asc' ? 1 : req.query.sort === 'desc' ? -1 : 1
+        const data: PaginatedResponse = await postService.getPosts({ userId, page, size, sort })
         successResponse({
             message: ResponseMessages.POST.GET_POST_SUCCESS,
             res,
@@ -56,11 +57,12 @@ const getPosts = async (req: AuthenticatedRequest, res: Response, next: NextFunc
 
 const getPostsByGroupId = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
-        const groupId : string = req.params.groupId
-        const userId : string = req.user._id
-        const page : number = Number(req.query.page) || 1
-        const size : number = Number(req.query.size) || 5
-        const data: PaginatedResponse = await postService.getPostsByGroupId({ groupId, userId, page, size })
+        const groupId: string = req.params.groupId
+        const userId: string = req.user._id
+        const page: number = Number(req.query.page) || 1
+        const size: number = Number(req.query.size) || 5
+        const sort = req.query.sort === 'asc' ? 1 : req.query.sort === 'desc' ? -1 : 1
+        const data: PaginatedResponse = await postService.getPostsByGroupId({ groupId, userId, page, size, sort })
 
         successResponse({
             message: ResponseMessages.POST.GET_POST_SUCCESS,
@@ -148,7 +150,6 @@ const deleteComment = async (req: AuthenticatedRequest, res: Response, next: Nex
         next(error)
     }
 }
-
 
 export const postController = {
     create,

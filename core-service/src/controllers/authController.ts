@@ -1,14 +1,10 @@
 import { Request, Response, NextFunction } from 'express'
-// import { sendMail } from '~/mail/sendMail'
-// import { GMAIL_TYPE } from '~/mail/gmailType'
-import { genarateToken } from '../config/token'
 import { authService } from '../services/authService';
 import { LoginReq, RegisterReq } from '../validations/AuthReq';
 import { successResponse } from '../utils/responses';
 import { ResponseMessages } from '../utils/messages';
 import { otpService } from '../services/otpService';
 import { AuthenticatedRequest } from '../types';
-
 
 const registerUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -60,18 +56,20 @@ const verifyAccount = async (req: Request, res: Response, next: NextFunction) =>
 const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const data = await authService.loginUser(req.body as LoginReq)
-        res.cookie('accessToken', data.accessToken, {
-            httpOnly: true,
-            secure: true,
-            path: '/',
-            sameSite: 'strict',
-        })
-        res.cookie('refreshToken', data.refreshToken, {
-            httpOnly: true,
-            secure: true,
-            path: '/',
-            sameSite: 'strict',
-        })
+        if (data.isActive) {
+            res.cookie('accessToken', data.accessToken, {
+                httpOnly: true,
+                secure: true,
+                path: '/',
+                sameSite: 'strict',
+            })
+            res.cookie('refreshToken', data.refreshToken, {
+                httpOnly: true,
+                secure: true,
+                path: '/',
+                sameSite: 'strict',
+            })
+        }
 
         const { password, provider, updatedAt, admin, accessToken, refreshToken, ...filterUser } = data
 
@@ -79,12 +77,10 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
             message: ResponseMessages.USER.LOGIN_SUCCESSFUL,
             res,
             status: 200,
-            data: {
-                ...filterUser
-            }
+            data: filterUser
+
         })
         return
-
     } catch (error) {
         next(error)
     }

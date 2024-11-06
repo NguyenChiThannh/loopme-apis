@@ -1,11 +1,18 @@
+import { PaginatedResponse } from "@/dtos/PaginatedResponse";
 import UserModel, { UserUpdateData } from "@/models/user";
 import mongoose from "mongoose";
 
-const searchUser = async (name : string, userId : string) => {
+const searchUser = async ({ userId, name, page, size, sort }: {
+    userId: string,
+    name: string,
+    page: number,
+    size: number,
+    sort: 1 | -1
+}): Promise<PaginatedResponse> => {
     try {
         const userObjectId = new mongoose.Types.ObjectId(userId)
 
-        const result = await UserModel.aggregate([
+        const friends = await UserModel.aggregate([
             {
                 $match: {
                     displayName: { $regex: name, $options: "i" },
@@ -48,16 +55,37 @@ const searchUser = async (name : string, userId : string) => {
                 $addFields: {
                     friendStatus: { $arrayElemAt: ["$friendStatus.status", 0] }
                 }
+            },
+            {
+                $skip: (page - 1) * size
+            },
+            {
+                $limit: size
+            },
+            {
+                $sort: { name: sort }
             }
         ]);
 
-        return result;
+        const totalDocuments = await UserModel.countDocuments({
+            displayName: { $regex: name, $options: "i" },
+            _id: { $ne: userObjectId }
+        });
+
+        const totalPages = Math.ceil(totalDocuments / size);
+
+        return {
+            data: friends,
+            currentPage: page,
+            totalPages,
+            hasNextPage: page < totalPages,
+            nextCursor: page < totalPages ? page + 1 : null,
+        };
 
     } catch (error) {
         throw error
     }
 };
-
 
 const updateUser = async (data: UserUpdateData, userId) => {
     try {
@@ -84,7 +112,6 @@ const getUser = async (userId: string) => {
         throw error;
     }
 };
-
 
 export const userService = {
     searchUser,

@@ -4,7 +4,7 @@ import express from 'express'
 
 const Router = express.Router()
 Router.use(verifyMiddleware.verifyToken)
-
+// Search user by Name
 Router.get('/search', userController.searchUser)
 
 Router.route('/')

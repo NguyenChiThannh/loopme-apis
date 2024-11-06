@@ -131,15 +131,15 @@ const removeMemberFromGroup = async (req: AuthenticatedRequest, res: Response, n
 const getAllPendingInvitations = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const { groupId } = req.params
-        const invitations = await groupService.getAllPendingInvitations(groupId)
+        const page = Number(req.query.page) || 1
+        const size = Number(req.query.size) || 5
+        const sort = req.query.sort === 'asc' ? 1 : req.query.sort === 'desc' ? -1 : 1
+        const data = await groupService.getAllPendingInvitations({ groupId, page, size, sort })
         successResponse({
             message: ResponseMessages.GROUP.GET_ALL_PENDING_INVITATIONS_SUCCESS,
             res,
             status: 200,
-            data: {
-                invitations
-            }
-
+            data,
         })
         return
     } catch (error) {
@@ -150,14 +150,15 @@ const getAllPendingInvitations = async (req: AuthenticatedRequest, res: Response
 const getAllMembers = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const { groupId } = req.params
-        const members = await groupService.getAllMembers(groupId)
+        const page = Number(req.query.page) || 1
+        const size = Number(req.query.size) || 5
+        const sort = req.query.sort === 'asc' ? 1 : req.query.sort === 'desc' ? -1 : 1
+        const data = await groupService.getAllMembers({ groupId, page, size, sort })
         successResponse({
             message: ResponseMessages.GROUP.GET_ALL_MEMBERS_GROUP_SUCCESS,
             res,
             status: 200,
-            data: {
-                members,
-            }
+            data: data,
         })
         return
     } catch (error) {
@@ -169,12 +170,15 @@ const searchGroups = async (req: AuthenticatedRequest, res: Response, next: Next
     try {
         const userId = req.user._id
         const search = req.query.q as string
-        const groups = await groupService.searchGroups(userId, search)
+        const page = Number(req.query.page) || 1
+        const size = Number(req.query.size) || 5
+        const sort = req.query.sort === 'asc' ? 1 : req.query.sort === 'desc' ? -1 : 1
+        const data = await groupService.searchGroups({ userId, search, page, size, sort })
         successResponse({
             message: ResponseMessages.GROUP.SEARCH_GROUP_SUCCESS,
             res,
             status: 200,
-            data: groups,
+            data,
         })
         return
     } catch (error) {

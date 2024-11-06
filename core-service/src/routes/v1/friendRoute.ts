@@ -10,9 +10,13 @@ Router.route('/pending-invitations/:userId')
     .delete(friendController.removePendingInvitations)
 
 Router.get('/', friendController.getAllFriend)
+
 Router.post('/accept-invitations/:userId', friendController.acceptInvitations)
+
 Router.delete('/:userId', friendController.removeFriend)
+
 Router.get('/all-invitations', friendController.getAllInvitationsFriend)
+//Get 4 random users who are not friends or have not sent a friend request.
 Router.get('/suggest-mutual-friends', friendController.suggestMutualFriends)
 
 export const friendRoute = Router

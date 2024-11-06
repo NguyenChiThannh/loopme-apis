@@ -8,10 +8,15 @@ const Router = express.Router()
 Router.use(verifyMiddleware.verifyToken)
 
 Router.post('/', groupController.create)
+// Search group by Name
 Router.get('/search', groupController.searchGroups)
+
 Router.get('/:groupId', groupController.getGroupById)
+
 Router.post('/:groupId/pending-invitations', groupController.addPendingInvitations)
+
 Router.delete('/:groupId/pending-invitations/:userId', groupMiddleware.checkGroupOwner, groupController.removePendingInvitations)
+
 Router.post('/:groupId/accept-invitations/:userId', groupMiddleware.checkGroupOwner, groupController.acceptPendingInvitations)
 
 Router.route('/:groupId/members/:userId')
@@ -19,6 +24,7 @@ Router.route('/:groupId/members/:userId')
     .delete(groupMiddleware.checkGroupOwner, groupController.removeMemberFromGroup)
 
 Router.get('/:groupId/members', groupController.getAllMembers)
+
 Router.get('/:groupId/invitations', groupMiddleware.checkGroupOwner, groupController.getAllPendingInvitations)
 
 export const groupRoute = Router
