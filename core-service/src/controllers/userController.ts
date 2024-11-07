@@ -39,7 +39,7 @@ const updateUser = async (req: AuthenticatedRequest, res: Response, next: NextFu
     }
 }
 
-const getUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+const getMyInfo = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const userId: string = req.user._id
         const user = await userService.getUser(userId)
@@ -54,8 +54,25 @@ const getUser = async (req: AuthenticatedRequest, res: Response, next: NextFunct
     }
 }
 
+const getUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        const userId: string = req.params.id
+        const user = await userService.getUser(userId)
+        successResponse({
+            message: ResponseMessages.USER.SEARCH_USER_SUCCESS,
+            res,
+            status: 200,
+            data: user,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+
 export const userController = {
     searchUser,
     updateUser,
+    getMyInfo,
     getUser,
 }

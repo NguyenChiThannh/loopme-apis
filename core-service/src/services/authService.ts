@@ -2,7 +2,7 @@ import { } from './../../node_modules/@types/jsonwebtoken/index.d';
 import { CustomError } from '../config/customError';
 import { genarateToken } from '../config/token';
 import UserModel, { IUser } from '../models/user';
-import { LoginReq, RegisterReq } from '../validations/AuthReq';
+import { ChangePassworReq, LoginReq, RegisterReq } from '../validations/AuthReq';
 import { otpService } from './otpService';
 import { generateRandomString } from '../utils/algorithms';
 import { ResponseMessages } from '../utils/messages';
@@ -40,7 +40,7 @@ const registerUser = async (data: RegisterReq): Promise<number> => {
     } catch (error) {
         throw error
     }
-};
+}
 
 const verifyAccount = async (email: string): Promise<{ accessToken: string; refreshToken: string }> => {
     try {
@@ -52,8 +52,10 @@ const verifyAccount = async (email: string): Promise<{ accessToken: string; refr
             user.isActive = true;
             await user.save();
         }
+        console.log('🚀 ~ verifyAccount ~ user:', user)
         const accessToken: string = genarateToken.genarateAccessToken(user)
         const refreshToken: string = genarateToken.genarateRefreshToken(user)
+        refreshTokens.push(refreshToken);
         return { accessToken, refreshToken }
     } catch (error) {
         throw error
@@ -83,6 +85,29 @@ const loginUser = async (reqBody: LoginReq) => {
         throw error
     }
 };
+
+const changePassword = async (data: ChangePassworReq, userId: string) => {
+    try {
+        const user = await UserModel.findOne({
+            _id: userId,
+        })
+        if (!user) throw new CustomError(404, ResponseMessages.USER.LOGIN_FAIL);
+
+        const comparePassword = await bcrypt.compare(data.currentPassword, user.password);
+        if (!comparePassword) throw new CustomError(404, ResponseMessages.USER.CHANGE_PASSWORD_FAIL);
+
+        const salt = await bcrypt.genSalt(10);
+        const hashed: string = await bcrypt.hash(data.confirmPassword, salt);
+
+        user.password = hashed
+        await user.save()
+        return
+    }
+    catch (error) {
+        throw error
+    }
+};
+
 
 const requestRefreshToken = async (refreshToken: string): Promise<{ newAccessToken: string; newRefreshToken: string }> => {
     try {
@@ -161,4 +186,5 @@ export const authService = {
     verifyForgotPassword,
     findOneUserByEmail,
     findOneUserById,
+    changePassword,
 };

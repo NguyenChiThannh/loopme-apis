@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { authService } from '../services/authService';
-import { LoginReq, RegisterReq } from '../validations/AuthReq';
+import { ChangePassworReq, LoginReq, RegisterReq } from '../validations/AuthReq';
 import { successResponse } from '../utils/responses';
 import { ResponseMessages } from '../utils/messages';
 import { otpService } from '../services/otpService';
@@ -52,7 +52,6 @@ const verifyAccount = async (req: Request, res: Response, next: NextFunction) =>
     }
 }
 
-
 const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const data = await authService.loginUser(req.body as LoginReq)
@@ -85,6 +84,23 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
         next(error)
     }
 }
+
+const changePassword = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.user._id
+        await authService.changePassword(req.body as ChangePassworReq, userId)
+        successResponse({
+            message: ResponseMessages.USER.CHANGE_PASSWORD_SUCCESS,
+            res,
+            status: 200,
+
+        })
+        return
+    } catch (error) {
+        next(error)
+    }
+}
+
 
 const requestRefreshToken = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -176,4 +192,5 @@ export const authController = {
     logoutUser,
     forgotPassword,
     verifyForgotPassword,
+    changePassword,
 }

@@ -8,7 +8,8 @@ Router.use(verifyMiddleware.verifyToken)
 Router.get('/search', userController.searchUser)
 
 Router.route('/')
-    .post(userController.updateUser)
-    .get(userController.getUser)
+    .patch(userController.updateUser)
+    .get(userController.getMyInfo)
 
+Router.get('/:id', userController.getUser)
 export const userRoute = Router

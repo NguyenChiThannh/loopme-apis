@@ -311,6 +311,70 @@ const getPostsByGroupId = async ({ groupId, userId, page, size, sort }: {
 
 }
 
+const getPostsByUserId = async ({ myId, userId, page, size, sort }: {
+    myId: string;
+    userId: string;
+    page: number;
+    size: number;
+    sort: 1 | -1
+}) => {
+    try {
+        const isMyself = myId === userId;
+        const myObjectId = new mongoose.Types.ObjectId(myId);
+        const userObjectId = new mongoose.Types.ObjectId(userId);
+
+        let posts;
+        let totalPages;
+
+        if (isMyself) {
+            posts = await PostModel.find({
+                user: userObjectId,
+                group: null,
+            }).sort({ createdAt: sort })
+                .skip((page - 1) * size)
+                .limit(size);
+
+            const totalPosts = await PostModel.countDocuments({ user: userObjectId, group: null });
+            totalPages = Math.ceil(totalPosts / size);
+        } else {
+            const isFriend = await FriendModel.findOne(
+                {
+                    $or: [
+                        { sender: myObjectId, receiver: userObjectId, status: 'accepted' },
+                        { sender: userObjectId, receiver: myObjectId, status: 'accepted' }
+                    ]
+                }
+            ) ? true : false;
+
+            const privacyFilter = isFriend
+                ? { privacy: { $in: ['public', 'friends'] } }
+                : { privacy: 'public' };
+
+            const totalPosts = await PostModel.countDocuments({ user: userObjectId, group: null, ...privacyFilter });
+            totalPages = Math.ceil(totalPosts / size);
+
+            posts = await PostModel.find({
+                user: userObjectId,
+                group: null,
+                ...privacyFilter
+            })
+                .sort({ createdAt: sort })
+                .skip((page - 1) * size)
+                .limit(size);
+        }
+
+        return {
+            data: posts,
+            currentPage: page,
+            totalPages,
+            hasNextPage: page < totalPages,
+            nextCursor: page < totalPages ? page + 1 : null
+        };
+    } catch (error) {
+        throw error;
+    }
+};
+
 const getPosts = async ({ userId, page, size, sort }: {
     userId: string;
     page: number;
@@ -659,6 +723,7 @@ export const postService = {
     create,
     getById,
     getPostsByGroupId,
+    getPostsByUserId,
     getPosts,
     upvote,
     downvote,

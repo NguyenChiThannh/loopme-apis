@@ -1,5 +1,5 @@
 import { PaginatedResponse } from "@/dtos/PaginatedResponse";
-import UserModel, { UserUpdateData } from "@/models/user";
+import UserModel, { filterData, UserUpdateData } from "@/models/user";
 import mongoose from "mongoose";
 
 const searchUser = async ({ userId, name, page, size, sort }: {
@@ -87,19 +87,22 @@ const searchUser = async ({ userId, name, page, size, sort }: {
     }
 };
 
-const updateUser = async (data: UserUpdateData, userId) => {
+const updateUser = async (data: Partial<UserUpdateData>, userId: string) => {
     try {
+        const filteredData = filterData(data, ["displayName", "avatar"]);
 
         const updatedUser = await UserModel.findByIdAndUpdate(
             new mongoose.Types.ObjectId(userId),
-            { $set: data },
+            { $set: filteredData },
             { new: true, runValidators: true }
-        ).select('_id displayName avatar');
+        ).select('_id displayName avatar email isActive createdAt __v')
+
         return updatedUser;
     } catch (error) {
         throw error;
     }
 };
+
 
 const getUser = async (userId: string) => {
     try {

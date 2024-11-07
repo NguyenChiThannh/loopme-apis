@@ -1,7 +1,7 @@
 import { authController } from '../../controllers/authController'
 import { validate } from '../../middlewares/validate'
 import { verifyMiddleware } from '../../middlewares/verifyMiddleware'
-import { LoginReqSchema, RegisterReqSchema } from '../../validations/AuthReq'
+import { ChangePasswordReqSchema, LoginReqSchema, RegisterReqSchema } from '../../validations/AuthReq'
 import express from 'express'
 
 const Router = express.Router()
@@ -14,6 +14,8 @@ Router.post('/login', validate(LoginReqSchema), authController.loginUser)
 Router.post('/refresh-token', authController.requestRefreshToken)
 
 Router.post('/logout', verifyMiddleware.verifyToken, authController.logoutUser)
+
+Router.put('/change-pwd', validate(ChangePasswordReqSchema), verifyMiddleware.verifyToken, authController.changePassword)
 
 Router.post('/forgot-password', authController.forgotPassword)
 Router.post('/verify-forgot-password', authController.verifyForgotPassword)

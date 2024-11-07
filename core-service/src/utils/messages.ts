@@ -18,7 +18,9 @@ export const ResponseMessages = {
         LOGOUT_SUCCESSFUL: "Logout successful.",
         FORGOT_PASSWORD: "Please enter the OTP to set a new password.",
         VERIFY_FORGOT_PASSWORD: "Forgot password successful.",
-        SEARCH_USER_SUCCESS: "Search user successful."
+        SEARCH_USER_SUCCESS: "Search user successful.",
+        CHANGE_PASSWORD_SUCCESS: "Change password successful",
+        CHANGE_PASSWORD_FAIL: "Password is wrong.",
     },
     OTP: {
         VERIFY_OTP_FAIL: "OTP is invalid or has expired.",

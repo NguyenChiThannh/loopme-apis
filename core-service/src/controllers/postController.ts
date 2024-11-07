@@ -75,6 +75,26 @@ const getPostsByGroupId = async (req: AuthenticatedRequest, res: Response, next:
     }
 }
 
+const getPostsByUserId = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        const userId: string = req.params.userId
+        const myId: string = req.user._id
+        const page: number = Number(req.query.page) || 1
+        const size: number = Number(req.query.size) || 5
+        const sort = req.query.sort === 'asc' ? 1 : req.query.sort === 'desc' ? -1 : 1
+        const data: PaginatedResponse = await postService.getPostsByUserId({ myId, userId, page, size, sort })
+
+        successResponse({
+            message: ResponseMessages.POST.GET_POST_SUCCESS,
+            res,
+            status: 201,
+            data: data
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 const upvote = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const postId: string = req.params.id
@@ -161,4 +181,6 @@ export const postController = {
     getPostsByGroupId,
     addComment,
     deleteComment,
+    getPostsByUserId,
+
 }

@@ -12,7 +12,7 @@ export interface IUser extends Document {
     updatedAt?: Date;
 }
 
-export type UserUpdateData = Pick<IUser, 'displayName' | 'avatar' | 'password'>;
+export type UserUpdateData = Pick<IUser, 'displayName' | 'avatar'>;
 
 const validateEmail = function (email) {
     const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -57,3 +57,12 @@ const UserModel = mongoose.model<IUser>('User', UserSchema);
 
 export default UserModel;
 
+export const filterData = (data: Partial<UserUpdateData>, keys: (keyof UserUpdateData)[]): Partial<UserUpdateData> => {
+    const filteredData: Partial<UserUpdateData> = {};
+    keys.forEach((key) => {
+        if (key in data) {
+            filteredData[key] = data[key];
+        }
+    });
+    return filteredData;
+};

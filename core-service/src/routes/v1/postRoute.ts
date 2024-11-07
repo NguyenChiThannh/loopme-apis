@@ -15,6 +15,10 @@ Router.route('/')
 
 // Get detail post by Id
 Router.get('/:id', postController.getById)
+
+// Get all post in userProfile by userInfo
+Router.get('/user/:userId', postController.getPostsByUserId)
+
 // Get all post in group by groupId
 Router.get('/group/:groupId', postController.getPostsByGroupId)
 // Create post in group
