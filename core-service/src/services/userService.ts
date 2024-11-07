@@ -105,7 +105,7 @@ const getUser = async (userId: string) => {
     try {
         const user = await UserModel.findOne(
             { _id: new mongoose.Types.ObjectId(userId) }
-        ).select('_id displayName avatar')
+        ).select('_id displayName avatar email isActive createdAt __v')
 
         return user;
     } catch (error) {

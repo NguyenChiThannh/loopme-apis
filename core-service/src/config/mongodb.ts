@@ -1,15 +1,11 @@
-// Config connect mongo Atlas
+// // Config connect mongo Atlas
 // import { MongoClient, ServerApiVersion } from 'mongodb'
+// import dotenv from 'dotenv';
+// dotenv.config();
 // let databaseInstance = null
 
 // // Khởi tạo một đối tượng mongoClientInstance để connect tới MongoDB
-// const mongoClientInstance = new MongoClient(process.env.MONGODB_URI, {
-//     serverApi: {
-//         version: ServerApiVersion.v1,
-//         strict: true,
-//         deprecationErrors: true,
-//     }
-// })
+// const mongoClientInstance = new MongoClient(process.env.MONGODB_URI)
 
 // //Kết nối tới Database
 // export const CONNECT_DB = async () => {
@@ -19,7 +15,7 @@
 //     databaseInstance = mongoClientInstance.db(process.env.DATABASE_NAME)
 // }
 
-// //Đóng kết nối tới Database
+// // Đóng kết nối tới Database
 // export const CLOSE_DB = async () => {
 //     await mongoClientInstance.close()
 // }

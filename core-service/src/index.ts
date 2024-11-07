@@ -1,3 +1,4 @@
+// import { CONNECT_DB } from './config/mongodb';
 /* eslint-disable no-console */
 import express from 'express'
 import cors from 'cors'

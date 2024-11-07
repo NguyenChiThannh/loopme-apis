@@ -3,7 +3,7 @@ import mongoose, { Schema, Document, Types } from 'mongoose';
 export interface INotification extends Document {
     actor: Types.ObjectId;
     recipient: Types.ObjectId;
-    type: 'dislike' | 'like' | 'comment' | 'request_to_join_group' | 'friend_request' | 'accept_join_group' | 'accept_friend';
+    type: 'dislike' | 'like' | 'comment' | 'request_to_join_group' | 'friend_request' | 'accept_join_group' | 'accept_friend'
     postId?: Types.ObjectId;
     groupId?: Types.ObjectId;
     createdAt: Date;
