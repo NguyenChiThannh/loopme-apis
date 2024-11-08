@@ -8,7 +8,7 @@ const genarateAccessToken = (user: any): string => {
             admin: user.admin
         },
         process.env.JWT_ACCESS_TOKEN as string,
-        { expiresIn: '30000' } as SignOptions
+        { expiresIn: '1h' } as SignOptions
     )
 }
 

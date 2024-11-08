@@ -2,7 +2,7 @@ import { notificationService } from "@/services/notificationService"
 import { CustomError } from "../config/customError"
 import GroupModel from "../models/group"
 import { ResponseMessages } from "../utils/messages"
-import mongoose from "mongoose"
+import mongoose, { Mongoose } from "mongoose"
 import { PaginatedResponse } from "@/dtos/PaginatedResponse"
 
 const create = async (data) => {
@@ -110,6 +110,23 @@ const addPendingInvitations = async (userId: string, groupId: string): Promise<v
         throw error
     }
 }
+
+const getJoinedGroup = async (userId: string) => {
+    try {
+        const userObjectId = new mongoose.Types.ObjectId(userId);
+
+        const groups = await GroupModel.find({
+            $or: [
+                { "members.user": userObjectId },
+                { owner: userObjectId }
+            ]
+        }).select('-members -pendingInvitations')
+
+        return groups
+    } catch (error) {
+        throw error;
+    }
+};
 
 const acceptPendingInvitations = async (userId: string, groupId: string): Promise<void> => {
     try {
@@ -359,6 +376,7 @@ export const groupService = {
     create,
     isMemberGroup,
     isOwnerGroup,
+    getJoinedGroup,
     addPendingInvitations,
     acceptPendingInvitations,
     removePendingInvitations,

@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
-import PostModel from "../models/post"
+import PostModel, { filterData } from "../models/post"
 import GroupModel from '@/models/group';
 import FriendModel from '@/models/friend';
 import { friendService } from '@/services/friendSerive';
 import { notificationService } from '@/services/notificationService';
 import { CustomError } from '@/config/customError';
 import { ResponseMessages } from '@/utils/messages';
+import { groupService } from '@/services/groupService';
 
 const create = async (data) => {
     try {
@@ -178,6 +179,64 @@ const getById = async (postId: string, userId: string) => {
         throw error
     }
 }
+
+const deleteById = async (postId: string, userId: string) => {
+    try {
+        const postObjectId = new mongoose.Types.ObjectId(postId);
+        const userObjectId = new mongoose.Types.ObjectId(userId);
+
+        const post = await PostModel.findById(postObjectId);
+
+        if (!post) {
+            throw new CustomError(404, ResponseMessages.NOT_FOUND);
+        }
+
+        if (post.user.equals(userObjectId)) {
+            await PostModel.deleteOne({ _id: postObjectId });
+            return;
+        }
+
+        if (post.group) {
+            const isOwnerGroup = await groupService.isOwnerGroup(userId, post.group.toString());
+            if (!isOwnerGroup) {
+                throw new CustomError(403, ResponseMessages.FORBIDDEN);
+            }
+        } else {
+            throw new CustomError(403, ResponseMessages.FORBIDDEN);
+        }
+
+        await PostModel.deleteOne({ _id: postObjectId });
+        return;
+
+    } catch (error) {
+        throw error;
+    }
+};
+
+const updateById = async (postId: string, userId: string, data: any) => {
+    try {
+        const postObjectId = new mongoose.Types.ObjectId(postId);
+        const userObjectId = new mongoose.Types.ObjectId(userId);
+
+        const post = await PostModel.findById(postObjectId);
+
+        if (!post) {
+            throw new CustomError(404, ResponseMessages.NOT_FOUND);
+        }
+
+        if (!post.user.equals(userObjectId)) {
+            throw new CustomError(403, ResponseMessages.FORBIDDEN);
+        }
+
+        const validData = filterData(data, ["privacy", "content", "images"]);
+
+        await PostModel.updateOne({ _id: postObjectId }, { $set: validData });
+
+        return;
+    } catch (error) {
+        throw error;
+    }
+};
 
 const getPostsByGroupId = async ({ groupId, userId, page, size, sort }: {
     groupId: string;
@@ -722,6 +781,8 @@ const deleteComment = async (postId: string, commentId: string): Promise<void> =
 export const postService = {
     create,
     getById,
+    deleteById,
+    updateById,
     getPostsByGroupId,
     getPostsByUserId,
     getPosts,

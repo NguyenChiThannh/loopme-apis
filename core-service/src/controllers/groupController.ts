@@ -40,6 +40,22 @@ const getGroupById = async (req: AuthenticatedRequest, res: Response, next: Next
 
 }
 
+const getJoinedGroup = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.user._id
+        const groups = await groupService.getJoinedGroup(userId)
+        successResponse({
+            message: ResponseMessages.GROUP.GET_JOINED_GROUP_SUCCESS,
+            res,
+            status: 200,
+            data: groups,
+        })
+    } catch (error) {
+        next(error)
+    }
+
+}
+
 const getPostsInGroup = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         successResponse({
@@ -189,6 +205,7 @@ const searchGroups = async (req: AuthenticatedRequest, res: Response, next: Next
 export const groupController = {
     create,
     getGroupById,
+    getJoinedGroup,
     addPendingInvitations,
     acceptPendingInvitations,
     removePendingInvitations,

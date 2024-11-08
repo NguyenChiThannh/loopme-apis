@@ -7,7 +7,9 @@ const Router = express.Router()
 
 Router.use(verifyMiddleware.verifyToken)
 
-Router.post('/', groupController.create)
+Router.route('/')
+    .post(groupController.create)
+    .get(groupController.getJoinedGroup)
 // Search group by Name
 Router.get('/search', groupController.searchGroups)
 

@@ -66,6 +66,8 @@ LoopMe is a social networking platform similar to Facebook.
 - **POST** `/`: Create a new post in newfeed.
 - **GET** `/`: Get all posts from friend, groups and public posts for the newsfeed.
 - **GET** `/:id`: Get a post by its postId.
+- **PUT** `/:id`: Put a post by its postId.
+- **DELETE** `/:id`: Delete a post by its postId.
 - **GET** `/user/:userId`: Get all posts by userId.
 - **GET** `/group/:groupId`: Get all posts by groupId.
 - **POST** `/group`: Create a new post in a group (requires group membership).
@@ -86,6 +88,7 @@ LoopMe is a social networking platform similar to Facebook.
 
 #### 3.1.6 Groups
 - **POST** `/`: Create a new group.
+- **GET** `/`: Get all group joined.
 - **GET** `/search`: Search for groups by name.
 - **GET** `/:groupId`: Get a group by its ID.
 - **POST** `/:groupId/pending-invitations`: Add pending invitations for a group.

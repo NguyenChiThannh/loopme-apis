@@ -14,7 +14,10 @@ Router.route('/')
     .get(postController.getPosts)
 
 // Get detail post by Id
-Router.get('/:id', postController.getById)
+Router.route('/:id')
+    .get(postController.getById)
+    .delete(verifyMiddleware.verifyToken, postController.deleteById)
+    .patch(verifyMiddleware.verifyToken, postController.updateById)
 
 // Get all post in userProfile by userInfo
 Router.get('/user/:userId', postController.getPostsByUserId)

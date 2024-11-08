@@ -37,6 +37,32 @@ const getById = async (req: AuthenticatedRequest, res: Response, next: NextFunct
     }
 }
 
+const updateById = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        await postService.updateById(req.params.id, req.user._id, req.body)
+        successResponse({
+            message: ResponseMessages.POST.UPDATE_POST_SUCCESS,
+            res,
+            status: 200,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+const deleteById = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        await postService.deleteById(req.params.id, req.user._id)
+        successResponse({
+            message: ResponseMessages.POST.DELETE_POST_SUCCESS,
+            res,
+            status: 200,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getPosts = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const userId: string = req.user._id
@@ -174,6 +200,8 @@ const deleteComment = async (req: AuthenticatedRequest, res: Response, next: Nex
 export const postController = {
     create,
     getById,
+    deleteById,
+    updateById,
     upvote,
     downvote,
     removevote,

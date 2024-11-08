@@ -30,6 +30,7 @@ export const ResponseMessages = {
     GROUP: {
         CREATE_GROUP_SUCCESS: "Create group successful.",
         GET_GROUP_SUCCESS: "Get group successful.",
+        GET_JOINED_GROUP_SUCCESS: "Get joined group successful.",
         ADD_PENDING_INVITATIONS_SUCCESS: "Add pending invitations successful.",
         ACCEPT_PENDING_INVITATIONS_SUCCESS: "Accept pending invitations successful.",
         REMOVE_PENDING_INVITATIONS_SUCCESS: "Remove pending invitations successful.",
@@ -40,8 +41,10 @@ export const ResponseMessages = {
         SEARCH_GROUP_SUCCESS: "Search group successful"
     },
     POST: {
-        CREATE_POST_SUCCESS: "Upvote post successful",
+        CREATE_POST_SUCCESS: "Create post successful",
         GET_POST_SUCCESS: "Get post successful",
+        DELETE_POST_SUCCESS: "Delete post successful",
+        UPDATE_POST_SUCCESS: "Update post successful",
         UPVOTE_POST_SUCCESS: "Upvote post successful",
         DOWNVOTE_POST_SUCCESS: "Downvote post successful",
         REMOVEVOTE_POST_SUCCESS: "Removevote post successful",

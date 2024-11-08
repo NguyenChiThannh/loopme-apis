@@ -133,9 +133,9 @@ const requestRefreshToken = async (req: Request, res: Response, next: NextFuncti
 const logoutUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const refreshToken: string = req.cookies?.refresh_token
-        authService.logoutUser(refreshToken)
-        res.clearCookie('refreshToken')
-        res.clearCookie('accessToken')
+        await authService.logoutUser(refreshToken)
+        res.clearCookie('refresh_token')
+        res.clearCookie('access_token')
         successResponse({
             message: ResponseMessages.USER.LOGOUT_SUCCESSFUL,
             res,
