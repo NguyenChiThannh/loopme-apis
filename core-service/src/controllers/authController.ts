@@ -29,13 +29,13 @@ const verifyAccount = async (req: Request, res: Response, next: NextFunction) =>
         const email: string = await otpService.verifyOtp(Number(otp))
         const token = await authService.verifyAccount(email)
 
-        res.cookie('accessToken', token.accessToken, {
+        res.cookie('access_token', token.accessToken, {
             httpOnly: true,
             secure: true,
             path: '/',
             sameSite: 'strict',
         })
-        res.cookie('refreshToken', token.refreshToken, {
+        res.cookie('refresh_token', token.refreshToken, {
             httpOnly: true,
             secure: true,
             path: '/',
@@ -56,13 +56,13 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const data = await authService.loginUser(req.body as LoginReq)
         if (data.isActive) {
-            res.cookie('accessToken', data.accessToken, {
+            res.cookie('access_token', data.accessToken, {
                 httpOnly: true,
                 secure: true,
                 path: '/',
                 sameSite: 'strict',
             })
-            res.cookie('refreshToken', data.refreshToken, {
+            res.cookie('refresh_token', data.refreshToken, {
                 httpOnly: true,
                 secure: true,
                 path: '/',
@@ -104,16 +104,16 @@ const changePassword = async (req: AuthenticatedRequest, res: Response, next: Ne
 
 const requestRefreshToken = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const refreshToken: string = req.cookies?.refreshToken
+        const refreshToken: string = req.cookies?.refresh_token
         const token = await authService.requestRefreshToken(refreshToken)
 
-        res.cookie('accessToken', token.newAccessToken, {
+        res.cookie('access_token', token.newAccessToken, {
             httpOnly: true,
             secure: true,
             path: '/',
             sameSite: 'strict',
         })
-        res.cookie('refreshToken', token.newRefreshToken, {
+        res.cookie('refresh_token', token.newRefreshToken, {
             httpOnly: true,
             secure: true,
             path: '/',
@@ -132,7 +132,7 @@ const requestRefreshToken = async (req: Request, res: Response, next: NextFuncti
 
 const logoutUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
-        const refreshToken: string = req.cookies?.refreshToken
+        const refreshToken: string = req.cookies?.refresh_token
         authService.logoutUser(refreshToken)
         res.clearCookie('refreshToken')
         res.clearCookie('accessToken')

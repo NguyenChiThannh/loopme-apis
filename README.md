@@ -43,51 +43,62 @@ LoopMe is a social networking platform similar to Facebook.
 
 ### 3.1. Endpoints
 
-POST /register: Registers a new user account.
-POST /verify-account: Verifies the user account.
-POST /login: Logs in an existing user.
-POST /logout: Logs out the user and invalidates the session.
-POST /forgot-password: Initiates a password reset process for the user.
-POST /verify-forgot-password: Confirms a password reset using a verification code.
-POST /refresh-token: Requests a new access token using a refresh token.
+#### 3.1.1. Auth
+- **POST** `/register`: Registers a new user account.
+- **POST** `/verify-account`: Verifies the user account.
+- **POST** `/login`: Logs in user.
+- **POST** `/logout`: Logs out the user.
+- **POST** `/forgot-password`: Initiates a password reset process for the user.
+- **POST** `/verify-forgot-password`: Confirms a password reset using a otp code.
+- **PUT** `/change-pwd`: Change current password.
+- **POST** `/refresh-token`: Requests a new access token using a refresh token.
 
-GET /: Get the user information.
-POST /: Update the user information.
-GET /search: Search for users.
+#### 3.1.2. User
+- **GET** `/`: Get the user current information.
+- **PUT** `/`: Update the user information.
+- **GET** `/search`: Search for users by name.
+- **GET** `/:id`: Get user information.
 
-POST /refresh: Refresh the OTP (One-Time Password).
+#### 3.1.3 Otps
+- **POST** `/refresh`: Refresh the OTP.
 
-POST /: Create a new post.
-GET /: Get all posts.
-GET /:id: Get a post by its ID.
-GET /group/:groupId: Get posts by group ID.
-POST /group: Create a new post in a group (requires group membership).
-POST /:id/upvote: Upvote a post by its ID.
-POST /:id/downvote: Downvote a post by its ID.
-DELETE /:id/removevote: Remove the vote from a post by its ID.
-POST /:id/comment: Add a comment to a post by its ID.
-DELETE /:id/comment: Delete a comment from a post by its ID.
+#### 3.1.4 Posts
+- **POST** `/`: Create a new post in newfeed.
+- **GET** `/`: Get all posts from friend, groups and public posts for the newsfeed.
+- **GET** `/:id`: Get a post by its postId.
+- **GET** `/user/:userId`: Get all posts by userId.
+- **GET** `/group/:groupId`: Get all posts by groupId.
+- **POST** `/group`: Create a new post in a group (requires group membership).
+- **POST** `/:id/upvote`: Upvote a post by its Id.
+- **POST** `/:id/downvote`: Downvote a post by its Id.
+- **DELETE** `/:id/removevote`: Remove the vote from a post by its Id.
+- **POST** `/:id/comment`: Add a comment to a post by its Id.
+- **DELETE** `/:id/comment`: Delete a comment from a post by its Id.
 
-POST /pending-invitations/:userId: Add a pending friend invitation for a user by their ID.
-DELETE /pending-invitations/:userId: Remove a pending friend invitation for a user by their ID.
-GET /: Get all friends of the authenticated user.
-POST /accept-invitations/:userId: Accept a friend invitation for a user by their ID.
-DELETE /:userId: Remove a friend by their ID.
-GET /all-invitations: Get all friend invitations for the authenticated user.
-GET /suggest-mutual-friends: Suggest mutual friends for the authenticated user.
+#### 3.1.5 Friends
+- **POST** `/pending-invitations/:userId`: Add a pending friend invitation for a user by their Id.
+- **DELETE** `/pending-invitations/:userId`: Remove a pending friend invitation for a user by their Id.
+- **GET** `/`: Get all friends of user.
+- **POST** `/accept-invitations/:userId`: Accept a friend invitation for a user by their Id.
+- **DELETE** `/:userId`: Remove a friend by their Id.
+- **GET** `/all-invitations`: Get all friend invitations for user.
+- **GET** `/suggest-mutual-friends`: Suggest mutual friends for user.
 
-POST /: Create a new group.
-GET /search: Search for groups.
-GET /:groupId: Get a group by its ID.
-POST /:groupId/pending-invitations: Add pending invitations for a group.
-DELETE /:groupId/pending-invitations/:userId: Remove a pending invitation for a user from a group (requires group ownership).
-POST /:groupId/accept-invitations/:userId: Accept a pending invitation for a user to join a group (requires group ownership).
-POST /:groupId/members/:userId: Add a member to a group (requires group ownership).
-DELETE /:groupId/members/:userId: Remove a member from a group (requires group ownership).
-GET /:groupId/members: Get all members of a group.
-GET /:groupId/invitations: Get all pending invitations for a group (requires group ownership).
+#### 3.1.6 Groups
+- **POST** `/`: Create a new group.
+- **GET** `/search`: Search for groups by name.
+- **GET** `/:groupId`: Get a group by its ID.
+- **POST** `/:groupId/pending-invitations`: Add pending invitations for a group.
+- **DELETE** `/:groupId/pending-invitations/:userId`: Remove a pending invitation for a user from a group (requires group ownership).
+- **POST** `/:groupId/accept-invitations/:userId`: Accept a pending invitation for a user to join a group (requires group ownership).
+- **POST** `/:groupId/members/:userId`: Add a member to a group (requires group ownership).
+- **DELETE** `/:groupId/members/:userId`: Remove a member from a group (requires group ownership).
+- **GET** `/:groupId/members`: Get all members of a group (requires group ownership).
+- **GET** `/:groupId/invitations`: Get all pending invitations for a group (requires group ownership).
 
-GET /:userId: Get all messages for a specific user (requires token verification).
-POST /:userId: Send a message to a specific user (requires token verification).
+#### 3.1.7 Messages
+- **GET** `/:userId`: Get all messages for a specific user.
+- **POST** `/:userId`: Send a message to a specific user.
 
-GET /: Get all notifications for the authenticated user (requires token verification).
+#### 3.1.8 Notifications
+- **GET** `/`: Get all notifications for the authenticated user.

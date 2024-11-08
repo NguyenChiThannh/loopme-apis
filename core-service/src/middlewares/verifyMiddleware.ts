@@ -7,7 +7,7 @@ import { AuthenticatedRequest } from '../types';
 
 const verifyToken = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
-        const accessToken = req.cookies?.accessToken
+        const accessToken = req.cookies?.access_token
         if (accessToken) {
             jwt.verify(accessToken, process.env.JWT_ACCESS_TOKEN, (err, user) => {
                 if (err) {
