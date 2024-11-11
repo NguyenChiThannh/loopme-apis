@@ -1,5 +1,8 @@
+import { CustomError } from "@/config/customError";
 import { PaginatedResponse } from "@/dtos/PaginatedResponse"
+import ChannelModel from "@/models/channel"
 import MessageModel from "@/models/message"
+import { ResponseMessages } from "@/utils/messages";
 import mongoose from "mongoose"
 
 const getAllMessage = async ({ myId, friendId, page, size, sort }: {
@@ -10,31 +13,38 @@ const getAllMessage = async ({ myId, friendId, page, size, sort }: {
     sort: 1 | -1
 }): Promise<PaginatedResponse> => {
     try {
-        const myObjectId = new mongoose.Types.ObjectId(myId)
-        const friendObjectId = new mongoose.Types.ObjectId(friendId)
-        const messages = await MessageModel.find({
-            $or: [
-                { sender: myObjectId, receiver: friendObjectId },
-                { sender: friendObjectId, receiver: myObjectId }
-            ]
-        })
-            .populate('sender', '_id displayName avatar')
-            .populate('receiver', '_id displayName avatar')
-            .sort({ createdAt: sort })
-            .skip((page - 1) * size)
-            .limit(size)
+        const myObjectId = new mongoose.Types.ObjectId(myId);
+        const friendObjectId = new mongoose.Types.ObjectId(friendId);
 
-        const totalMessages = await MessageModel.countDocuments({
-            $or: [
-                { sender: myObjectId, receiver: friendObjectId },
-                { sender: friendObjectId, receiver: myObjectId }
+        const channel = await ChannelModel.findOne({
+            participants: {
+                $all: [
+                    { $elemMatch: { $eq: myObjectId } },
+                    { $elemMatch: { $eq: friendObjectId } },
+                ]
+            },
+        }).populate({
+            path: 'messages',
+            options: {
+                sort: { createdAt: sort },
+                skip: (page - 1) * size,
+                limit: size,
+            },
+            populate: [
+                { path: 'sender', select: 'displayName avatar _id' },
+                { path: 'receiver', select: 'displayName avatar _id' }
             ]
         });
 
+        if (!channel) {
+            throw new CustomError(404, ResponseMessages.NOT_FOUND)
+        }
+
+        const totalMessages = await MessageModel.countDocuments({ _id: { $in: channel.messages.map(msg => msg._id) } });
         const totalPages = Math.ceil(totalMessages / size);
 
         return {
-            data: messages,
+            data: channel.messages,
             currentPage: page,
             totalPages,
             hasNextPage: page < totalPages,
@@ -42,32 +52,49 @@ const getAllMessage = async ({ myId, friendId, page, size, sort }: {
             totalElement: totalMessages,
         };
     } catch (error) {
-        throw error
+        throw error;
     }
-}
+};
 
-const sendMessage = async ({ myId, friendId, content }: {
+
+
+const sendMessage = async ({ myId, friendId, message }: {
     myId: string,
     friendId: string,
-    content: string
+    message: string
 }) => {
     try {
-        const myObjectId = new mongoose.Types.ObjectId(myId)
-        const friendObjectId = new mongoose.Types.ObjectId(friendId)
+        const myObjectId = new mongoose.Types.ObjectId(myId);
+        const friendObjectId = new mongoose.Types.ObjectId(friendId);
 
-        const message = await MessageModel.create({
+        let messageCreated = await MessageModel.create({
             sender: myObjectId,
             receiver: friendObjectId,
-            message: content,
+            message,
         })
-        return message
+
+        await ChannelModel.updateOne(
+            {
+                participants: { $all: [myObjectId, friendObjectId] },
+            },
+            {
+                $push: { messages: messageCreated._id },
+                $set: { isRead: false }
+            }
+        )
+
+        messageCreated = await MessageModel.findById(messageCreated._id)
+            .populate('sender', '_id displayName avatar')
+            .populate('receiver', '_id displayName avatar');
+
+        return messageCreated;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 
 
 export const messageService = {
     getAllMessage,
-    sendMessage
+    sendMessage,
 }

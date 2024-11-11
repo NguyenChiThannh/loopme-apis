@@ -31,7 +31,7 @@ const addPendingInvitations = async (myId: string, friendId: string): Promise<vo
         // Create Notification
         await notificationService.create({
             actor: myId,
-            recipient: friendId,
+            receiver: friendId,
             type: 'friend_request',
         })
     } catch (error) {
@@ -76,7 +76,7 @@ const acceptInvitations = async (myId: string, friendId: string): Promise<void> 
         // Create Notification
         await notificationService.create({
             actor: myId,
-            recipient: friendId,
+            receiver: friendId,
             type: 'accept_friend',
         })
     } catch (error) {

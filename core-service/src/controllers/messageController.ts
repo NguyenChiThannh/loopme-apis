@@ -1,6 +1,7 @@
 import { PaginatedResponse } from "@/dtos/PaginatedResponse"
 import { messageService } from "@/services/messageService"
 import { AuthenticatedRequest } from "@/types"
+import RabbitMQService from "@/utils/amqp"
 import { ResponseMessages } from "@/utils/messages"
 import { successResponse } from "@/utils/responses"
 import { NextFunction, Response } from "express"
@@ -28,25 +29,32 @@ const send = async (req: AuthenticatedRequest, res: Response, next: NextFunction
     try {
         const myId = req.user._id
         const friendId = req.params.userId
-        const content = req.body.content
-        const messsage = await messageService.sendMessage({
+        const message = req.body.message
+        const messageCreated = await messageService.sendMessage({
             myId,
             friendId,
-            content
+            message
         })
+
+        // Pub message to the realtime service 
+
+        // const realtime = new RabbitMQService(process.env.ExchangeName_Realtime_Service)
+
+        // realtime.publishMessage("Message", messageCreated)
+        // 1111
+
         successResponse({
             message: ResponseMessages.MESSAGE.SEND_MESSAGE_SUCCESS,
             res,
             status: 200,
-            data: messsage
+            data: messageCreated,
         })
     } catch (error) {
         next(error)
     }
 }
 
-
 export const messageController = {
     getAll,
-    send
+    send,
 }

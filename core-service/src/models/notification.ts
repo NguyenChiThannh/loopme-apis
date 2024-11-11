@@ -2,12 +2,12 @@ import mongoose, { Schema, Document, Types } from 'mongoose';
 
 export interface INotification extends Document {
     actor: Types.ObjectId;
-    recipient: Types.ObjectId;
+    receiver: Types.ObjectId;
     type: 'dislike' | 'like' | 'comment' | 'request_to_join_group' | 'friend_request' | 'accept_join_group' | 'accept_friend'
     postId?: Types.ObjectId;
     groupId?: Types.ObjectId;
     createdAt: Date;
-    read: boolean;
+    isRead: boolean;
 }
 
 const NotificationSchema = new Schema<INotification>({
@@ -16,7 +16,7 @@ const NotificationSchema = new Schema<INotification>({
         ref: 'User',
         required: true
     },
-    recipient: {
+    receiver: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
@@ -38,7 +38,7 @@ const NotificationSchema = new Schema<INotification>({
         type: Date,
         default: Date.now
     },
-    read: {
+    isRead: {
         type: Boolean,
         default: false
     }

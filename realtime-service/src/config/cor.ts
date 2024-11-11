@@ -1,7 +1,11 @@
-import ApiError from '../utils/ApiError'
-import { WHITELIST_DOMAINS } from '../utils/constants'
+// import ApiError from '../utils/ApiError'
+// import { WHITELIST_DOMAINS } from '../utils/constants'
 
 // Cấu hình CORS Option
+export const WHITELIST_DOMAINS: string[] = [
+    'http://localhost:5173',
+]
+
 export const corsOptions = {
     origin: function (origin, callback) {
         // Cho phép việc gọi API bằng POSTMAN trên môi trường dev,
@@ -16,7 +20,7 @@ export const corsOptions = {
         }
 
         // Cuối cùng nếu domain không được chấp nhận thì trả về lỗi
-        return callback(new ApiError(403, `${origin} not allowed by our CORS Policy.`))
+        // return callback(new ApiError(403, `${origin} not allowed by our CORS Policy.`))
     },
 
     // Some legacy browsers (IE11, various SmartTVs) choke on 204

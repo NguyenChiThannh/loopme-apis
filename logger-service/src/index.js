@@ -6,8 +6,8 @@ app.listen(process.env.PORT, () => {
     console.log(`Server starting at PORT ${process.env.PORT}`)
 })
 
-const handleErrorLog = async () => {
+const handleLog = async () => {
     await consumeMessages()
 }
 
-handleErrorLog()
+handleLog()

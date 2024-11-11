@@ -1,4 +1,4 @@
-import Logger from "@/utils/amqp";
+import RabbitMQService from "@/utils/amqp";
 import type { Response } from "express";
 
 interface reponsePrams {
@@ -8,12 +8,16 @@ interface reponsePrams {
     data?: any,
 }
 
-const logger = new Logger();
+const exchangName = process.env.ExchangeName_Logger_Service
+
+const logger = new RabbitMQService(exchangName)
 export function successResponse({ res, message, status, data }: reponsePrams) {
     // logger.publishMessage("Info", {
     //     status,
     //     message
     // })
+
+    // 1111
     return res.status(status).json({ success: true, message, data: data });
 }
 

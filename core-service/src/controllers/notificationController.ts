@@ -19,6 +19,38 @@ const getAll = async (req: AuthenticatedRequest, res: Response, next: NextFuncti
     }
 }
 
+const markAsRead = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        const notificationId = req.params.id
+        await notificationService.markAsRead(notificationId)
+        successResponse({
+            message: ResponseMessages.NOTIFICATIONS.MARK_AS_READ_SUCCESS,
+            res,
+            status: 200,
+        })
+        return
+    } catch (error) {
+        next(error)
+    }
+}
+
+const markAllAsRead = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        const notifications = await notificationService.markAllAsRead(req.user._id)
+        successResponse({
+            message: ResponseMessages.NOTIFICATIONS.MARK_ALL_AS_READ_SUCCESS,
+            res,
+            status: 200,
+            data: notifications,
+        })
+        return
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const notificationController = {
     getAll,
+    markAsRead,
+    markAllAsRead,
 }

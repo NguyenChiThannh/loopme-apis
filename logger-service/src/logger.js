@@ -10,7 +10,7 @@ const logger = winston.createLogger({
         winston.format.timestamp(),
         winston.format.printf(({ timestamp, level, message, status }) => {
             return JSON.stringify({
-                timestamp,    // Ensure timestamp is first
+                timestamp,
                 level,
                 status,
                 message,
@@ -50,6 +50,8 @@ export const logError = ({ message, stack }) => {
     //     stack: stack,
     //     timestamp: new Date().toISOString()
     // });
+
+    // 1111
 
     sendLogToDiscord({
         message,

@@ -1,12 +1,14 @@
 core-service/node_modules
 logger-service/node_modules
 getway-api/node_modules
+realtime-service/node_modules
 
 core-service/dist
 logger-service/dist
 getway-api/dist
-
+realtime-service/dist
 
 core-service/.env
 logger-service/.env
 getway-api/.env
+realtime-service/.env

@@ -370,64 +370,176 @@ const getPostsByGroupId = async ({ groupId, userId, page, size, sort }: {
 
 }
 
-const getPostsByUserId = async ({ myId, userId, page, size, sort }: {
+const getPostsByUserId = async ({
+    myId,
+    userId,
+    page,
+    size,
+    sort,
+}: {
     myId: string;
     userId: string;
     page: number;
     size: number;
-    sort: 1 | -1
+    sort: 1 | -1;
 }) => {
     try {
         const isMyself = myId === userId;
         const myObjectId = new mongoose.Types.ObjectId(myId);
         const userObjectId = new mongoose.Types.ObjectId(userId);
 
-        let posts;
-        let totalPages;
-
+        let matchStage;
         if (isMyself) {
-            posts = await PostModel.find({
-                user: userObjectId,
-                group: null,
-            }).sort({ createdAt: sort })
-                .skip((page - 1) * size)
-                .limit(size);
-
-            const totalPosts = await PostModel.countDocuments({ user: userObjectId, group: null });
-            totalPages = Math.ceil(totalPosts / size);
+            matchStage = { user: userObjectId, group: null };
         } else {
-            const isFriend = await FriendModel.findOne(
-                {
-                    $or: [
-                        { sender: myObjectId, receiver: userObjectId, status: 'accepted' },
-                        { sender: userObjectId, receiver: myObjectId, status: 'accepted' }
-                    ]
-                }
-            ) ? true : false;
+            const isFriend = (await FriendModel.findOne({
+                $or: [
+                    {
+                        sender: myObjectId,
+                        receiver: userObjectId,
+                        status: "accepted",
+                    },
+                    {
+                        sender: userObjectId,
+                        receiver: myObjectId,
+                        status: "accepted",
+                    },
+                ],
+            }))
+                ? true
+                : false;
 
             const privacyFilter = isFriend
-                ? { privacy: { $in: ['public', 'friends'] } }
-                : { privacy: 'public' };
+                ? { privacy: { $in: ["public", "friends"] } }
+                : { privacy: "public" };
 
-            const totalPosts = await PostModel.countDocuments({ user: userObjectId, group: null, ...privacyFilter });
-            totalPages = Math.ceil(totalPosts / size);
-
-            posts = await PostModel.find({
-                user: userObjectId,
-                group: null,
-                ...privacyFilter
-            })
-                .sort({ createdAt: sort })
-                .skip((page - 1) * size)
-                .limit(size);
+            matchStage = { user: userObjectId, group: null, ...privacyFilter };
         }
 
+        const posts = await PostModel.aggregate([
+            {
+                $match: matchStage,
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "user",
+                    foreignField: "_id",
+                    as: "userDetails",
+                },
+            },
+            {
+                $unwind: "$userDetails",
+            },
+            {
+                $lookup: {
+                    from: "groups",
+                    localField: "group",
+                    foreignField: "_id",
+                    as: "groupDetails",
+                },
+            },
+            {
+                $unwind: {
+                    path: "$groupDetails",
+                    preserveNullAndEmptyArrays: true,
+                },
+            },
+            {
+                $project: {
+                    _id: 1,
+                    title: 1,
+                    content: 1,
+                    privacy: 1,
+                    images: 1,
+                    createdAt: 1,
+                    updatedAt: 1,
+                    user: {
+                        _id: "$userDetails._id",
+                        displayName: "$userDetails.displayName",
+                        avatar: "$userDetails.avatar",
+                    },
+                    group: {
+                        _id: "$groupDetails._id",
+                        name: "$groupDetails.name",
+                    },
+                    voteValue: {
+                        $let: {
+                            vars: {
+                                userVote: {
+                                    $arrayElemAt: [
+                                        {
+                                            $filter: {
+                                                input: "$votes",
+                                                as: "vote",
+                                                cond: {
+                                                    $eq: [
+                                                        "$vote.user",
+                                                        myObjectId,
+                                                    ],
+                                                },
+                                            },
+                                        },
+                                        0,
+                                    ],
+                                },
+                            },
+                            in: {
+                                $cond: {
+                                    if: { $ifNull: ["$userVote", false] },
+                                    then: "$userVote.value",
+                                    else: null,
+                                },
+                            },
+                        },
+                    },
+                    totalVotes: {
+                        $subtract: [
+                            {
+                                $size: {
+                                    $filter: {
+                                        input: "$votes",
+                                        as: "vote",
+                                        cond: {
+                                            $eq: ["$vote.value", "UPVOTE"],
+                                        },
+                                    },
+                                },
+                            },
+                            {
+                                $size: {
+                                    $filter: {
+                                        input: "$votes",
+                                        as: "vote",
+                                        cond: {
+                                            $eq: ["$vote.value", "DOWNVOTE"],
+                                        },
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                },
+            },
+            {
+                $skip: (page - 1) * size,
+            },
+            {
+                $limit: size,
+            },
+            {
+                $sort: { createdAt: sort },
+            },
+        ]);
+
+        const totalPosts = await PostModel.countDocuments(matchStage);
+        const totalPages = Math.ceil(totalPosts / size);
         return {
             data: posts,
             currentPage: page,
             totalPages,
             hasNextPage: page < totalPages,
-            nextCursor: page < totalPages ? page + 1 : null
+            nextCursor: page < totalPages ? page + 1 : null,
         };
     } catch (error) {
         throw error;
@@ -645,7 +757,7 @@ const upvote = async (postId: string, userId: string): Promise<void> => {
         // Send notifications
         await notificationService.create({
             actor: userId,
-            recipient: post.user.toString(),
+            receiver: post.user.toString(),
             postId: postId,
             type: 'like',
         })
@@ -701,7 +813,7 @@ const downvote = async (postId: string, userId: string): Promise<void> => {
         // Send notifications
         await notificationService.create({
             actor: userId,
-            recipient: post.user.toString(),
+            receiver: post.user.toString(),
             postId: postId,
             type: 'dislike',
         })
@@ -754,7 +866,7 @@ const addComment = async ({ postId, userId, content }:
 
         await notificationService.create({
             actor: userId,
-            recipient: post.user.toString(),
+            receiver: post.user.toString(),
             groupId: postId,
             type: 'comment',
         })

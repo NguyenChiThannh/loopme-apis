@@ -52,7 +52,6 @@ const verifyAccount = async (email: string): Promise<{ accessToken: string; refr
             user.isActive = true;
             await user.save();
         }
-        console.log('🚀 ~ verifyAccount ~ user:', user)
         const accessToken: string = genarateToken.genarateAccessToken(user)
         const refreshToken: string = genarateToken.genarateRefreshToken(user)
         refreshTokens.push(refreshToken);

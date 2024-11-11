@@ -1,5 +1,3 @@
-// messages.ts
-
 export const ResponseMessages = {
     NOT_FOUND: "NOT_FOUND",
     OK: "OK",
@@ -60,10 +58,18 @@ export const ResponseMessages = {
         GET_ALL_INVITATIONS_FRIEND_SUCCESS: "Get all invitations successful."
     },
     NOTIFICATIONS: {
-        GET_ALL_NOTIFICATIONS_SUCCESS: "Get all notifications successful"
+        GET_ALL_NOTIFICATIONS_SUCCESS: "Get all notifications successful",
+        MARK_AS_READ_SUCCESS: "Mark as read successful",
+        MARK_ALL_AS_READ_SUCCESS: "Mark all as read successful",
     },
     MESSAGE: {
         GET_MESSAGE_SUCCESS: "Get message success",
-        SEND_MESSAGE_SUCCESS: "Send messsage success"
+        SEND_MESSAGE_SUCCESS: "Send messsage success",
+        GET_CHANNEL_MESSAGE_SUCCESS: "Get channel message success",
+    },
+    CHANNEL: {
+        GET_ALL_CHANNEL_SUCCESS: "Get all channel success",
+        GET_CHANNEL_SUCCESS: "Get channel success",
     }
+
 }

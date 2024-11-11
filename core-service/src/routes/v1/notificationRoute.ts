@@ -7,5 +7,8 @@ const Router = express.Router()
 Router.use(verifyMiddleware.verifyToken);
 
 Router.get('/', notificationController.getAll)
+Router.patch('/:id/read', notificationController.markAsRead);
+Router.patch('/read', notificationController.markAllAsRead);
+
 
 export const notificationRoute = Router

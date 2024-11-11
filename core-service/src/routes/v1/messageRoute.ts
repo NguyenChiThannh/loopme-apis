@@ -9,7 +9,8 @@ const Router = express.Router()
 Router.use(verifyMiddleware.verifyToken)
 
 Router.route('/:userId')
-    .get(validate(MessageReqSchema), messageController.getAll)
-    .post(messageController.send)
+    .get(messageController.getAll)
+    .post(validate(MessageReqSchema), messageController.send)
+
 
 export const messageRoute = Router

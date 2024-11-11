@@ -101,7 +101,7 @@ const addPendingInvitations = async (userId: string, groupId: string): Promise<v
         // Create notificaitons
         await notificationService.create({
             actor: userId,
-            recipient: group.owner.toString(),
+            receiver: group.owner.toString(),
             groupId: groupId,
             type: 'request_to_join_group',
         })
@@ -152,7 +152,7 @@ const acceptPendingInvitations = async (userId: string, groupId: string): Promis
         // Create notifications
         await notificationService.create({
             actor: group.owner.toString(),
-            recipient: userId,
+            receiver: userId,
             groupId: groupId,
             type: 'accept_join_group',
         })

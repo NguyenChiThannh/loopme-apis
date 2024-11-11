@@ -1,1 +1,35 @@
 {"timestamp":"2024-11-01T02:18:04.862Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-08T18:23:24.060Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-08T18:23:34.558Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-08T18:29:12.568Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-08T18:32:23.786Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-08T18:41:06.797Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-08T18:43:03.768Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-08T18:49:26.141Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-08T18:58:19.134Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-08T19:02:44.411Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-08T19:04:03.164Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-08T19:05:16.316Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-08T19:09:24.592Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-08T19:10:10.680Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-08T19:10:54.688Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-09T01:41:17.764Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-09T01:41:21.859Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-09T01:43:39.710Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-09T01:43:57.589Z","level":"info","status":200,"message":"Upvote post successful"}
+{"timestamp":"2024-11-09T01:44:36.078Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-09T01:45:30.729Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-09T01:46:12.214Z","level":"info","status":200,"message":"Downvote post successful"}
+{"timestamp":"2024-11-09T01:47:38.665Z","level":"info","status":200,"message":"Upvote post successful"}
+{"timestamp":"2024-11-09T01:48:09.131Z","level":"info","status":200,"message":"Downvote post successful"}
+{"timestamp":"2024-11-09T01:50:14.280Z","level":"info","status":200,"message":"Upvote post successful"}
+{"timestamp":"2024-11-09T01:50:37.707Z","level":"info","status":200,"message":"Upvote post successful"}
+{"timestamp":"2024-11-09T01:51:01.177Z","level":"info","status":200,"message":"Downvote post successful"}
+{"timestamp":"2024-11-09T01:52:57.214Z","level":"info","status":200,"message":"Upvote post successful"}
+{"timestamp":"2024-11-09T02:05:39.399Z","level":"info","status":200,"message":"Get channel message success"}
+{"timestamp":"2024-11-09T02:07:24.984Z","level":"info","status":200,"message":"Get channel message success"}
+{"timestamp":"2024-11-09T02:20:13.213Z","level":"info","status":200,"message":"Get channel message success"}
+{"timestamp":"2024-11-09T02:20:27.908Z","level":"info","status":200,"message":"Get channel message success"}
+{"timestamp":"2024-11-09T02:20:52.349Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-09T02:20:59.454Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-09T02:21:08.082Z","level":"info","status":200,"message":"Get channel message success"}
