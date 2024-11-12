@@ -18,9 +18,9 @@ const create = async (data: INotification): Promise<void> => {
         // Pub message to the realtime service 
         await notification.populate('actor', 'displayName avatar _id')
 
-        // const realtime = new RabbitMQService(process.env.ExchangeName_Realtime_Service)
+        const realtime = new RabbitMQService(process.env.ExchangeName_Realtime_Service)
 
-        // realtime.publishMessage("Notifications", notification)
+        realtime.publishMessage("Notifications", notification)
 
         // 1111
 

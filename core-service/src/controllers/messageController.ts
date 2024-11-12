@@ -38,9 +38,9 @@ const send = async (req: AuthenticatedRequest, res: Response, next: NextFunction
 
         // Pub message to the realtime service 
 
-        // const realtime = new RabbitMQService(process.env.ExchangeName_Realtime_Service)
+        const realtime = new RabbitMQService(process.env.ExchangeName_Realtime_Service)
 
-        // realtime.publishMessage("Message", messageCreated)
+        realtime.publishMessage("Message", messageCreated)
         // 1111
 
         successResponse({

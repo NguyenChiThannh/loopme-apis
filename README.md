@@ -7,6 +7,33 @@ LoopMe is a social networking platform similar to Facebook.
 
 ![Frame 1](https://github.com/user-attachments/assets/751d728f-b4e4-42db-b6d1-0f1f5663bd56)
 
+#### Gateway Service (Port: 8000)
+- API Gateway/Reverse Proxy
+- Routes requests to appropriate services
+- Rate limiting (100 requests/minute)
+- WebSocket proxy for real-time communications
+- Single entry point for all client requests
+
+#### Core Service (Port: 8001)
+- Handles main business logic and API endpoints
+- User authentication & authorization
+- CRUD operations for users, posts, messages
+- Database interactions with MongoDB
+- Message queue producer for notifications and real-time events
+
+#### Realtime Service (Port: 8002)
+- Handles real-time communications using Socket.IO
+- Message queue consumer for real-time events
+- Manages WebSocket connections
+- Real-time notifications and messaging
+- Redis for socket session management
+
+#### Logger Service (Port: 8003)
+- Centralized logging system
+- Consumes log events from message queue
+- Stores system logs and audit trails
+- Error tracking and monitoring
+
 ### 1.2. Technology used:
 
 - **TypeScript**: The primary programming language used for the application.
@@ -37,6 +64,41 @@ LoopMe is a social networking platform similar to Facebook.
    ```bash
    git clone https://github.com/NguyenChiThannh/loopme-apis.git
    cd loopme-apis
+   cd gateway-api
+   npm i
+   cd .. 
+   cd core-service
+   npm i
+   cd realtime-service
+   npm i
+   cd ..
+   cd logger-service
+   npm i
+   cd ..
+   ```
+2. Install node module for each service
+
+   ```bash
+   cd gateway-api
+   npm i
+   cd .. 
+   cd core-service
+   npm i
+   cd ..
+   cd realtime-service
+   npm i
+   cd ..
+   cd logger-service
+   npm i
+   cd ..
+   ```
+3. Create .env files for each service
+
+4. Run docker
+
+5. On cmd: 
+      ```bash
+   run-services.bat
    ```
 
 ## 3. API Documentation
@@ -55,7 +117,7 @@ LoopMe is a social networking platform similar to Facebook.
 
 #### 3.1.2. User
 - **GET** `/`: Get the user current information.
-- **PUT** `/`: Update the user information.
+- **PATCH** `/`: Update the user information.
 - **GET** `/search`: Search for users by name.
 - **GET** `/:id`: Get user information.
 
@@ -66,7 +128,7 @@ LoopMe is a social networking platform similar to Facebook.
 - **POST** `/`: Create a new post in newfeed.
 - **GET** `/`: Get all posts from friend, groups and public posts for the newsfeed.
 - **GET** `/:id`: Get a post by its postId.
-- **PUT** `/:id`: Put a post by its postId.
+- **PATCH** `/:id`: Put a post by its postId.
 - **DELETE** `/:id`: Delete a post by its postId.
 - **GET** `/user/:userId`: Get all posts by userId.
 - **GET** `/group/:groupId`: Get all posts by groupId.
@@ -100,8 +162,14 @@ LoopMe is a social networking platform similar to Facebook.
 - **GET** `/:groupId/invitations`: Get all pending invitations for a group (requires group ownership).
 
 #### 3.1.7 Messages
+- **GET** `/`: Get all channel for current user
+- **GET** `/:id`: Get detail channel by channelId
+
+#### 3.1.8 Messages
 - **GET** `/:userId`: Get all messages for a specific user.
 - **POST** `/:userId`: Send a message to a specific user.
 
-#### 3.1.8 Notifications
+#### 3.1.9 Notifications
 - **GET** `/`: Get all notifications for the authenticated user.
+- **GET** `/:id/read`: Mark as read one notifications by notificationId
+- **GET** `/read`: Mark as read all notifications.

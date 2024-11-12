@@ -9,8 +9,12 @@ const app = express();
 const httpServer: HTTPServer = createServer(app);
 export const io = setupSocketIO(httpServer);
 
+// app.get('/', (req, res) => {
+//     res.send('Hello')
+// })
+
 httpServer.listen(process.env.PORT, () => {
-    console.log(`Realtime server is listening on port: ${process.env.PORT}`);
+    console.log(`Realtime service is running on port: ${process.env.PORT}`);
 });
 
 const handleRealtime = async () => {

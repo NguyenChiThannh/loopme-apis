@@ -44,12 +44,12 @@ async function sendLogToDiscord(logData) {
 
 // Log error and send to Discord
 export const logError = ({ message, stack }) => {
-    // logger.log({
-    //     level: 'error',
-    //     message: message,
-    //     stack: stack,
-    //     timestamp: new Date().toISOString()
-    // });
+    logger.log({
+        level: 'error',
+        message: message,
+        stack: stack,
+        timestamp: new Date().toISOString()
+    });
 
     // 1111
 
