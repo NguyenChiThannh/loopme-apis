@@ -1,6 +1,7 @@
+REM Clear console log
 @echo off
 
-REM Kiểm tra và chạy RabbitMQ container
+REM Check and run RabbitMQ container
 docker ps | findstr "rabbitmq" > nul
 if errorlevel 1 (
     echo Starting RabbitMQ container...
@@ -12,7 +13,7 @@ if errorlevel 1 (
     echo RabbitMQ is already running
 )
 
-REM Kiểm tra và chạy Redis container
+REM Check and run Redis container
 docker ps | findstr "my-redis" > nul
 if errorlevel 1 (
     echo Starting Redis container...

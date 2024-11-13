@@ -8,14 +8,25 @@ import { rateLimit } from 'express-rate-limit'
 const app = express();
 
 // // Middleware
-// app.use(cors({
-//     origin: true,
-//     credentials: true,
-//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-//     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
-// }));
+app.use(
+    cors({
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+        allowedHeaders: [
+            "Content-Type",
+            "Authorization",
+            "X-Requested-With",
+            "Accept",
+            "Origin",
+            "tojson",
+        ],
+        optionsSuccessStatus: 200,
+        maxAge: 3600,
+        origin: "http://localhost:5173",
+    })
+);
 
-app.use(cors());
+// app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
