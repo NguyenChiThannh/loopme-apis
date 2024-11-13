@@ -22,6 +22,22 @@ const getAll = async (req: AuthenticatedRequest, res: Response, next: NextFuncti
     }
 }
 
+const create = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.user._id
+        const friendId = req.body.friendId
+        const data = await channelService.create({ userId, friendId })
+        successResponse({
+            message: ResponseMessages.CHANNEL.CREATE_CHANNEL_SUCCESS,
+            res,
+            status: 200,
+            data,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getDetail = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const myId = req.user._id
@@ -40,6 +56,7 @@ const getDetail = async (req: AuthenticatedRequest, res: Response, next: NextFun
 }
 
 export const channelController = {
+    create,
     getAll,
     getDetail,
 }

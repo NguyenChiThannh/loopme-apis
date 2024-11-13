@@ -61,3 +61,44 @@
 {"timestamp":"2024-11-13T09:40:44.143Z","level":"info","status":200,"message":"Send messsage success"}
 {"timestamp":"2024-11-13T09:41:49.869Z","level":"info","status":200,"message":"Upvote post successful"}
 {"timestamp":"2024-11-13T09:42:02.796Z","level":"info","status":200,"message":"Upvote post successful"}
+{"timestamp":"2024-11-13T10:48:00.964Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-13T10:48:01.017Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-13T10:48:01.142Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-13T10:48:01.212Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-13T10:48:42.298Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-13T10:48:45.602Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-13T10:51:31.964Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-13T10:51:31.974Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-13T10:51:32.009Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-13T10:51:49.909Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-13T10:52:30.157Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-13T10:52:33.662Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-13T10:52:33.668Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-13T10:52:33.675Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-13T10:52:39.137Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-13T10:52:39.159Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-13T10:52:39.701Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-13T10:52:50.683Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-13T10:53:55.251Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-13T10:53:55.259Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-13T10:53:55.268Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-13T10:53:59.331Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-13T10:54:37.171Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-13T10:54:42.282Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-13T13:46:12.089Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-13T13:46:17.061Z","level":"info","status":200,"message":"Get channel success"}
+{"timestamp":"2024-11-13T14:04:09.506Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-13T14:05:06.731Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-13T14:05:15.208Z","level":"error","message":"Updating the path 'updatedAt' would create a conflict at 'updatedAt'"}
+{"timestamp":"2024-11-13T14:05:54.365Z","level":"error","message":"Updating the path 'updatedAt' would create a conflict at 'updatedAt'"}
+{"timestamp":"2024-11-13T14:07:43.403Z","level":"error","message":"Plan executor error during findAndModify :: caused by :: cannot infer query fields to set, path 'participants' is matched twice"}
+{"timestamp":"2024-11-13T14:08:38.471Z","level":"error","message":"$elemMatch needs an Object"}
+{"timestamp":"2024-11-13T14:09:23.058Z","level":"error","message":"$elemMatch needs an Object"}
+{"timestamp":"2024-11-13T14:09:48.224Z","level":"error","message":"$elemMatch needs an Object"}
+{"timestamp":"2024-11-13T14:10:46.205Z","level":"info","status":200,"message":"Create channel success"}
+{"timestamp":"2024-11-13T14:10:53.464Z","level":"info","status":200,"message":"Create channel success"}
+{"timestamp":"2024-11-13T14:10:56.421Z","level":"info","status":200,"message":"Create channel success"}
+{"timestamp":"2024-11-13T14:11:00.413Z","level":"info","status":200,"message":"Create channel success"}
+{"timestamp":"2024-11-13T14:12:56.050Z","level":"info","status":200,"message":"Create channel success"}
+{"timestamp":"2024-11-13T14:12:57.421Z","level":"info","status":200,"message":"Create channel success"}
+{"timestamp":"2024-11-13T14:12:59.238Z","level":"info","status":200,"message":"Get all channel success"}

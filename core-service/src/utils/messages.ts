@@ -70,6 +70,7 @@ export const ResponseMessages = {
     CHANNEL: {
         GET_ALL_CHANNEL_SUCCESS: "Get all channel success",
         GET_CHANNEL_SUCCESS: "Get channel success",
+        CREATE_CHANNEL_SUCCESS: "Create channel success"
     }
 
 }

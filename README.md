@@ -150,7 +150,7 @@ LoopMe is a social networking platform similar to Facebook.
 - **GET** `/:groupId/members`: Get all members of a group (requires group ownership).
 - **GET** `/:groupId/invitations`: Get all pending invitations for a group (requires group ownership).
 
-#### 3.1.7 Messages
+#### 3.1.7 Channels
 - **GET** `/`: Get all channel for current user
 - **GET** `/:id`: Get detail channel by channelId
 

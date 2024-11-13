@@ -117,7 +117,45 @@ const getAll = async ({ userId, page, size, sort }: {
     }
 };
 
+const create = async ({ userId, friendId }: { userId: string, friendId: string }) => {
+    try {
+        const userObjectId = new mongoose.Types.ObjectId(userId)
+        const friendObjectId = new mongoose.Types.ObjectId(friendId)
+        console.log('🚀 ~ create ~ userObjectId:', userObjectId)
+        console.log('🚀 ~ create ~ friendObjectId:', friendObjectId)
+
+        const channel = await ChannelModel.findOneAndUpdate(
+            {
+                participants:
+                {
+                    $all: [
+                        { "$elemMatch": { $eq: userObjectId } },
+                        { "$elemMatch": { $eq: friendObjectId } }
+                    ]
+                }
+            },
+            {
+                $setOnInsert: {
+                    participants: [userObjectId, friendObjectId],
+                }
+            },
+            {
+                new: true,
+                upsert: true
+            }
+        ).populate({
+            path: 'participants',
+            select: '_id displayName avatar'
+        });
+
+        return channel
+    } catch (error) {
+        throw error
+    }
+}
+
 export const channelService = {
     getAll,
-    getDetail
+    getDetail,
+    create,
 }
