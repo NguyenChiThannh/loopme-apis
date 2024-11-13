@@ -156,7 +156,7 @@ LoopMe is a social networking platform similar to Facebook.
 - **GET** `/:id`: Get detail channel by channelId
 
 #### 3.1.8 Messages
-- **GET** `/:userId`: Get all messages for a specific user.
+- **GET** `/?channelId=`: Get all messages for a specific user.
 - **POST** `/:userId`: Send a message to a specific user.
 
 #### 3.1.9 Notifications

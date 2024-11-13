@@ -8,9 +8,8 @@ const Router = express.Router()
 
 Router.use(verifyMiddleware.verifyToken)
 
-Router.route('/:userId')
-    .get(messageController.getAll)
-    .post(validate(MessageReqSchema), messageController.send)
+Router.get('/', messageController.getAll)
+Router.post('/:userId', validate(MessageReqSchema), messageController.send)
 
 
 export const messageRoute = Router

@@ -5,24 +5,21 @@ import MessageModel from "@/models/message"
 import { ResponseMessages } from "@/utils/messages";
 import mongoose from "mongoose"
 
-const getAllMessage = async ({ myId, friendId, page, size, sort }: {
+const getAllMessage = async ({ myId, channelId, page, size, sort }: {
     myId: string,
-    friendId: string,
+    channelId: string | null,
     page: number,
     size: number,
     sort: 1 | -1
 }): Promise<PaginatedResponse> => {
     try {
+        if (!channelId) throw new CustomError(400, ResponseMessages.BAD_REQUEST)
         const myObjectId = new mongoose.Types.ObjectId(myId);
-        const friendObjectId = new mongoose.Types.ObjectId(friendId);
+        const channelObjectId = new mongoose.Types.ObjectId(channelId);
 
         const channel = await ChannelModel.findOne({
-            participants: {
-                $all: [
-                    { $elemMatch: { $eq: myObjectId } },
-                    { $elemMatch: { $eq: friendObjectId } },
-                ]
-            },
+            _id: channelId,
+            participants: { $in: [myObjectId] }
         }).populate({
             path: 'messages',
             options: {

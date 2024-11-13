@@ -1,6 +1,7 @@
 export const ResponseMessages = {
     NOT_FOUND: "NOT_FOUND",
     OK: "OK",
+    BAD_REQUEST: "BAD_REQUEST",
     FORBIDDEN: "FORBIDDEN",
     UNAUTHORIZED: "Unauthorized",
     USER: {

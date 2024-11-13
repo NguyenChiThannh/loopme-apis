@@ -102,3 +102,16 @@
 {"timestamp":"2024-11-13T14:12:56.050Z","level":"info","status":200,"message":"Create channel success"}
 {"timestamp":"2024-11-13T14:12:57.421Z","level":"info","status":200,"message":"Create channel success"}
 {"timestamp":"2024-11-13T14:12:59.238Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-13T14:59:55.060Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-13T15:00:01.742Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-13T15:00:09.062Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-13T15:00:16.138Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-13T15:00:39.910Z","level":"error","message":"Cannot read properties of undefined (reading 'toString')"}
+{"timestamp":"2024-11-13T15:01:10.620Z","level":"error","message":"input must be a 24 character hex string, 12 byte Uint8Array, or an integer"}
+{"timestamp":"2024-11-13T15:01:39.500Z","level":"error","message":"input must be a 24 character hex string, 12 byte Uint8Array, or an integer"}
+{"timestamp":"2024-11-13T15:01:52.885Z","level":"error","message":"input must be a 24 character hex string, 12 byte Uint8Array, or an integer"}
+{"timestamp":"2024-11-13T15:02:04.597Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-13T15:02:20.656Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-13T15:02:22.472Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-13T15:02:31.934Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-13T15:02:36.935Z","level":"info","status":200,"message":"Get all channel success"}
