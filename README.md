@@ -152,6 +152,7 @@ LoopMe is a social networking platform similar to Facebook.
 
 #### 3.1.7 Channels
 - **GET** `/`: Get all channel for current user
+- **POST** `/`: Create channel
 - **GET** `/:id`: Get detail channel by channelId
 
 #### 3.1.8 Messages
