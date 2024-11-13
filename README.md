@@ -64,17 +64,6 @@ LoopMe is a social networking platform similar to Facebook.
    ```bash
    git clone https://github.com/NguyenChiThannh/loopme-apis.git
    cd loopme-apis
-   cd gateway-api
-   npm i
-   cd .. 
-   cd core-service
-   npm i
-   cd realtime-service
-   npm i
-   cd ..
-   cd logger-service
-   npm i
-   cd ..
    ```
 2. Install node module for each service
 
