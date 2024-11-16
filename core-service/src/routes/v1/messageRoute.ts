@@ -9,7 +9,10 @@ const Router = express.Router()
 Router.use(verifyMiddleware.verifyToken)
 
 Router.get('/', messageController.getAll)
-Router.post('/:userId', validate(MessageReqSchema), messageController.send)
+Router.post('/send/:userId', validate(MessageReqSchema), messageController.send)
+Router.route('/:id')
+    .patch(validate(MessageReqSchema), messageController.update)
+    .delete(messageController.deleteMessage)
 
 
 export const messageRoute = Router

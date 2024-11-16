@@ -1,3 +1,4 @@
+import notificationEmitter from "@/config/eventEmitter";
 import NotificationModel from "@/models/notification"
 import RabbitMQService from "@/utils/amqp";
 import mongoose from "mongoose"
@@ -10,14 +11,22 @@ interface INotification {
     groupId?: string;
 }
 
+notificationEmitter.on('create_notification', async (notificationData: INotification) => {
+    try {
+        await create(notificationData)
+    } catch (error) {
+        throw error
+    }
+});
+
 const create = async (data: INotification): Promise<void> => {
     try {
         const notification = new NotificationModel(data)
         await notification.save()
 
-        // Pub message to the realtime service 
         await notification.populate('actor', 'displayName avatar _id')
 
+        // Pub message to the realtime service 
         const realtime = new RabbitMQService(process.env.ExchangeName_Realtime_Service)
 
         realtime.publishMessage("Notifications", notification)

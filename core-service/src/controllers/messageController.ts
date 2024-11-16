@@ -10,7 +10,6 @@ const getAll = async (req: AuthenticatedRequest, res: Response, next: NextFuncti
     try {
         const myId = req.user._id
         const channelId = String(req.query.channelId) || null
-        console.log('🚀 ~ getAll ~ channelId:', channelId)
         const page = Number(req.query.page) || 1
         const size = Number(req.query.size) || 5
         const sort = req.query.sort === 'asc' ? 1 : req.query.sort === 'desc' ? -1 : 1
@@ -55,7 +54,44 @@ const send = async (req: AuthenticatedRequest, res: Response, next: NextFunction
     }
 }
 
+
+const update = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        const messageId = req.params.id
+        console.log('🚀 ~ update ~ messageId:', messageId)
+        const myId = req.user._id
+        const message = req.body.message
+        const messageUpdated = await messageService.update({ myId, messageId, message })
+        successResponse({
+            message: ResponseMessages.MESSAGE.UPDATE_MESSAGE_SUCCESS,
+            res,
+            status: 200,
+            data: messageUpdated
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+const deleteMessage = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        const messageId = req.params.id
+        const myId = req.user._id
+        await messageService.deleteComment(myId, messageId)
+        successResponse({
+            message: ResponseMessages.MESSAGE.UPDATE_MESSAGE_SUCCESS,
+            res,
+            status: 200,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const messageController = {
     getAll,
     send,
+    update,
+    deleteMessage,
 }

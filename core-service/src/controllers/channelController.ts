@@ -54,7 +54,6 @@ const getDetail = async (req: AuthenticatedRequest, res: Response, next: NextFun
         next(error)
     }
 }
-
 export const channelController = {
     create,
     getAll,

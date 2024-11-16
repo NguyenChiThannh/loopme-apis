@@ -27,14 +27,4 @@ Router.get('/group/:groupId', postController.getPostsByGroupId)
 // Create post in group
 Router.post('/group', groupMiddleware.checkGroupMembership, validate(PostReqSchema), postController.create)
 
-Router.post('/:id/upvote', postController.upvote)
-
-Router.post('/:id/downvote', postController.downvote)
-
-Router.delete('/:id/removevote', postController.removevote)
-
-Router.route('/:id/comment')
-    .post(postController.addComment)
-    .delete(postController.deleteComment)
-
 export const postRoute = Router

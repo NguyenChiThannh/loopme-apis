@@ -22,7 +22,6 @@ const getDetail = async (myId, channelId) => {
     }
 };
 
-
 const getAll = async ({ userId, page, size, sort }: {
     userId: string,
     page: number,
@@ -32,40 +31,57 @@ const getAll = async ({ userId, page, size, sort }: {
     try {
         const userObjectId = new mongoose.Types.ObjectId(userId);
 
-
         const channels = await ChannelModel.aggregate([
             {
-                $match: {
-                    participants: { $in: [userObjectId] },
-                    messages: { $ne: null },
+                $match: { participants: userObjectId },
+            },
+            {
+                $lookup: {
+                    from: "messages",
+                    let: { channelId: "$_id" },
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: { $eq: ["$channel", "$$channelId"] },
+                            },
+                        },
+                        {
+                            $sort: { createdAt: -1 },
+                        },
+                        {
+                            $limit: 1,
+                        },
+                    ],
+                    as: "lastMessage",
+                },
+            },
+            {
+                $match: { lastMessage: { $ne: [] } },
+            },
+            {
+                $addFields: {
+                    lastMessage: { $arrayElemAt: ["$lastMessage", 0] },
                 },
             },
             {
                 $lookup: {
-                    from: 'messages',
-                    localField: 'messages',
-                    foreignField: '_id',
-                    as: 'messagesDetails',
+                    from: "users",
+                    localField: "participants",
+                    foreignField: "_id",
+                    pipeline: [
+                        {
+                            $project: {
+                                _id: 1,
+                                avatar: 1,
+                                displayName: 1,
+                            },
+                        },
+                    ],
+                    as: "participants",
                 },
             },
             {
-                $match: {
-                    'messagesDetails.0': { $exists: true },
-                },
-            },
-
-            {
-                $project: {
-                    _id: 1,
-                    updatedAt: 1,
-                    participants: 1,
-                    isRead: 1,
-                    readAt: 1,
-                    messagesDetails: { $sortArray: { input: '$messagesDetails', sortBy: { createdAt: -1 } } },
-                },
-            },
-            {
-                $sort: { updatedAt: -1 },
+                $sort: { "lastMessage.createdAt": sort },
             },
             {
                 $skip: (page - 1) * size,
@@ -73,44 +89,47 @@ const getAll = async ({ userId, page, size, sort }: {
             {
                 $limit: size,
             },
+        ]);
+
+        const totalChannels = await ChannelModel.aggregate([
+            {
+                $match: { participants: userObjectId },
+            },
             {
                 $lookup: {
-                    from: 'users',
-                    localField: 'participants',
-                    foreignField: '_id',
-                    as: 'participantsDetails',
+                    from: "messages",
+                    let: { channelId: "$_id" },
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: { $eq: ["$channel", "$$channelId"] },
+                            },
+                        },
+                    ],
+                    as: "messages",
                 },
             },
             {
-                $project: {
-                    _id: 1,
-                    updatedAt: 1,
-                    isRead: 1,
-                    readAt: 1,
-                    participantsDetails: {
-                        _id: 1,
-                        avatar: 1,
-                        displayName: 1,
-                    },
-                    latestMessage: { $arrayElemAt: ['$messagesDetails', 0] },
-                },
+                $match: { messages: { $ne: [] } },
+            },
+            {
+                $count: "total",
             },
         ]);
 
-        const totalChannels = await ChannelModel.countDocuments({
-            participants: userObjectId,
-            messages: { $exists: true, $not: { $size: 0 } },
-        });
-
-        const totalPages = Math.ceil(totalChannels / size);
+        const totalElements = totalChannels.length > 0 ? totalChannels[0].total : 0;
+        const totalPages = Math.ceil(totalElements / size);
 
         return {
-            data: channels,
+            data: channels.map(channel => ({
+                ...channel,
+                participants: channel.participants, // Gắn `participants` trực tiếp vào output
+            })),
             currentPage: page,
-            totalPages: totalPages,
+            totalPages,
             hasNextPage: page < totalPages,
             nextCursor: page < totalPages ? page + 1 : null,
-            totalElement: totalChannels,
+            totalElement: totalElements,
         };
     } catch (error) {
         throw error;
@@ -121,8 +140,6 @@ const create = async ({ userId, friendId }: { userId: string, friendId: string }
     try {
         const userObjectId = new mongoose.Types.ObjectId(userId)
         const friendObjectId = new mongoose.Types.ObjectId(friendId)
-        console.log('🚀 ~ create ~ userObjectId:', userObjectId)
-        console.log('🚀 ~ create ~ friendObjectId:', friendObjectId)
 
         const channel = await ChannelModel.findOneAndUpdate(
             {
@@ -146,7 +163,7 @@ const create = async ({ userId, friendId }: { userId: string, friendId: string }
         ).populate({
             path: 'participants',
             select: '_id displayName avatar'
-        });
+        })
 
         return channel
     } catch (error) {

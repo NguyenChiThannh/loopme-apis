@@ -4,12 +4,12 @@ export interface IMessage extends Document {
     _id: string
     sender: Types.ObjectId
     receiver: Types.ObjectId
+    channel: Types.ObjectId
     message: string,
     createdAt: Date
     updatedAt: Date
 }
 
-// Create the schema for messages
 const MessageSchema = new Schema<IMessage>({
     sender: {
         type: Schema.Types.ObjectId,
@@ -25,10 +25,15 @@ const MessageSchema = new Schema<IMessage>({
         type: String,
         required: true
     },
+    channel: {
+        type: Schema.Types.ObjectId,
+        ref: 'Channel',
+        required: true
+    },
 }, { timestamps: true });
 
 const MessageModel = mongoose.model<IMessage>('Message', MessageSchema);
 
-export default MessageModel;
+export default MessageModel
 
 

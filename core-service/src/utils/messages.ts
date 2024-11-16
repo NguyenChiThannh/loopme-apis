@@ -44,11 +44,6 @@ export const ResponseMessages = {
         GET_POST_SUCCESS: "Get post successful",
         DELETE_POST_SUCCESS: "Delete post successful",
         UPDATE_POST_SUCCESS: "Update post successful",
-        UPVOTE_POST_SUCCESS: "Upvote post successful",
-        DOWNVOTE_POST_SUCCESS: "Downvote post successful",
-        REMOVEVOTE_POST_SUCCESS: "Removevote post successful",
-        ADD_COMMENT_POST_SUCCESS: "Add comment post successful",
-        DELETE_COMMENT_POST_SUCCESS: "Delete comment post successful",
     },
     FRIEND: {
         ADD_PENDING_INVITATIONS_SUCCESS: "Add pending invitations successful.",
@@ -67,11 +62,23 @@ export const ResponseMessages = {
         GET_MESSAGE_SUCCESS: "Get message success",
         SEND_MESSAGE_SUCCESS: "Send messsage success",
         GET_CHANNEL_MESSAGE_SUCCESS: "Get channel message success",
+        UPDATE_MESSAGE_SUCCESS: "Update message success",
+        DELETE_MESSAGE_SUCCESS: "Delete message success",
     },
     CHANNEL: {
         GET_ALL_CHANNEL_SUCCESS: "Get all channel success",
         GET_CHANNEL_SUCCESS: "Get channel success",
         CREATE_CHANNEL_SUCCESS: "Create channel success"
-    }
+    },
+    VOTE_POST: {
+        UPVOTE_POST_SUCCESS: "Upvote post successful",
+        DOWNVOTE_POST_SUCCESS: "Downvote post successful",
+        REMOVEVOTE_POST_SUCCESS: "Removevote post successful",
+    },
+    COMMENT_POST: {
+        ADD_COMMENT_POST_SUCCESS: "Add comment post successful",
+        DELETE_COMMENT_POST_SUCCESS: "Delete comment post successful",
+        UPDATE_COMMENT_POST_SUCCESS: "Update comment post successful",
+    },
 
 }

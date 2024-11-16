@@ -26,7 +26,9 @@ export const consumeMessages = async () => {
 
     channel.consume("NotificationsQueue", async (msg) => {
         const message = JSON.parse(msg.content);
+        console.log('🚀 ~ channel.consume ~ message:', message)
         const socketId = await redisClient.get(`${message.receiver}`)
+        console.log('🚀 ~ channel.consume ~ socketId:', socketId)
         if (socketId)
             io.to(socketId).emit('notifications', message)
         channel.ack(msg);

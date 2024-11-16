@@ -122,11 +122,6 @@ LoopMe is a social networking platform similar to Facebook.
 - **GET** `/user/:userId`: Get all posts by userId.
 - **GET** `/group/:groupId`: Get all posts by groupId.
 - **POST** `/group`: Create a new post in a group (requires group membership).
-- **POST** `/:id/upvote`: Upvote a post by its Id.
-- **POST** `/:id/downvote`: Downvote a post by its Id.
-- **DELETE** `/:id/removevote`: Remove the vote from a post by its Id.
-- **POST** `/:id/comment`: Add a comment to a post by its Id.
-- **DELETE** `/:id/comment`: Delete a comment from a post by its Id.
 
 #### 3.1.5 Friends
 - **POST** `/pending-invitations/:userId`: Add a pending friend invitation for a user by their Id.
@@ -157,9 +152,21 @@ LoopMe is a social networking platform similar to Facebook.
 
 #### 3.1.8 Messages
 - **GET** `/?channelId=`: Get all messages for a specific user.
+- **PATCH** `/:id`: Update a message by its Id.
+- **DELETE** `/:id'`: Delete a message by its Id.
 - **POST** `/:userId`: Send a message to a specific user.
 
 #### 3.1.9 Notifications
 - **GET** `/`: Get all notifications for the authenticated user.
 - **GET** `/:id/read`: Mark as read one notifications by notificationId
 - **GET** `/read`: Mark as read all notifications.
+
+#### 3.1.9 Votes
+- **POST** `/upvote/:postId`: Upvote a post by its Id.
+- **POST** `/downvote/:postId`: Downvote a post by its Id.
+- **DELETE** `/:postId`: Remove the vote from a post by its Id.
+
+#### 3.1.9 Comments
+- **POST** `/:postId`: Add a comment to a post by its Id.
+- **DELETE** `/:id`: Delete a comment from a post by its Id.
+- **PATCH** `/:id`: Update a comment from a post by its Id.

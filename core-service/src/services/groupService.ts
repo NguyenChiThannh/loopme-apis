@@ -4,6 +4,7 @@ import GroupModel from "../models/group"
 import { ResponseMessages } from "../utils/messages"
 import mongoose, { Mongoose } from "mongoose"
 import { PaginatedResponse } from "@/dtos/PaginatedResponse"
+import notificationEmitter from "@/config/eventEmitter"
 
 const create = async (data) => {
     try {
@@ -98,13 +99,16 @@ const addPendingInvitations = async (userId: string, groupId: string): Promise<v
             {
                 $push: { pendingInvitations: { user: userObjId, joinAt: new Date() } }
             })
-        // Create notificaitons
-        await notificationService.create({
+
+        // Create Notification
+        const notificationData = {
             actor: userId,
             receiver: group.owner.toString(),
             groupId: groupId,
             type: 'request_to_join_group',
-        })
+        }
+        notificationEmitter.emit('create_notification', notificationData);
+
         return
     } catch (error) {
         throw error
@@ -149,13 +153,14 @@ const acceptPendingInvitations = async (userId: string, groupId: string): Promis
                 $push: { members: { user: userObjId, joinAt: new Date() } }
             }
         )
-        // Create notifications
-        await notificationService.create({
+        // Create Notification
+        const notificationData = {
             actor: group.owner.toString(),
             receiver: userId,
             groupId: groupId,
             type: 'accept_join_group',
-        })
+        }
+        notificationEmitter.emit('create_notification', notificationData);
 
         return
     } catch (error) {

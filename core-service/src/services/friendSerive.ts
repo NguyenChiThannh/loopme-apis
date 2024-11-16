@@ -3,6 +3,7 @@ import FriendModel from "../models/friend"
 import mongoose from "mongoose"
 import { notificationService } from "@/services/notificationService"
 import { PaginatedResponse } from "@/dtos/PaginatedResponse"
+import notificationEmitter from "@/config/eventEmitter"
 
 const addPendingInvitations = async (myId: string, friendId: string): Promise<void> => {
     try {
@@ -29,11 +30,12 @@ const addPendingInvitations = async (myId: string, friendId: string): Promise<vo
         );
 
         // Create Notification
-        await notificationService.create({
+        const notificationData = {
             actor: myId,
             receiver: friendId,
             type: 'friend_request',
-        })
+        }
+        notificationEmitter.emit('create_notification', notificationData);
     } catch (error) {
         throw error
     }
@@ -74,11 +76,12 @@ const acceptInvitations = async (myId: string, friendId: string): Promise<void> 
         );
 
         // Create Notification
-        await notificationService.create({
+        const notificationData = {
             actor: myId,
             receiver: friendId,
             type: 'accept_friend',
-        })
+        }
+        notificationEmitter.emit('create_notification', notificationData);
     } catch (error) {
         throw error
     }

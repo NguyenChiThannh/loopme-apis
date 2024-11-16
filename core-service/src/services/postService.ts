@@ -7,15 +7,22 @@ import { notificationService } from '@/services/notificationService';
 import { CustomError } from '@/config/customError';
 import { ResponseMessages } from '@/utils/messages';
 import { groupService } from '@/services/groupService';
+import { commentService } from '@/services/commentService';
+import { voteService } from '@/services/voteService';
 
 const create = async (data) => {
     try {
-        if (data.group) {
+        if (data.groupId) {
+            data.group = data.groupId
+            delete data.groupId
+        }
+        else {
             data.privacy = 'private'
         }
+
         const post = await PostModel.create(data)
         await post.populate('user', 'displayName avatar _id')
-        if (data.groupId) {
+        if (data.group) {
             await post.populate('group', 'name _id')
         }
         return post.toObject()
@@ -27,154 +34,23 @@ const create = async (data) => {
 const getById = async (postId: string, userId: string) => {
     try {
         const postObjectId = new mongoose.Types.ObjectId(postId);
-        const userObjectId = new mongoose.Types.ObjectId(userId);
 
-        const post = await PostModel.aggregate([
-            {
-                $match: { _id: postObjectId }
-            },
-            {
-                $lookup: {
-                    from: "users",
-                    localField: "user",
-                    foreignField: "_id",
-                    as: "userDetails"
-                }
-            },
-            {
-                $unwind: "$userDetails"
-            },
-            {
-                $lookup: {
-                    from: "groups",
-                    localField: "group",
-                    foreignField: "_id",
-                    as: "groupDetails"
-                }
-            },
-            {
-                $unwind: {
-                    path: "$groupDetails",
-                    preserveNullAndEmptyArrays: true
-                }
-            },
-            {
-                $lookup: {
-                    from: "users",
-                    localField: "comments.user",
-                    foreignField: "_id",
-                    as: "commentUserDetails"
-                }
-            },
-            {
-                $addFields: {
-                    comments: {
-                        $map: {
-                            input: "$comments",
-                            as: "comment",
-                            in: {
-                                _id: "$$comment._id",
-                                value: "$$comment.value",
-                                createdAt: "$$comment.createdAt",
-                                updatedAt: "$$comment.updatedAt",
-                                user: {
-                                    $let: {
-                                        vars: {
-                                            user: {
-                                                $arrayElemAt: [
-                                                    {
-                                                        $filter: {
-                                                            input: "$commentUserDetails",
-                                                            as: "userDetail",
-                                                            cond: { $eq: ["$$userDetail._id", "$$comment.user"] }
-                                                        }
-                                                    },
-                                                    0
-                                                ]
-                                            }
-                                        },
-                                        in: {
-                                            _id: "$$user._id",
-                                            displayName: "$$user.displayName",
-                                            avatar: "$$user.avatar"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            {
-                $project: {
-                    _id: 1,
-                    title: 1,
-                    content: 1,
-                    privacy: 1,
-                    images: 1,
-                    createdAt: 1,
-                    updatedAt: 1,
-                    comments: 1,
-                    "user": {
-                        _id: "$userDetails._id",
-                        displayName: "$userDetails.displayName",
-                        avatar: "$userDetails.avatar"
-                    },
-                    "group": {
-                        _id: "$groupDetails._id",
-                        name: "$groupDetails.name"
-                    },
-                    voteValue: {
-                        $let: {
-                            vars: {
-                                userVote: {
-                                    $arrayElemAt: [
-                                        {
-                                            $filter: {
-                                                input: "$votes",
-                                                as: "vote",
-                                                cond: { $eq: ["$$vote.user", userObjectId] }
-                                            }
-                                        },
-                                        0
-                                    ]
-                                }
-                            },
-                            in: {
-                                $cond: {
-                                    if: { $ifNull: ["$$userVote", false] },
-                                    then: "$$userVote.value",
-                                    else: null
-                                }
-                            }
-                        }
-                    },
-                    totalVotes: {
-                        $subtract: [
-                            {
-                                $size: {
-                                    $filter: {
-                                        input: "$votes",
-                                        as: "vote",
-                                        cond: { $eq: ["$$vote.value", "UPVOTE"] }
-                                    }
-                                }
-                            },
-                            {
-                                $size: {
-                                    $filter: {
-                                        input: "$votes",
-                                        as: "vote",
-                                        cond: { $eq: ["$$vote.value", "DOWNVOTE"] }
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                }
-            }
+        const post = await PostModel.findById(postObjectId)
+            .populate('user', '_id displayName avatar')
+            .populate('group', '_id name')
+
+        if (!post) throw new CustomError(404, ResponseMessages.NOT_FOUND)
+        const [comments, voteValue, totalVotes] = await Promise.all([
+            commentService.getCommentsInPost(postId),
+            voteService.getValueVote(userId, postId),
+            voteService.totalVotesInPost(userId, postId)
         ]);
-        return post
+        return {
+            ...post.toObject(),
+            comments,
+            voteValue,
+            totalVotes
+        }
     } catch (error) {
         throw error
     }
@@ -247,167 +123,75 @@ const getPostsByGroupId = async ({ groupId, userId, page, size, sort }: {
 }) => {
     try {
         const groupObjectId = new mongoose.Types.ObjectId(groupId);
-        const userObjectId = new mongoose.Types.ObjectId(userId);
-        const post = await PostModel.aggregate([
-            {
-                $match: { group: groupObjectId }
-            },
-            {
-                $lookup: {
-                    from: "users",
-                    localField: "user",
-                    foreignField: "_id",
-                    as: "userDetails"
-                }
-            },
-            {
-                $unwind: "$userDetails"
-            },
-            {
-                $lookup: {
-                    from: "groups",
-                    localField: "group",
-                    foreignField: "_id",
-                    as: "groupDetails"
-                }
-            },
-            {
-                $unwind: {
-                    path: "$groupDetails",
-                    preserveNullAndEmptyArrays: true
-                }
-            },
-            {
-                $project: {
-                    _id: 1,
-                    title: 1,
-                    content: 1,
-                    privacy: 1,
-                    images: 1,
-                    createdAt: 1,
-                    updatedAt: 1,
-                    "user": {
-                        _id: "$userDetails._id",
-                        displayName: "$userDetails.displayName",
-                        avatar: "$userDetails.avatar"
-                    },
-                    "group": {
-                        _id: "$groupDetails._id",
-                        name: "$groupDetails.name"
-                    },
-                    voteValue: {
-                        $let: {
-                            vars: {
-                                userVote: {
-                                    $arrayElemAt: [
-                                        {
-                                            $filter: {
-                                                input: "$votes",
-                                                as: "vote",
-                                                cond: { $eq: ["$$vote.user", userObjectId] }
-                                            }
-                                        },
-                                        0
-                                    ]
-                                }
-                            },
-                            in: {
-                                $cond: {
-                                    if: { $ifNull: ["$$userVote", false] },
-                                    then: "$$userVote.value",
-                                    else: null
-                                }
-                            }
-                        }
-                    },
-                    totalVotes: {
-                        $subtract: [
-                            {
-                                $size: {
-                                    $filter: {
-                                        input: "$votes",
-                                        as: "vote",
-                                        cond: { $eq: ["$$vote.value", "UPVOTE"] }
-                                    }
-                                }
-                            },
-                            {
-                                $size: {
-                                    $filter: {
-                                        input: "$votes",
-                                        as: "vote",
-                                        cond: { $eq: ["$$vote.value", "DOWNVOTE"] }
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                }
-            },
-            {
-                $skip: (page - 1) * size
-            },
-            {
-                $limit: size
-            },
-            {
-                $sort: { createdAt: sort },
-            }
-        ]);
+
+        const posts = await PostModel.find({ group: groupObjectId })
+            .populate('user', '_id displayName avatar')
+            .populate('group', '_id name')
+            .sort({ createdAt: sort })
+            .skip((page - 1) * size)
+            .limit(size);
+
+        const postIds = posts.map(post => post._id);
+
+        const votes = await voteService.getVotesForPosts(userId, postIds);
+
+        const totalVotesForPostsMap = await voteService.totalVotesForPosts(postIds);
+
+        const userVotesMap = new Map(votes.map(vote => [vote.postId.toString(), vote.voteValue]));
+
+        const postsWithVotes = posts.map(post => {
+            const postIdStr = post._id.toString();
+            const postVote = totalVotesForPostsMap.get(postIdStr) || { totalVotes: 0, totalUpvotes: 0, totalDownvotes: 0 };
+            return {
+                ...post.toObject(),
+                voteValue: userVotesMap.get(postIdStr) || null,
+                totalVotes: postVote.totalVotes,
+            };
+        });
+
         const totalPosts = await PostModel.countDocuments({ group: groupObjectId });
         const totalPages = Math.ceil(totalPosts / size);
 
         return {
-            data: post,
+            data: postsWithVotes,
             currentPage: page,
             totalPages,
             hasNextPage: page < totalPages,
             nextCursor: page < totalPages ? page + 1 : null
         }
     } catch (error) {
-        throw error
+        throw error;
     }
-
 }
 
 const getPostsByUserId = async ({
-    myId,
     userId,
+    myId,
     page,
     size,
-    sort,
+    sort
 }: {
-    myId: string;
     userId: string;
+    myId: string;
     page: number;
     size: number;
     sort: 1 | -1;
 }) => {
     try {
         const isMyself = myId === userId;
-        const myObjectId = new mongoose.Types.ObjectId(myId);
         const userObjectId = new mongoose.Types.ObjectId(userId);
+        const myObjectId = new mongoose.Types.ObjectId(myId);
 
         let matchStage;
         if (isMyself) {
             matchStage = { user: userObjectId, group: null };
         } else {
-            const isFriend = (await FriendModel.findOne({
+            const isFriend = await FriendModel.findOne({
                 $or: [
-                    {
-                        sender: myObjectId,
-                        receiver: userObjectId,
-                        status: "accepted",
-                    },
-                    {
-                        sender: userObjectId,
-                        receiver: myObjectId,
-                        status: "accepted",
-                    },
-                ],
-            }))
-                ? true
-                : false;
+                    { sender: myObjectId, receiver: userObjectId, status: "accepted" },
+                    { sender: userObjectId, receiver: myObjectId, status: "accepted" }
+                ]
+            });
 
             const privacyFilter = isFriend
                 ? { privacy: { $in: ["public", "friends"] } }
@@ -416,135 +200,44 @@ const getPostsByUserId = async ({
             matchStage = { user: userObjectId, group: null, ...privacyFilter };
         }
 
-        const posts = await PostModel.aggregate([
-            {
-                $match: matchStage,
-            },
-            {
-                $lookup: {
-                    from: "users",
-                    localField: "user",
-                    foreignField: "_id",
-                    as: "userDetails",
-                },
-            },
-            {
-                $unwind: "$userDetails",
-            },
-            {
-                $lookup: {
-                    from: "groups",
-                    localField: "group",
-                    foreignField: "_id",
-                    as: "groupDetails",
-                },
-            },
-            {
-                $unwind: {
-                    path: "$groupDetails",
-                    preserveNullAndEmptyArrays: true,
-                },
-            },
-            {
-                $project: {
-                    _id: 1,
-                    title: 1,
-                    content: 1,
-                    privacy: 1,
-                    images: 1,
-                    createdAt: 1,
-                    updatedAt: 1,
-                    user: {
-                        _id: "$userDetails._id",
-                        displayName: "$userDetails.displayName",
-                        avatar: "$userDetails.avatar",
-                    },
-                    group: {
-                        _id: "$groupDetails._id",
-                        name: "$groupDetails.name",
-                    },
-                    voteValue: {
-                        $let: {
-                            vars: {
-                                userVote: {
-                                    $arrayElemAt: [
-                                        {
-                                            $filter: {
-                                                input: "$votes",
-                                                as: "vote",
-                                                cond: {
-                                                    $eq: [
-                                                        "$vote.user",
-                                                        myObjectId,
-                                                    ],
-                                                },
-                                            },
-                                        },
-                                        0,
-                                    ],
-                                },
-                            },
-                            in: {
-                                $cond: {
-                                    if: { $ifNull: ["$userVote", false] },
-                                    then: "$userVote.value",
-                                    else: null,
-                                },
-                            },
-                        },
-                    },
-                    totalVotes: {
-                        $subtract: [
-                            {
-                                $size: {
-                                    $filter: {
-                                        input: "$votes",
-                                        as: "vote",
-                                        cond: {
-                                            $eq: ["$vote.value", "UPVOTE"],
-                                        },
-                                    },
-                                },
-                            },
-                            {
-                                $size: {
-                                    $filter: {
-                                        input: "$votes",
-                                        as: "vote",
-                                        cond: {
-                                            $eq: ["$vote.value", "DOWNVOTE"],
-                                        },
-                                    },
-                                },
-                            },
-                        ],
-                    },
-                },
-            },
-            {
-                $skip: (page - 1) * size,
-            },
-            {
-                $limit: size,
-            },
-            {
-                $sort: { createdAt: sort },
-            },
-        ]);
+        const posts = await PostModel.find(matchStage)
+            .populate('user', '_id displayName avatar')
+            .populate('group', '_id name')
+            .sort({ createdAt: sort })
+            .skip((page - 1) * size)
+            .limit(size);
+
+        const postIds = posts.map(post => post._id);
+        const votes = await voteService.getVotesForPosts(myId, postIds);
+        const totalVotesForPostsMap = await voteService.totalVotesForPosts(postIds);
+
+        const userVotesMap = new Map(votes.map(vote => [vote.postId.toString(), vote.voteValue]));
+
+        const postsWithVotes = posts.map(post => {
+            const postIdStr = post._id.toString();
+            const postVote = totalVotesForPostsMap.get(postIdStr) || { totalVotes: 0, totalUpvotes: 0, totalDownvotes: 0 };
+            return {
+                ...post.toObject(),
+                voteValue: userVotesMap.get(postIdStr) || null,
+                totalVotes: postVote.totalVotes,
+            };
+        });
 
         const totalPosts = await PostModel.countDocuments(matchStage);
         const totalPages = Math.ceil(totalPosts / size);
+
         return {
-            data: posts,
+            data: postsWithVotes,
             currentPage: page,
             totalPages,
             hasNextPage: page < totalPages,
-            nextCursor: page < totalPages ? page + 1 : null,
+            nextCursor: page < totalPages ? page + 1 : null
         };
     } catch (error) {
         throw error;
     }
 };
+
 
 const getPosts = async ({ userId, page, size, sort }: {
     userId: string;
@@ -575,119 +268,38 @@ const getPosts = async ({ userId, page, size, sort }: {
 
         const friendIds = await friendService.getFriendIds(userObjectId)
 
-        const posts = await PostModel.aggregate([
-            {
-                $match: {
-                    $or: [
-                        { group: { $in: groupIds } },
-                        { privacy: "public" },
-                        { user: { $in: friendIds } },
-                        { user: userId }
-                    ]
-                }
-            },
-            {
-                $lookup: {
-                    from: "users",
-                    localField: "user",
-                    foreignField: "_id",
-                    as: "userDetails"
-                }
-            },
-            {
-                $unwind: "$userDetails"
-            },
-            {
-                $lookup: {
-                    from: "groups",
-                    localField: "group",
-                    foreignField: "_id",
-                    as: "groupDetails"
-                }
-            },
-            {
-                $unwind: {
-                    path: "$groupDetails",
-                    preserveNullAndEmptyArrays: true
-                }
-            },
-            {
-                $project: {
-                    _id: 1,
-                    title: 1,
-                    content: 1,
-                    privacy: 1,
-                    images: 1,
-                    createdAt: 1,
-                    updatedAt: 1,
-                    "user": {
-                        _id: "$userDetails._id",
-                        displayName: "$userDetails.displayName",
-                        avatar: "$userDetails.avatar"
-                    },
-                    "group": {
-                        _id: "$groupDetails._id",
-                        name: "$groupDetails.name"
-                    },
-                    voteValue: {
-                        $let: {
-                            vars: {
-                                userVote: {
-                                    $arrayElemAt: [
-                                        {
-                                            $filter: {
-                                                input: "$votes",
-                                                as: "vote",
-                                                cond: { $eq: ["$$vote.user", userObjectId] }
-                                            }
-                                        },
-                                        0
-                                    ]
-                                }
-                            },
-                            in: {
-                                $cond: {
-                                    if: { $ifNull: ["$$userVote", false] },
-                                    then: "$$userVote.value",
-                                    else: null
-                                }
-                            }
-                        }
-                    },
-                    totalVotes: {
-                        $subtract: [
-                            {
-                                $size: {
-                                    $filter: {
-                                        input: "$votes",
-                                        as: "vote",
-                                        cond: { $eq: ["$$vote.value", "UPVOTE"] }
-                                    }
-                                }
-                            },
-                            {
-                                $size: {
-                                    $filter: {
-                                        input: "$votes",
-                                        as: "vote",
-                                        cond: { $eq: ["$$vote.value", "DOWNVOTE"] }
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                }
-            },
-            {
-                $skip: (page - 1) * size
-            },
-            {
-                $limit: size
-            },
-            {
-                $sort: { createdAt: sort },
-            }
-        ]);
+        const posts = await PostModel.find({
+            $or: [
+                { group: { $in: groupIds } },
+                { privacy: "public" },
+                { user: { $in: friendIds } },
+                { user: userId }
+            ]
+        })
+            .populate("user", "displayName avatar")
+            .populate("group", "name")
+            .skip((page - 1) * size)
+            .limit(size)
+            .sort({ createdAt: sort });
+
+        const postIds = posts.map(post => post._id);
+
+        const votes = await voteService.getVotesForPosts(userId, postIds);
+
+        const totalVotesForPostsMap = await voteService.totalVotesForPosts(postIds);
+
+        const userVotesMap = new Map(votes.map(vote => [vote.postId.toString(), vote.voteValue]));
+
+        const postsWithVotes = posts.map(post => {
+            const postIdStr = post._id.toString();
+            const postVote = totalVotesForPostsMap.get(postIdStr) || { totalVotes: 0, totalUpvotes: 0, totalDownvotes: 0 };
+            return {
+                ...post.toObject(),
+                voteValue: userVotesMap.get(postIdStr) || null,
+                totalVotes: postVote.totalVotes,
+            };
+        });
+        console.log('🚀 ~ postsWithVotes ~ postsWithVotes:', postsWithVotes)
 
         const totalPosts = await PostModel.countDocuments({
             $or: [
@@ -699,7 +311,7 @@ const getPosts = async ({ userId, page, size, sort }: {
         const totalPages = Math.ceil(totalPosts / size);
 
         return {
-            data: posts,
+            data: postsWithVotes,
             currentPage: page,
             totalPages,
             hasNextPage: page < totalPages,
@@ -711,185 +323,6 @@ const getPosts = async ({ userId, page, size, sort }: {
 
 }
 
-const upvote = async (postId: string, userId: string): Promise<void> => {
-    try {
-        const postObjectId = new mongoose.Types.ObjectId(postId);
-        const userObjectId = new mongoose.Types.ObjectId(userId);
-
-        const post = await PostModel.findById(postObjectId).select('user');
-
-        if (!post) {
-            throw new CustomError(404, ResponseMessages.NOT_FOUND);
-        }
-
-        await PostModel.updateOne(
-            { _id: postObjectId },
-            [
-                {
-                    $set: {
-                        votes: {
-                            $cond: {
-                                if: {
-                                    $in: [userObjectId, '$votes.user']
-                                },
-                                then: {
-                                    $map: {
-                                        input: '$votes',
-                                        as: 'vote',
-                                        in: {
-                                            $cond: {
-                                                if: { $eq: ['$$vote.user', userObjectId] },
-                                                then: { user: userObjectId, value: 'UPVOTE' },
-                                                else: '$$vote'
-                                            }
-                                        }
-                                    }
-                                },
-                                else: {
-                                    $concatArrays: ['$votes', [{ user: userObjectId, value: 'UPVOTE' }]]
-                                }
-                            }
-                        }
-                    }
-                }
-            ]
-        )
-        // Send notifications
-        await notificationService.create({
-            actor: userId,
-            receiver: post.user.toString(),
-            postId: postId,
-            type: 'like',
-        })
-        return
-    } catch (error) {
-        throw error
-    }
-}
-
-const downvote = async (postId: string, userId: string): Promise<void> => {
-    try {
-        const postObjectId = new mongoose.Types.ObjectId(postId)
-        const userObjectId = new mongoose.Types.ObjectId(userId)
-
-        const post = await PostModel.findById(postObjectId).select('user');
-
-        if (!post) {
-            throw new CustomError(404, ResponseMessages.NOT_FOUND);
-        }
-
-        await PostModel.updateOne(
-            { _id: postObjectId },
-            [
-                {
-                    $set: {
-                        votes: {
-                            $cond: {
-                                if: {
-                                    $in: [userObjectId, '$votes.user']
-                                },
-                                then: {
-                                    $map: {
-                                        input: '$votes',
-                                        as: 'vote',
-                                        in: {
-                                            $cond: {
-                                                if: { $eq: ['$$vote.user', userObjectId] },
-                                                then: { user: userObjectId, value: 'DOWNVOTE' },
-                                                else: '$$vote'
-                                            }
-                                        }
-                                    }
-                                },
-                                else: {
-                                    $concatArrays: ['$votes', [{ user: userObjectId, value: 'DOWNVOTE' }]]
-                                }
-                            }
-                        }
-                    }
-                }
-            ]
-        );
-        // Send notifications
-        await notificationService.create({
-            actor: userId,
-            receiver: post.user.toString(),
-            postId: postId,
-            type: 'dislike',
-        })
-        return
-    } catch (error) {
-        throw error
-    }
-}
-
-const removevote = async (postId: string, userId: string): Promise<void> => {
-    try {
-        await PostModel.updateOne(
-            { _id: new mongoose.Types.ObjectId(postId) },
-            {
-                $pull: { votes: { user: new mongoose.Types.ObjectId(userId) } }
-            }
-        );
-        return
-    } catch (error) {
-        throw error
-    }
-}
-
-const addComment = async ({ postId, userId, content }:
-    {
-        postId: string,
-        userId: string,
-        content: string,
-    }): Promise<void> => {
-    try {
-
-        const post = await PostModel.findById(new mongoose.Types.ObjectId(postId)).select('user');
-
-        if (!post) {
-            throw new CustomError(404, ResponseMessages.NOT_FOUND);
-        }
-
-        await PostModel.updateOne(
-            { _id: new mongoose.Types.ObjectId(postId) },
-            {
-                $push: {
-                    comments:
-                    {
-                        user: new mongoose.Types.ObjectId(userId),
-                        value: content,
-                    }
-                }
-            }
-        );
-
-        await notificationService.create({
-            actor: userId,
-            receiver: post.user.toString(),
-            groupId: postId,
-            type: 'comment',
-        })
-        return
-    } catch (error) {
-        throw error
-    }
-}
-
-const deleteComment = async (postId: string, commentId: string): Promise<void> => {
-    try {
-        await PostModel.updateOne(
-            { _id: new mongoose.Types.ObjectId(postId) },
-            {
-                $pull: { comments: { _id: new mongoose.Types.ObjectId(commentId) } }
-            }
-        );
-        return
-    } catch (error) {
-        throw error
-    }
-}
-
 export const postService = {
     create,
     getById,
@@ -898,9 +331,4 @@ export const postService = {
     getPostsByGroupId,
     getPostsByUserId,
     getPosts,
-    upvote,
-    downvote,
-    removevote,
-    addComment,
-    deleteComment,
 }

@@ -4,9 +4,7 @@ export interface IChannel extends Document {
     name: string;
     isRead: boolean;
     participants: Types.ObjectId[];
-    messages: Types.ObjectId[];
     createdAt: Date;
-
     readAt: Date;
     updatedAt: Date;
 }
@@ -24,12 +22,6 @@ const ChannelSchema: Schema = new Schema({
         {
             type: Schema.Types.ObjectId,
             ref: 'User',
-        },
-    ],
-    messages: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Message',
         },
     ],
     readAt: {

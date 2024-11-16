@@ -1,27 +1,11 @@
 import mongoose, { Schema, Document, Types } from 'mongoose';
 
-type VoteValue = 'UPVOTE' | 'DOWNVOTE';
-
-interface IVote {
-    user: Types.ObjectId;
-    value: VoteValue;
-}
-
-interface IComment {
-    user: Types.ObjectId;
-    value: string;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
 export interface IPost extends Document {
     group?: Types.ObjectId;
     content: string;
     user: Types.ObjectId;
     images: string[];
-    comments: IComment[]
     privacy: 'public' | 'private' | 'friends';
-    votes: IVote[];
     createdAt: Date;
     updatedAt: Date;
 }
@@ -52,38 +36,6 @@ const PostSchema: Schema = new Schema({
         enum: ['public', 'private', 'friends'],
         default: 'public',
     },
-    votes: [{
-        _id: false,
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            required: true,
-        },
-        value: {
-            type: String,
-            required: true,
-            enum: ['UPVOTE', 'DOWNVOTE'],
-        },
-    }],
-    comments: [{
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            required: true,
-        },
-        value: {
-            type: String,
-            required: true,
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-        },
-        updatedAt: {
-            type: Date,
-            default: Date.now,
-        },
-    }],
 }, { timestamps: true });
 
 const PostModel = mongoose.model<IPost>('Post', PostSchema);

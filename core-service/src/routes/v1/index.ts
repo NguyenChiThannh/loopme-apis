@@ -9,6 +9,8 @@ import { userRoute } from '@/routes/v1/userRoute'
 import { messageRoute } from '@/routes/v1/messageRoute'
 import { notificationRoute } from '@/routes/v1/notificationRoute'
 import { channelRoute } from '@/routes/v1/channelRoute'
+import { voteRoute } from '@/routes/v1/voteRoute'
+import { commentRoute } from '@/routes/v1/commentRoute'
 
 const logger = new Logger(process.env.ExchangeName_Logger_Service);
 const Router = express.Router()
@@ -53,4 +55,9 @@ Router.use('/notifications', notificationRoute)
 // Channel api
 Router.use('/channels', channelRoute)
 
+// Vote api
+Router.use('/votes', voteRoute)
+
+// Comment api
+Router.use('/comments', commentRoute)
 export const APIs_V1 = Router
