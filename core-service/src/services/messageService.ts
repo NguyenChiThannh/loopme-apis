@@ -42,7 +42,9 @@ const getAllMessage = async ({
         const messages = await MessageModel.find({ channel: channelObjectId })
             .sort({ createdAt: sort })
             .skip((page - 1) * size)
-            .limit(size);
+            .limit(size)
+            .populate('sender', '_id avatar displayName')
+            .populate('receiver', '_id avatar displayName'); // Populate both sender and receiver
 
         return {
             data: messages,

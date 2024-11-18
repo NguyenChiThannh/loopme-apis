@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const RegisterReqSchema = z.object({
-    displayName: z.string().min(6, { message: "Mật khẩu phải có ít nhất 6 ký tự." }),
+    displayName: z.string().min(6, { message: "Tên hiển thị phải có ít nhất 6 ký tự." }),
     email: z.string().email({ message: "Email không đúng định dạng" }),
     password: z.string()
         .min(6, { message: "Mật khẩu phải có ít nhất 6 ký tự." })

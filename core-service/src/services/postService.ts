@@ -14,10 +14,8 @@ const create = async (data) => {
     try {
         if (data.groupId) {
             data.group = data.groupId
-            delete data.groupId
-        }
-        else {
             data.privacy = 'private'
+            delete data.groupId
         }
 
         const post = await PostModel.create(data)
