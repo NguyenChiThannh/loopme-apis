@@ -318,6 +318,7 @@ const searchGroups = async ({ userId, search, page, size, sort }: {
             },
             {
                 $addFields: {
+                    isOwner: { $eq: ["$owner", userObjectId] },
                     isMember: { $in: [userObjectId, "$members.user"] },
                     isPending: { $in: [userObjectId, "$pendingInvitations.user"] }
                 }
@@ -326,13 +327,19 @@ const searchGroups = async ({ userId, search, page, size, sort }: {
                 $addFields: {
                     status: {
                         $cond: {
-                            if: "$isMember",
+                            if: "$isOwner",
                             then: "joined",
                             else: {
                                 $cond: {
-                                    if: "$isPending",
-                                    then: "pending",
-                                    else: "not_joined"
+                                    if: "$isMember",
+                                    then: "joined",
+                                    else: {
+                                        $cond: {
+                                            if: "$isPending",
+                                            then: "pending",
+                                            else: "not_joined"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -350,13 +357,13 @@ const searchGroups = async ({ userId, search, page, size, sort }: {
                 }
             },
             {
+                $sort: { name: sort }
+            },
+            {
                 $skip: (page - 1) * size
             },
             {
                 $limit: size
-            },
-            {
-                $sort: { name: sort }
             }
         ]);
 

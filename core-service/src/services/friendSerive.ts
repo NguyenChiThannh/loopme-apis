@@ -239,7 +239,41 @@ const getAllInvitationsFriend = async ({ userId, page, size, sort }: {
 const suggestMutualFriends = async (userId: string) => {
     try {
         const userObjectId = new mongoose.Types.ObjectId(userId)
-        const friendIds = await getFriendIds(userObjectId)
+        const friendIdsResult = await FriendModel.aggregate([
+            {
+                $match: {
+                    $or: [
+                        { sender: userObjectId },
+                        { receiver: userObjectId }
+                    ]
+                }
+            },
+            {
+                $project: {
+                    userId: {
+                        $cond: {
+                            if: { $eq: ["$sender", userObjectId] },
+                            then: "$receiver",
+                            else: "$sender"
+                        }
+                    },
+                    _id: 0
+                }
+            },
+            {
+                $group: {
+                    _id: null,
+                    friendIds: { $push: "$userId" }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    friendIds: 1
+                }
+            }
+        ])
+        const friendIds = friendIdsResult.length > 0 ? friendIdsResult[0].friendIds : [];
         const mutualFriends = await UserModel.find(
             {
                 $and: [

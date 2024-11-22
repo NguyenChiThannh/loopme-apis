@@ -44,7 +44,9 @@ const getAll = async (userId) => {
         const userObjectId = new mongoose.Types.ObjectId(userId)
         const notifications = NotificationModel.find({
             receiver: userObjectId,
-        }).populate('actor', 'avatar _id displayName')
+        })
+            .populate('actor', 'avatar _id displayName')
+            .sort({ createdAt: -1 })
         return notifications
     } catch (error) {
         throw error
