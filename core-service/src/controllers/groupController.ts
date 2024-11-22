@@ -102,7 +102,8 @@ const acceptPendingInvitations = async (req: AuthenticatedRequest, res: Response
 const removePendingInvitations = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const { groupId, userId } = req.params
-        await groupService.removePendingInvitations(userId, groupId)
+        const myId = req.user._id
+        await groupService.removePendingInvitations(userId, groupId, myId)
         successResponse({
             message: ResponseMessages.GROUP.REMOVE_PENDING_INVITATIONS_SUCCESS,
             res,

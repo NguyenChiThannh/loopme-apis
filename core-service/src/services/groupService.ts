@@ -168,8 +168,10 @@ const acceptPendingInvitations = async (userId: string, groupId: string): Promis
     }
 }
 
-const removePendingInvitations = async (userId: string, groupId: string): Promise<void> => {
+const removePendingInvitations = async (userId: string, groupId: string, myId: string): Promise<void> => {
     try {
+        if (myId === userId || !isOwnerGroup(userId, groupId))
+            throw new CustomError(403, ResponseMessages.FORBIDDEN)
         const userObjId = new mongoose.Types.ObjectId(userId)
         const groupObjId = new mongoose.Types.ObjectId(groupId)
         await GroupModel.updateOne(
@@ -350,7 +352,7 @@ const searchGroups = async ({ userId, search, page, size, sort }: {
                 $project: {
                     _id: 1,
                     name: 1,
-                    // owner: 1,
+                    owner: 1,
                     background_cover: 1,
                     isPublic: 1,
                     status: 1,

@@ -17,7 +17,7 @@ Router.get('/:groupId', groupController.getGroupById)
 
 Router.post('/:groupId/pending-invitations', groupController.addPendingInvitations)
 
-Router.delete('/:groupId/pending-invitations/:userId', groupMiddleware.checkGroupOwner, groupController.removePendingInvitations)
+Router.delete('/:groupId/pending-invitations/:userId', groupController.removePendingInvitations)
 
 Router.post('/:groupId/accept-invitations/:userId', groupMiddleware.checkGroupOwner, groupController.acceptPendingInvitations)
 
