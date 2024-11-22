@@ -170,7 +170,7 @@ const acceptPendingInvitations = async (userId: string, groupId: string): Promis
 
 const removePendingInvitations = async (userId: string, groupId: string, myId: string): Promise<void> => {
     try {
-        if (myId === userId || !isOwnerGroup(userId, groupId))
+        if (!(myId === userId) && !isOwnerGroup(userId, groupId))
             throw new CustomError(403, ResponseMessages.FORBIDDEN)
         const userObjId = new mongoose.Types.ObjectId(userId)
         const groupObjId = new mongoose.Types.ObjectId(groupId)
