@@ -34,13 +34,15 @@ const vote = async ({
         );
 
         // Create Notification
-        const notificationData = {
-            actor: userId,
-            receiver: post.user.toString(),
-            postId: postId,
-            type: voteValue === 'UPVOTE' ? 'like' : 'dislike',
+        if (userId !== post.user.toString()) {
+            const notificationData = {
+                actor: userId,
+                receiver: post.user.toString(),
+                postId: postId,
+                type: voteValue === 'UPVOTE' ? 'like' : 'dislike',
+            }
+            notificationEmitter.emit('create_notification', notificationData);
         }
-        notificationEmitter.emit('create_notification', notificationData);
         return
     } catch (error) {
         throw error

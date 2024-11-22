@@ -24,13 +24,15 @@ const create = async ({ userId, postId, content }: {
         const commented = await newComment.save();
 
         // Create Notification
-        const notificationData = {
-            actor: userId,
-            receiver: post.user.toString(),
-            postId: postId,
-            type: 'comment',
+        if (userId !== post.user.toString()) {
+            const notificationData = {
+                actor: userId,
+                receiver: post.user.toString(),
+                postId: postId,
+                type: 'comment',
+            }
+            notificationEmitter.emit('create_notification', notificationData);
         }
-        notificationEmitter.emit('create_notification', notificationData);
 
         return commented
     } catch (error) {
