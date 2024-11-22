@@ -350,10 +350,10 @@ const searchGroups = async ({ userId, search, page, size, sort }: {
                 $project: {
                     _id: 1,
                     name: 1,
-                    owner: 1,
+                    // owner: 1,
                     background_cover: 1,
                     isPublic: 1,
-                    status: 1
+                    status: 1,
                 }
             },
             {

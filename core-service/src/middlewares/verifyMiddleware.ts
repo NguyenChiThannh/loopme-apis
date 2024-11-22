@@ -30,7 +30,7 @@ const verifyToken = async (req: AuthenticatedRequest, res: Response, next: NextF
 const verifyTokenAndAdminAuth = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         verifyToken(req, res, () => {
-            if (req.user && (req.user?._id === req.params.id || req.user.admin)) {
+            if (req.user && req.user.admin) {
                 next()
             } else {
                 throw new CustomError(401, ResponseMessages.USER.UNAUTHORIZED)
@@ -44,5 +44,5 @@ const verifyTokenAndAdminAuth = (req: AuthenticatedRequest, res: Response, next:
 
 export const verifyMiddleware = {
     verifyToken,
-    // verifyTokenAndAdminAuth,
+    verifyTokenAndAdminAuth,
 }
