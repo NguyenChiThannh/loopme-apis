@@ -14,6 +14,7 @@ Router.route('/')
 Router.get('/search', groupController.searchGroups)
 
 Router.get('/:groupId', groupController.getGroupById)
+Router.delete('/:groupId', groupMiddleware.checkGroupOwner, groupController.deleteGroupById)
 
 Router.post('/:groupId/pending-invitations', groupController.addPendingInvitations)
 

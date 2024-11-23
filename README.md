@@ -137,6 +137,7 @@ LoopMe is a social networking platform similar to Facebook.
 - **GET** `/`: Get all group joined.
 - **GET** `/search`: Search for groups by name.
 - **GET** `/:groupId`: Get a group by its ID.
+- **DELETE** `/:groupId`: Delete a group by its ID.
 - **POST** `/:groupId/pending-invitations`: Add pending invitations for a group.
 - **DELETE** `/:groupId/pending-invitations/:userId`: Remove a pending invitation for a user from a group (requires group ownership).
 - **POST** `/:groupId/accept-invitations/:userId`: Accept a pending invitation for a user to join a group (requires group ownership).

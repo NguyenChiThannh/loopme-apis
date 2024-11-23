@@ -101,7 +101,6 @@ const totalVotesInPost = async (userId, postId) => {
                 }
             }
         ]);
-        console.log('🚀 ~ totalVotesInPost ~ result:', result)
 
         return result.length > 0 ? result[0].totalVotes : 0;
     } catch (error) {

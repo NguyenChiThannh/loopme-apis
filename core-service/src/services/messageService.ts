@@ -102,10 +102,7 @@ const update = async ({ myId, messageId, message }: {
 }) => {
     try {
         const myObjectId = new mongoose.Types.ObjectId(myId);
-        console.log('🚀 ~ myId:', myId)
-        console.log('🚀 ~ messageId:', messageId)
         const messageObjectId = new mongoose.Types.ObjectId(messageId);
-        console.log('🚀 ~ messageId:', messageId)
 
         const existingMessage = await MessageModel.findById(messageObjectId);
 

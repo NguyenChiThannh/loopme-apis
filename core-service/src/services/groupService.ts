@@ -25,9 +25,11 @@ const getGroupById = async (groupId: string) => {
         const group = await GroupModel.findOne({
             _id: groupObjId
         }).populate('owner', 'displayName avatar _id').populate("members.user", 'displayName avatar _id')
+        if (!group)
+            throw new CustomError(404, ResponseMessages.NOT_FOUND)
         return group
     } catch (error) {
-
+        throw error
     }
 }
 
@@ -227,6 +229,25 @@ const removeMemberFromGroup = async (userId: string, groupId: string): Promise<v
     }
 }
 
+const deleteGroupById = async (groupId: string): Promise<void> => {
+    try {
+        const groupObjId = new mongoose.Types.ObjectId(groupId)
+        const group = await GroupModel.findOne(
+            {
+                _id: groupObjId,
+            }
+        )
+        if (!group)
+            throw new CustomError(404, ResponseMessages.NOT_FOUND)
+        await GroupModel.deleteOne({
+            _id: groupObjId,
+        })
+        return
+    } catch (error) {
+        throw error
+    }
+}
+
 const getAllPendingInvitations = async ({ groupId, page, size, sort }: {
     groupId: string,
     page: number,
@@ -391,6 +412,7 @@ export const groupService = {
     isMemberGroup,
     isOwnerGroup,
     getJoinedGroup,
+    deleteGroupById,
     addPendingInvitations,
     acceptPendingInvitations,
     removePendingInvitations,

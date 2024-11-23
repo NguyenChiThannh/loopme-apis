@@ -27,13 +27,13 @@ const verifyToken = async (req: AuthenticatedRequest, res: Response, next: NextF
 
 }
 
-const verifyTokenAndAdminAuth = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+const verifyTokenAndAdminAuth = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
-        verifyToken(req, res, () => {
+        await verifyToken(req, res, () => {
             if (req.user && req.user.admin) {
                 next()
             } else {
-                throw new CustomError(401, ResponseMessages.USER.UNAUTHORIZED)
+                throw new CustomError(403, ResponseMessages.FORBIDDEN)
             }
         })
     }

@@ -58,7 +58,6 @@ const send = async (req: AuthenticatedRequest, res: Response, next: NextFunction
 const update = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         const messageId = req.params.id
-        console.log('🚀 ~ update ~ messageId:', messageId)
         const myId = req.user._id
         const message = req.body.message
         const messageUpdated = await messageService.update({ myId, messageId, message })

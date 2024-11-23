@@ -37,6 +37,7 @@ export const ResponseMessages = {
         REMOVE_MEMBER_FROM_GROUP_SUCCESS: "Remove member from group successful.",
         GET_ALL_PENDING_INVITATIONS_SUCCESS: "Get all pending invitations successful",
         GET_ALL_MEMBERS_GROUP_SUCCESS: "Get all members in group successful",
+        DELETE_GROUP_SUCCESS: "Delete group successful",
         SEARCH_GROUP_SUCCESS: "Search group successful"
     },
     POST: {
@@ -79,6 +80,10 @@ export const ResponseMessages = {
         ADD_COMMENT_POST_SUCCESS: "Add comment post successful",
         DELETE_COMMENT_POST_SUCCESS: "Delete comment post successful",
         UPDATE_COMMENT_POST_SUCCESS: "Update comment post successful",
+    },
+    MEMBER_GROUP: {
+        GET_MEMBER_SUCCESS: "Get member successful",
+        DELETE_MEMBER_SUCCESS: "Delete member successful",
     },
 
 }

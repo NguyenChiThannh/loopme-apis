@@ -1,18 +1,14 @@
-// import { messageController } from '@/controllers/messageController'
-// import { validate } from '@/middlewares/validate'
-// import { verifyMiddleware } from '@/middlewares/verifyMiddleware'
-// import { MessageReqSchema } from '@/validations/MessageReq'
-// import express from 'express'
+import { memberController } from '@/controllers/memberController'
+import { validate } from '@/middlewares/validate'
+import { verifyMiddleware } from '@/middlewares/verifyMiddleware'
+import express from 'express'
 
-// const Router = express.Router()
+const Router = express.Router()
 
-// Router.use(verifyMiddleware.verifyTokenAndAdminAuth)
+Router.use(verifyMiddleware.verifyTokenAndAdminAuth)
 
-// Router.get('/', messageController.getAll)
-// Router.post('/send/:userId', validate(MessageReqSchema), messageController.send)
-// Router.route('/:id')
-//     .patch(validate(MessageReqSchema), messageController.update)
-//     .delete(messageController.deleteMessage)
+Router.route('/')
+    .get(memberController.getMembersInGroup)
+    .delete(memberController.deleteMemberFromGroup)
 
-
-// export const messageRoute = Router
+export const memberRoute = Router

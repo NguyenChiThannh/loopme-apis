@@ -203,9 +203,25 @@ const searchGroups = async (req: AuthenticatedRequest, res: Response, next: Next
     }
 }
 
+const deleteGroupById = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        const { groupId } = req.params
+        await groupService.deleteGroupById(groupId)
+        successResponse({
+            message: ResponseMessages.GROUP.DELETE_GROUP_SUCCESS,
+            res,
+            status: 200,
+        })
+        return
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const groupController = {
     create,
     getGroupById,
+    deleteGroupById,
     getJoinedGroup,
     addPendingInvitations,
     acceptPendingInvitations,

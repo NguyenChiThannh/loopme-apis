@@ -297,7 +297,6 @@ const getPosts = async ({ userId, page, size, sort }: {
                 totalVotes: postVote.totalVotes,
             };
         });
-        console.log('🚀 ~ postsWithVotes ~ postsWithVotes:', postsWithVotes)
 
         const totalPosts = await PostModel.countDocuments({
             $or: [

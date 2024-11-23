@@ -8,7 +8,7 @@ logger-service/dist
 gateway-api/dist
 realtime-service/dist
 
-core-service/.env
-logger-service/.env
-gateway-api/.env
-realtime-service/.env
+# core-service/.env
+# logger-service/.env
+# gateway-api/.env
+# realtime-service/.env
