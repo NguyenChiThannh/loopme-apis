@@ -55,7 +55,7 @@ LoopMe is a social networking platform similar to Facebook.
 ### 2.1. Prerequisites
 
 - Node 20 or higher
-- Maven
+- Docker
 - MongoDB
 
 ### 2.2. Installation
