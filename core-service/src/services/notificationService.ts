@@ -1,4 +1,4 @@
-import notificationEmitter from "@/config/eventEmitter";
+import notificationEmitter from "@/configs/eventEmitter";
 import NotificationModel from "@/models/notification"
 import RabbitMQService from "@/utils/amqp";
 import mongoose from "mongoose"

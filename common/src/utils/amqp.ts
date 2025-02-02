@@ -1,19 +1,19 @@
-import amqp from 'amqplib';
+import amqp, { Channel, Connection } from 'amqplib';
 
 class RabbitMQService {
-    channel;
-    connection;
-    exchangeName;
+    private channel: Channel | null = null;
+    private connection: Connection | null = null;
+    private readonly exchangeName: string;
 
-    constructor(exchangeName) {
-        this.exchangeName = exchangeName
+    constructor(exchangeName: string) {
+        this.exchangeName = exchangeName;
     }
 
-    async createChannel() {
+    async createChannel(): Promise<void> {
         if (this.channel) return
 
         try {
-            const connectionURL = process.env.AMQP_URL
+            const connectionURL = process.env.AMQP_URL as string
             this.connection = await amqp.connect(connectionURL)
             this.channel = await this.connection.createChannel()
 
@@ -25,8 +25,13 @@ class RabbitMQService {
         }
     }
 
-    async publishMessage(routingKey, message) {
+    async publishMessage(routingKey: string, message: unknown): Promise<void> {
         if (!this.channel) await this.createChannel();
+
+        if (!this.channel) {
+            console.error('Channel is not available. Message not sent.');
+            return;
+        }
 
         try {
             this.channel.publish(
@@ -40,8 +45,13 @@ class RabbitMQService {
         }
     }
 
-    async consumeMessages(routingKey, onMessage) {
+    async consumeMessages(routingKey: string, onMessage: (msg: any) => void): Promise<void> {
         if (!this.channel) await this.createChannel();
+
+        if (!this.channel) {
+            console.error('Channel is not available. Message not sent.');
+            return;
+        }
 
         try {
             const queue = await this.channel.assertQueue('', { exclusive: true });
@@ -59,10 +69,17 @@ class RabbitMQService {
         }
     }
 
-    async closeConnection() {
-        await this.channel?.close();
-        await this.connection?.close();
-        console.log('RabbitMQ connection closed');
+    async closeConnection(): Promise<void> {
+        try {
+            await this.channel?.close();
+            await this.connection?.close();
+            console.log('RabbitMQ connection closed');
+        } catch (error) {
+            console.error('Failed to close RabbitMQ connection:', error);
+        } finally {
+            this.channel = null;
+            this.connection = null;
+        }
     }
 }
 

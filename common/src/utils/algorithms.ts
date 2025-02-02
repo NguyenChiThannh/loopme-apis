@@ -2,7 +2,7 @@ export const generateOTP = () => {
     return `${Math.floor(100000 + Math.random() * 900000)}`
 }
 
-export const generateRandomString = (length) => {
+export const generateRandomString = (length: number) => {
     const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz'
     const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     const numberChars = '0123456789'

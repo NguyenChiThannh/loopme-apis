@@ -1,4 +1,4 @@
-import { CustomError } from "@/config/customError";
+import { CustomError } from "@/configs/customError";
 import GroupModel from "@/models/group"
 import { ResponseMessages } from "@/utils/messages";
 import mongoose from "mongoose"

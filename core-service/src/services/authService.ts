@@ -1,6 +1,6 @@
 import { } from './../../node_modules/@types/jsonwebtoken/index.d';
-import { CustomError } from '../config/customError';
-import { genarateToken } from '../config/token';
+import { CustomError } from '../configs/customError';
+import { genarateToken } from '../configs/token';
 import UserModel, { IUser } from '../models/user';
 import { ChangePassworReq, LoginReq, RegisterReq } from '../validations/AuthReq';
 import { otpService } from './otpService';

@@ -1,4 +1,4 @@
-import { CustomError } from "@/config/customError";
+import { CustomError } from "@/configs/customError";
 import { PaginatedResponse } from "@/dtos/PaginatedResponse"
 import ChannelModel from "@/models/channel"
 import MessageModel from "@/models/message"

@@ -1,5 +1,5 @@
 import { sendMail } from "@/mail/sendMail";
-import { CustomError } from "../config/customError";
+import { CustomError } from "../configs/customError";
 import OtpModel from "../models/otp";
 import { generateOTP } from "../utils/algorithms";
 import { ResponseMessages } from "../utils/messages";

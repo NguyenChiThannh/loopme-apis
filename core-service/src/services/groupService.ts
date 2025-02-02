@@ -1,10 +1,10 @@
 import { notificationService } from "@/services/notificationService"
-import { CustomError } from "../config/customError"
+import { CustomError } from "../configs/customError"
 import GroupModel from "../models/group"
 import { ResponseMessages } from "../utils/messages"
 import mongoose, { Mongoose } from "mongoose"
 import { PaginatedResponse } from "@/dtos/PaginatedResponse"
-import notificationEmitter from "@/config/eventEmitter"
+import notificationEmitter from "@/configs/eventEmitter"
 
 const create = async (data) => {
     try {

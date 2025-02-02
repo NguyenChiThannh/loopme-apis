@@ -2,13 +2,13 @@
 /* eslint-disable no-console */
 import express from 'express'
 import cors from 'cors'
-import { corsOptions } from './config/cors'
+import { corsOptions } from './configs/cors'
 import exitHook from 'async-exit-hook'
 // import { CONNECT_DB, CLOSE_DB } from '@/config/mongodb'
 import { APIs_V1 } from './routes/v1'
 import { errorHandlingMiddleware } from './middlewares/errorHandlingMiddleware'
 import cookieParser from 'cookie-parser'
-import connectDB from './config/mongodb'
+import connectDB from './configs/mongodb'
 
 
 const app = express()

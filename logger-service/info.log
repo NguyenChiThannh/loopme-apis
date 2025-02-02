@@ -2353,3 +2353,738 @@
 {"timestamp":"2024-11-23T04:27:51.902Z","level":"info","status":200,"message":"Login successful."}
 {"timestamp":"2024-11-23T04:27:54.326Z","level":"info","status":200,"message":"Get member successful"}
 {"timestamp":"2024-11-23T04:28:05.505Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-23T06:50:23.657Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-23T06:50:23.718Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:50:23.770Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:50:23.831Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:50:30.445Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:50:30.508Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:50:31.791Z","level":"info","status":200,"message":"Get joined group successful."}
+{"timestamp":"2024-11-23T06:51:02.928Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-23T06:51:03.090Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:51:03.116Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:51:03.192Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:51:25.179Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-23T06:51:25.321Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:51:25.348Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:51:25.440Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:51:30.708Z","level":"info","status":200,"message":"Logout successful."}
+{"timestamp":"2024-11-23T06:52:27.343Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-23T06:52:27.433Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:52:27.457Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:52:27.505Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:52:43.444Z","level":"info","status":201,"message":"Create post successful"}
+{"timestamp":"2024-11-23T06:52:43.501Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:52:45.774Z","level":"info","status":200,"message":"Logout successful."}
+{"timestamp":"2024-11-23T06:53:15.575Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-23T06:53:15.650Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:53:15.679Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:53:15.722Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:54:11.328Z","level":"info","status":201,"message":"Create post successful"}
+{"timestamp":"2024-11-23T06:54:11.379Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:54:13.744Z","level":"info","status":200,"message":"Logout successful."}
+{"timestamp":"2024-11-23T06:54:15.392Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:54:15.393Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:54:15.398Z","level":"info","status":200,"message":"Get joined group successful."}
+{"timestamp":"2024-11-23T06:54:15.405Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:54:20.289Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:54:20.304Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:54:20.325Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:54:22.471Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:54:22.524Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:54:46.958Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-23T06:54:47.076Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:54:47.107Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:54:47.165Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:54:53.696Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:54:53.769Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:55:17.053Z","level":"info","status":201,"message":"Create post successful"}
+{"timestamp":"2024-11-23T06:55:17.083Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:56:38.997Z","level":"info","status":201,"message":"Create post successful"}
+{"timestamp":"2024-11-23T06:56:39.034Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:56:42.970Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:56:43.012Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:56:45.494Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:56:45.501Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:56:45.525Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:56:49.731Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:56:50.842Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T06:56:52.555Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:56:52.557Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:56:52.566Z","level":"info","status":200,"message":"Get joined group successful."}
+{"timestamp":"2024-11-23T06:56:52.572Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:57:08.225Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T06:57:08.287Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:57:59.506Z","level":"info","status":201,"message":"Create post successful"}
+{"timestamp":"2024-11-23T06:57:59.553Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:58:09.190Z","level":"info","status":201,"message":"Create post successful"}
+{"timestamp":"2024-11-23T06:58:09.229Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:58:13.390Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:58:13.396Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T06:58:13.532Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:58:16.757Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T06:58:20.662Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:58:20.669Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:58:20.688Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:58:24.868Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:58:24.877Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:58:24.895Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:59:15.202Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:59:15.262Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:59:18.748Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T06:59:18.750Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:59:25.988Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:59:25.990Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T06:59:49.403Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:59:49.404Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T06:59:57.458Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:59:57.459Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T06:59:57.466Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:59:57.494Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T06:59:57.495Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T06:59:57.506Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:00:24.705Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:00:28.568Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:00:28.570Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:00:28.571Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T07:00:31.216Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:00:31.275Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:01:13.916Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:01:13.917Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T07:01:16.160Z","level":"info","status":200,"message":"Add pending invitations successful."}
+{"timestamp":"2024-11-23T07:01:16.191Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:01:17.629Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:01:17.638Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:01:17.662Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:01:21.433Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:01:22.488Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:01:22.506Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:01:22.508Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:01:22.514Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:01:24.412Z","level":"info","status":200,"message":"Accept pending invitations successful."}
+{"timestamp":"2024-11-23T07:01:24.447Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:01:24.453Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:01:27.252Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:01:28.659Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:01:30.664Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:01:30.672Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:01:30.699Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T07:01:32.691Z","level":"info","status":200,"message":"Create channel success"}
+{"timestamp":"2024-11-23T07:01:32.731Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T07:01:35.346Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-23T07:01:35.391Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T07:01:40.057Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:01:40.061Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:01:40.266Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T07:01:40.319Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T07:01:40.337Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T07:02:17.691Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:02:18.635Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T07:02:19.491Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T07:02:19.501Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T07:02:22.840Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-23T07:02:22.876Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T07:02:25.856Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:02:25.933Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:02:28.999Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:02:30.541Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:02:30.566Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:02:33.851Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:02:33.915Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:02:35.744Z","level":"info","status":200,"message":"Add pending invitations successful."}
+{"timestamp":"2024-11-23T07:02:35.774Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:02:40.595Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:02:40.603Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:02:40.625Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:02:42.762Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:02:45.167Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:02:45.907Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:02:48.667Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:02:48.714Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:02:48.719Z","level":"info","status":200,"message":"Get all pending invitations successful"}
+{"timestamp":"2024-11-23T07:02:50.278Z","level":"info","status":200,"message":"Accept pending invitations successful."}
+{"timestamp":"2024-11-23T07:02:50.326Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:02:50.344Z","level":"info","status":200,"message":"Get all pending invitations successful"}
+{"timestamp":"2024-11-23T07:02:50.345Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:03:01.606Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:03:01.614Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:03:01.775Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:03:06.715Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:06:12.680Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:06:12.733Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:06:13.368Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:06:13.399Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:06:23.636Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:06:23.637Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:06:23.646Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:06:23.667Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:06:30.724Z","level":"info","status":200,"message":"Logout successful."}
+{"timestamp":"2024-11-23T07:06:39.040Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:06:39.041Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:06:39.047Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:06:39.061Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:07:49.187Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:07:49.195Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:07:49.204Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:07:51.695Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:07:51.710Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:07:51.734Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:08:17.898Z","level":"info","status":200,"message":"Logout successful."}
+{"timestamp":"2024-11-23T07:08:33.028Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:08:33.055Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:08:33.159Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:08:39.371Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:08:39.397Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:08:39.615Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:08:43.239Z","level":"info","status":200,"message":"Logout successful."}
+{"timestamp":"2024-11-23T07:08:56.342Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-23T07:08:56.440Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:08:56.464Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:08:56.521Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:09:13.089Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-23T07:09:13.191Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:09:13.221Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:09:13.300Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:10:32.521Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2024-11-23T07:10:32.604Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:10:32.627Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:10:32.691Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:11:31.051Z","level":"info","status":200,"message":"Upvote post successful"}
+{"timestamp":"2024-11-23T07:11:32.203Z","level":"info","status":200,"message":"Downvote post successful"}
+{"timestamp":"2024-11-23T07:11:33.190Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:11:34.728Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:11:34.749Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:12:05.907Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:12:05.911Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T07:12:30.238Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:13:53.513Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:13:53.522Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:13:53.541Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:15:09.878Z","level":"info","status":200,"message":"Removevote post successful"}
+{"timestamp":"2024-11-23T07:21:25.603Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:21:25.613Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:21:25.636Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:22:44.558Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:22:44.583Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:22:44.606Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:23:00.624Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:23:00.626Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:23:00.645Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:23:00.646Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:23:00.698Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:23:00.703Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:24:05.054Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:24:05.065Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:24:05.079Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:24:05.080Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:24:05.105Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:24:05.106Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:24:49.572Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:24:49.580Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:24:49.602Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:25:09.054Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:25:09.061Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:25:09.081Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:25:11.845Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:25:11.898Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:25:33.149Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:25:33.156Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T07:25:46.547Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:25:46.556Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:25:46.576Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:25:50.572Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:26:22.467Z","level":"info","status":200,"message":"Add pending invitations successful."}
+{"timestamp":"2024-11-23T07:26:22.506Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:26:26.964Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:26:50.072Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:26:50.085Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:26:50.105Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:26:50.107Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:26:50.157Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T07:26:50.168Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:26:50.170Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:26:52.562Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:26:52.588Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:26:52.716Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:26:53.464Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:26:57.175Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:26:57.203Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:26:57.440Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:26:58.491Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:26:59.034Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:26:59.105Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:26:59.114Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:26:59.122Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:27:03.808Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:27:03.841Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:27:04.090Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:27:04.960Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:27:08.656Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:27:08.725Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:27:08.731Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:27:08.738Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:27:16.490Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:27:16.494Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:27:16.813Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:27:16.827Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:27:16.831Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:27:17.279Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T07:27:18.499Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:27:18.560Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:27:19.310Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:27:31.136Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:27:31.144Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:27:32.546Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:27:32.577Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:27:32.867Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:27:33.606Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:27:46.288Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:27:46.343Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:27:53.663Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:27:53.672Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:28:06.341Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:28:09.135Z","level":"info","status":200,"message":"Remove pending invitations successful."}
+{"timestamp":"2024-11-23T07:28:09.164Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:28:09.166Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:28:15.299Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:28:15.300Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:28:15.303Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T07:28:21.215Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:28:21.262Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:29:53.394Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:29:53.402Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:29:53.421Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:29:59.471Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:29:59.473Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:29:59.490Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:29:59.497Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:29:59.516Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:30:15.443Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:30:15.444Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T07:30:18.003Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:30:18.044Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:30:19.477Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:30:22.173Z","level":"info","status":200,"message":"Get all pending invitations successful"}
+{"timestamp":"2024-11-23T07:30:23.913Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:30:23.919Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:30:23.940Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:30:29.645Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:30:29.647Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T07:30:32.314Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:30:32.359Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:31:01.279Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:31:08.859Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:31:08.860Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:31:08.868Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:31:08.873Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:31:08.882Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:31:27.777Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:31:27.784Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:31:29.474Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:31:31.044Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:31:31.068Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:31:33.395Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:31:33.397Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T07:31:35.465Z","level":"info","status":200,"message":"Add pending invitations successful."}
+{"timestamp":"2024-11-23T07:31:35.495Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:31:38.281Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:31:44.283Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:31:44.286Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:31:44.372Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:31:44.377Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:31:44.383Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:31:45.570Z","level":"info","status":200,"message":"Accept pending invitations successful."}
+{"timestamp":"2024-11-23T07:31:45.605Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:31:45.607Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:31:48.561Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:31:52.932Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:31:55.717Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:31:55.744Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:31:55.863Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:32:07.753Z","level":"info","status":200,"message":"Remove friend successful."}
+{"timestamp":"2024-11-23T07:32:07.796Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:32:09.287Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:32:09.314Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:32:09.544Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:32:29.636Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:32:29.637Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T07:32:31.043Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:32:31.086Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:32:33.482Z","level":"info","status":200,"message":"Add pending invitations successful."}
+{"timestamp":"2024-11-23T07:32:33.514Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:32:34.532Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:32:34.557Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:32:34.569Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:32:37.766Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:32:37.771Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:32:37.871Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:32:40.570Z","level":"info","status":200,"message":"Get all pending invitations successful"}
+{"timestamp":"2024-11-23T07:32:42.512Z","level":"info","status":200,"message":"Accept pending invitations successful."}
+{"timestamp":"2024-11-23T07:32:42.575Z","level":"info","status":200,"message":"Get all pending invitations successful"}
+{"timestamp":"2024-11-23T07:32:42.576Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:32:42.577Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:32:44.687Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:32:44.692Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:32:44.914Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:32:51.478Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:33:01.397Z","level":"info","status":200,"message":"Remove member from group successful."}
+{"timestamp":"2024-11-23T07:33:01.433Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:33:01.439Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:33:06.824Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:33:06.878Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:34:23.778Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:34:23.786Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:34:23.814Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:34:28.195Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:34:28.205Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:34:28.216Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:34:29.559Z","level":"info","status":200,"message":"Add pending invitations successful."}
+{"timestamp":"2024-11-23T07:34:29.588Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:34:30.628Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:34:32.401Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:34:32.411Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:34:32.422Z","level":"info","status":200,"message":"Get all pending invitations successful"}
+{"timestamp":"2024-11-23T07:34:34.078Z","level":"info","status":200,"message":"Accept pending invitations successful."}
+{"timestamp":"2024-11-23T07:34:34.126Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:34:34.135Z","level":"info","status":200,"message":"Get all pending invitations successful"}
+{"timestamp":"2024-11-23T07:34:34.136Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:34:37.816Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:34:37.885Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:34:48.298Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:34:48.299Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:34:48.317Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:34:50.745Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T07:34:50.750Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:34:51.653Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T07:34:51.660Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T07:34:57.893Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:34:57.920Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T07:35:05.711Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-23T07:35:05.747Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T07:35:09.313Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T07:35:09.321Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T07:35:09.378Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T07:35:09.386Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T07:35:20.686Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-23T07:35:20.724Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T07:35:28.537Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:35:31.525Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:35:31.604Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:35:40.104Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:35:41.602Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:35:41.634Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:35:44.450Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:35:44.461Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:35:48.150Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:35:48.840Z","level":"info","status":200,"message":"Get all pending invitations successful"}
+{"timestamp":"2024-11-23T07:35:51.956Z","level":"info","status":200,"message":"Remove member from group successful."}
+{"timestamp":"2024-11-23T07:35:51.998Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T07:35:52.004Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T07:35:53.837Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:35:53.853Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:35:55.590Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:35:55.611Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:35:55.724Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:35:59.385Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:36:00.503Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:36:23.466Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:36:23.494Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:36:23.607Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:36:26.579Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:36:29.358Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:36:56.515Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:36:56.522Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:36:56.543Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:36:57.398Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:37:23.073Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:37:23.079Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:37:23.095Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:37:39.160Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:37:39.161Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T07:37:39.167Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:37:39.184Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:38:24.871Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:38:24.873Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:38:24.883Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:38:24.900Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:38:24.927Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:38:24.928Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:39:28.496Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:39:28.542Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:39:30.009Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:39:30.011Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:39:30.473Z","level":"info","status":200,"message":"Get joined group successful."}
+{"timestamp":"2024-11-23T07:39:33.101Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:39:33.109Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:39:33.130Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:39:35.080Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:39:35.130Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:39:35.806Z","level":"info","status":200,"message":"Get joined group successful."}
+{"timestamp":"2024-11-23T07:39:36.496Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:39:36.498Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:39:48.792Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:39:48.802Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:39:48.831Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:39:51.063Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:39:51.104Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:40:31.267Z","level":"info","status":201,"message":"Create post successful"}
+{"timestamp":"2024-11-23T07:40:31.307Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:40:41.547Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:40:41.548Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:40:41.559Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T07:40:41.561Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T07:40:41.565Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:40:43.362Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:40:43.371Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:40:43.398Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:40:50.377Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:40:56.924Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:40:56.946Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T07:52:35.286Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T07:52:35.290Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T07:52:35.303Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:04:32.928Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:04:32.934Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:04:32.965Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:04:33.339Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:04:33.355Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:04:33.484Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:05:41.994Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:05:41.999Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:05:42.016Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:05:42.363Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:05:42.412Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:05:42.451Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:05:42.790Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:05:42.799Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:05:42.811Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:05:43.158Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:05:43.159Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:05:43.194Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:06:51.352Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:06:51.355Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:06:51.365Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:06:55.260Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:06:55.263Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:06:55.272Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:06:58.497Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:06:58.516Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:06:58.674Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:09:57.264Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:09:57.266Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:09:57.274Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:11:12.775Z","level":"info","status":200,"message":"Refresh token successful."}
+{"timestamp":"2024-11-23T08:11:12.787Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:11:13.789Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:11:13.804Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:18:16.104Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:18:16.108Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:18:16.118Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:18:18.030Z","level":"info","status":200,"message":"Refresh token successful."}
+{"timestamp":"2024-11-23T08:18:18.042Z","level":"info","status":200,"message":"Refresh token successful."}
+{"timestamp":"2024-11-23T08:18:18.053Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:18:18.060Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:18:19.071Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:18:19.078Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:32:26.035Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:32:26.038Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:32:26.049Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:32:27.739Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:32:27.740Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:32:27.743Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:32:27.744Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:32:27.753Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:32:27.778Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:34:31.289Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:34:31.293Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:34:31.304Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:34:47.721Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:34:47.721Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:34:47.729Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:34:49.214Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:34:49.218Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:34:49.226Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:36:06.119Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:36:06.122Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:36:06.130Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:36:06.768Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:36:06.771Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:36:06.780Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:49:17.997Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:49:18.016Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:49:18.030Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:51:25.115Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:51:25.118Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:51:25.127Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:51:27.998Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:51:27.999Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:51:27.999Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T08:51:28.006Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T08:51:28.016Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T08:51:28.026Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:05:40.403Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:05:40.410Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:05:40.460Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:05:42.894Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:05:42.895Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:05:42.936Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:05:42.937Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:05:42.946Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:05:42.972Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:06:13.079Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:06:13.090Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T09:06:27.729Z","level":"info","status":200,"message":"Add pending invitations successful."}
+{"timestamp":"2024-11-23T09:06:27.760Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:06:31.156Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T09:06:33.646Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T09:06:33.653Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T09:06:45.622Z","level":"info","status":200,"message":"Accept pending invitations successful."}
+{"timestamp":"2024-11-23T09:06:45.653Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T09:06:45.654Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T09:06:48.772Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:06:49.908Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T09:06:58.249Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:06:58.265Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:07:09.945Z","level":"info","status":200,"message":"Upvote post successful"}
+{"timestamp":"2024-11-23T09:07:11.762Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:07:11.768Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:07:11.793Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:07:12.137Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:07:12.140Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:07:12.151Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:07:15.331Z","level":"info","status":200,"message":"Upvote post successful"}
+{"timestamp":"2024-11-23T09:07:21.187Z","level":"info","status":200,"message":"Downvote post successful"}
+{"timestamp":"2024-11-23T09:07:30.608Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:07:35.048Z","level":"info","status":200,"message":"Add comment post successful"}
+{"timestamp":"2024-11-23T09:07:35.087Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:07:35.667Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T09:07:38.497Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:07:49.962Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:07:51.825Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:07:51.826Z","level":"info","status":200,"message":"Search group successful"}
+{"timestamp":"2024-11-23T09:07:56.363Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T09:07:56.416Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:08:03.559Z","level":"info","status":200,"message":"Add pending invitations successful."}
+{"timestamp":"2024-11-23T09:08:03.582Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T09:08:08.020Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T09:08:09.952Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T09:08:10.032Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T09:08:10.040Z","level":"info","status":200,"message":"Get all pending invitations successful"}
+{"timestamp":"2024-11-23T09:08:20.844Z","level":"info","status":200,"message":"Accept pending invitations successful."}
+{"timestamp":"2024-11-23T09:08:20.900Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T09:08:20.908Z","level":"info","status":200,"message":"Get all pending invitations successful"}
+{"timestamp":"2024-11-23T09:08:20.909Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T09:08:23.071Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:08:29.814Z","level":"info","status":200,"message":"Remove member from group successful."}
+{"timestamp":"2024-11-23T09:08:29.850Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T09:08:29.854Z","level":"info","status":200,"message":"Get all members in group successful"}
+{"timestamp":"2024-11-23T09:08:35.962Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:08:35.969Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2024-11-23T09:08:36.088Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:08:41.051Z","level":"info","status":200,"message":"Upvote post successful"}
+{"timestamp":"2024-11-23T09:08:49.954Z","level":"info","status":201,"message":"Create post successful"}
+{"timestamp":"2024-11-23T09:08:49.998Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:08:55.879Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:08:55.962Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:08:57.007Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T09:08:57.042Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T09:09:01.354Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T09:09:01.396Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T09:09:03.370Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T09:09:03.372Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T09:09:06.498Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:09:06.516Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:09:07.955Z","level":"info","status":200,"message":"Get all friend successful."}
+{"timestamp":"2024-11-23T09:09:07.961Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T09:09:12.199Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:09:12.267Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:09:15.297Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-23T09:09:15.338Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T09:09:19.042Z","level":"info","status":200,"message":"Get all notifications successful"}
+{"timestamp":"2024-11-23T09:09:25.197Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T09:09:25.205Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T09:09:25.235Z","level":"info","status":200,"message":"Get all channel success"}
+{"timestamp":"2024-11-23T09:09:29.296Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-23T09:09:29.350Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T09:09:35.129Z","level":"info","status":200,"message":"Send messsage success"}
+{"timestamp":"2024-11-23T09:09:35.175Z","level":"info","status":200,"message":"Get message success"}
+{"timestamp":"2024-11-23T09:09:39.249Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:09:39.251Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:09:39.295Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:09:40.772Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:09:40.819Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:09:43.617Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:09:43.619Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:09:43.767Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:09:49.606Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:09:49.617Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:09:59.141Z","level":"info","status":200,"message":"Update post successful"}
+{"timestamp":"2024-11-23T09:10:04.271Z","level":"info","status":200,"message":"Get all invitations successful."}
+{"timestamp":"2024-11-23T09:10:06.994Z","level":"info","status":200,"message":"Get joined group successful."}
+{"timestamp":"2024-11-23T09:10:08.920Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:11:00.800Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:11:00.801Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:11:00.802Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:11:00.807Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:11:00.824Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:11:00.838Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:12:08.749Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:12:08.786Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:12:08.789Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:12:10.762Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:12:10.851Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:13:15.971Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:13:15.981Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:13:16.003Z","level":"info","status":200,"message":"Refresh token successful."}
+{"timestamp":"2024-11-23T09:13:16.036Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:13:16.040Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:13:17.043Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:13:17.075Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:14:23.400Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:14:23.408Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:14:23.426Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:14:23.427Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:14:23.453Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:14:23.455Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:19:09.372Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:19:09.380Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:19:09.408Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:19:19.494Z","level":"info","status":200,"message":"Refresh token successful."}
+{"timestamp":"2024-11-23T09:19:19.523Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2024-11-23T09:19:20.547Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2024-11-23T09:19:20.559Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2024-11-23T09:19:31.036Z","level":"info","status":200,"message":"Logout successful."}
+{"timestamp":"2025-02-02T09:19:06.224Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2025-02-02T09:19:18.428Z","level":"info","status":201,"message":"Registered successfully. Please enter the OTP to verify your account."}
+{"timestamp":"2025-02-02T09:19:42.750Z","level":"info","status":200,"message":"Verify account successful"}
+{"timestamp":"2025-02-02T09:21:47.643Z","level":"info","status":200,"message":"Refresh token successful."}
+{"timestamp":"2025-02-02T09:21:54.451Z","level":"info","status":200,"message":"Logout successful."}
+{"timestamp":"2025-02-02T09:22:05.350Z","level":"info","status":201,"message":"Please enter the OTP to set a new password."}
+{"timestamp":"2025-02-02T09:22:19.746Z","level":"info","status":201,"message":"Forgot password successful."}
+{"timestamp":"2025-02-02T09:22:31.469Z","level":"info","status":200,"message":"Verify OTP successful"}
+{"timestamp":"2025-02-02T09:23:07.971Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2025-02-02T09:23:14.981Z","level":"info","status":201,"message":"Create post successful"}
+{"timestamp":"2025-02-02T09:23:25.221Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2025-02-02T09:31:42.020Z","level":"info","status":200,"message":"Login successful."}
+{"timestamp":"2025-02-02T09:31:42.073Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2025-02-02T09:31:42.097Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2025-02-02T09:31:42.167Z","level":"info","status":200,"message":"OK"}
+{"timestamp":"2025-02-02T09:31:45.785Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2025-02-02T09:31:45.814Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2025-02-02T09:31:49.860Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2025-02-02T09:31:49.881Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2025-02-02T09:32:00.601Z","level":"info","status":201,"message":"Create post successful"}
+{"timestamp":"2025-02-02T09:34:54.212Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2025-02-02T09:35:08.840Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2025-02-02T09:35:08.849Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2025-02-02T09:35:08.857Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2025-02-02T09:35:15.712Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2025-02-02T09:40:27.014Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2025-02-02T09:40:27.031Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2025-02-02T09:40:27.041Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2025-02-02T09:47:29.973Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2025-02-02T09:47:29.990Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2025-02-02T09:47:29.999Z","level":"info","status":201,"message":"Get post successful"}
+{"timestamp":"2025-02-02T09:54:02.596Z","level":"info","status":200,"message":"Search user successful."}
+{"timestamp":"2025-02-02T09:54:02.601Z","level":"info","status":200,"message":"Get group successful."}
+{"timestamp":"2025-02-02T09:54:02.609Z","level":"info","status":201,"message":"Get post successful"}

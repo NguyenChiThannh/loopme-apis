@@ -1,5 +1,5 @@
-import { CustomError } from "@/config/customError"
-import notificationEmitter from "@/config/eventEmitter"
+import { CustomError } from "@/configs/customError"
+import notificationEmitter from "@/configs/eventEmitter"
 import PostModel from "@/models/post"
 import VoteModel from "@/models/vote"
 import { ResponseMessages } from "@/utils/messages"

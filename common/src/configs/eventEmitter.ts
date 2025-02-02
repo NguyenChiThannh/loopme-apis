@@ -1,4 +1,4 @@
-import { INotification } from './../models/notification';
+// Event driven
 import { EventEmitter } from 'events';
 
 class NotificationEmitter extends EventEmitter { }
@@ -6,4 +6,3 @@ class NotificationEmitter extends EventEmitter { }
 const notificationEmitter = new NotificationEmitter();
 
 export default notificationEmitter;
-export { INotification };

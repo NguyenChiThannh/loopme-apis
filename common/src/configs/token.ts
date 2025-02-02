@@ -1,6 +1,5 @@
 import jwt, { SignOptions } from 'jsonwebtoken'
 
-
 const genarateAccessToken = (user: any): string => {
     return jwt.sign(
         {
@@ -23,31 +22,7 @@ const genarateRefreshToken = (user: any): string => {
     )
 }
 
-const encryptInfo = (user): string => {
-    return jwt.sign(
-        {
-            email: user.email,
-            password: user.password
-        },
-        process.env.VERIFY_ACCOUNT_TOKEN as string,
-        { expiresIn: '600000' } as SignOptions
-    )
-}
-
-const encryptInvitation = (userId: string, boardId: string): string => {
-    return jwt.sign(
-        {
-            userId,
-            boardId
-        },
-        process.env.VERIFY_ACCOUNT_TOKEN as string,
-        { expiresIn: '600000' } as SignOptions
-    )
-}
-
 export const genarateToken = {
     genarateAccessToken,
     genarateRefreshToken,
-    encryptInfo,
-    encryptInvitation,
 }

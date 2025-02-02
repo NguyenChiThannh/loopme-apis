@@ -3,7 +3,7 @@ import FriendModel from "../models/friend"
 import mongoose from "mongoose"
 import { notificationService } from "@/services/notificationService"
 import { PaginatedResponse } from "@/dtos/PaginatedResponse"
-import notificationEmitter from "@/config/eventEmitter"
+import notificationEmitter from "@/configs/eventEmitter"
 
 const addPendingInvitations = async (myId: string, friendId: string): Promise<void> => {
     try {
