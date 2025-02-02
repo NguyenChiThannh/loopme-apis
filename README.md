@@ -5,7 +5,8 @@ LoopMe is a social networking platform similar to Facebook.
 
 ### 1.1. Architecture:
 
-![Frame 1](https://github.com/user-attachments/assets/751d728f-b4e4-42db-b6d1-0f1f5663bd56)
+![loopme](https://github.com/user-attachments/assets/0b867803-ed2a-4a99-9c25-ba1bb5ec1c47)
+
 
 #### Gateway Service (Port: 8000)
 - API Gateway/Reverse Proxy
@@ -54,7 +55,7 @@ LoopMe is a social networking platform similar to Facebook.
 ### 2.1. Prerequisites
 
 - Node 20 or higher
-- Maven
+- Docker
 - MongoDB
 
 ### 2.2. Installation
