@@ -1,8 +1,9 @@
 import { groupService } from "../services/groupService"
-import { AuthenticatedRequest } from "../types"
-import { ResponseMessages } from "../utils/messages"
-import { successResponse } from "../utils/responses"
 import { Response, NextFunction } from "express"
+// Common
+import { AuthenticatedRequest } from "@loopme/common"
+import { ResponseMessages } from "@loopme/common"
+import { successResponse } from "@loopme/common"
 
 const create = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {

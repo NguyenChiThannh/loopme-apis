@@ -1,6 +1,6 @@
-import { PaginatedResponse } from "@/dtos/PaginatedResponse";
-import UserModel, { filterData, UserUpdateData } from "@/models/user";
 import mongoose from "mongoose";
+import UserModel, { filterData, UserUpdateData } from "@/models/user";
+import { PaginatedResponse } from "@loopme/common";
 
 const searchUser = async ({ userId, name, page, size, sort }: {
     userId: string,

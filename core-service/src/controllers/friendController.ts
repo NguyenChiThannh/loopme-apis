@@ -1,9 +1,10 @@
-import { PaginatedResponse } from "@/dtos/PaginatedResponse"
 import { friendService } from "../services/friendSerive"
-import { AuthenticatedRequest } from "../types"
-import { ResponseMessages } from "../utils/messages"
-import { successResponse } from "../utils/responses"
 import { NextFunction, Response } from "express"
+// Common
+import { AuthenticatedRequest } from "@loopme/common"
+import { ResponseMessages } from "@loopme/common"
+import { successResponse } from "@loopme/common"
+import { PaginatedResponse } from "@loopme/common"
 
 const addPendingInvitations = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {

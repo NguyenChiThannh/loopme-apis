@@ -1,5 +1,5 @@
-import ApiError from '../utils/ApiError'
 import { WHITELIST_DOMAINS } from '../utils/constants'
+import { ApiError } from '@loopme/common'
 
 // Cấu hình CORS Option
 export const corsOptions = {

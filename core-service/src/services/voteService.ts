@@ -1,9 +1,9 @@
-import { CustomError } from "@/configs/customError"
-import notificationEmitter from "@/configs/eventEmitter"
 import PostModel from "@/models/post"
 import VoteModel from "@/models/vote"
-import { ResponseMessages } from "@/utils/messages"
 import mongoose from "mongoose"
+import { CustomError } from "@loopme/common"
+import { notificationEmitter } from "@loopme/common"
+import { ResponseMessages } from "@loopme/common"
 
 const vote = async ({
     userId,

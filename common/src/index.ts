@@ -12,9 +12,14 @@ export * from './middlewares/verifyAuthMiddleware'
 // types
 export * from './types/index'
 
+// mail
+export * from './mail/index'
+
 // utils
 export * from './utils/algorithms'
-export * from './utils/amqp'
-export * from './utils/ApiError'
+import RabbitMQService from './utils/amqp'
+export { RabbitMQService }
+import ApiError from './utils/ApiError';
+export { ApiError };
 export * from './utils/messages'
 export * from './utils/responses'

@@ -4,11 +4,11 @@ import GroupModel from '@/models/group';
 import FriendModel from '@/models/friend';
 import { friendService } from '@/services/friendSerive';
 import { notificationService } from '@/services/notificationService';
-import { CustomError } from '@/configs/customError';
-import { ResponseMessages } from '@/utils/messages';
 import { groupService } from '@/services/groupService';
 import { commentService } from '@/services/commentService';
 import { voteService } from '@/services/voteService';
+import { CustomError } from '@loopme/common';
+import { ResponseMessages } from '@loopme/common';
 
 const create = async (data) => {
     try {

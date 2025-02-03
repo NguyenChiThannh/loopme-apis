@@ -1,7 +1,9 @@
 import { otpService } from '../services/otpService'
-import { ResponseMessages } from '../utils/messages'
-import { successResponse } from '../utils/responses'
 import { Request, Response, NextFunction } from 'express'
+// Common
+import { AuthenticatedRequest } from "@loopme/common"
+import { ResponseMessages } from "@loopme/common"
+import { successResponse } from "@loopme/common"
 
 const refreshOTP = async (req: Request, res: Response, next: NextFunction) => {
     try {

@@ -1,7 +1,7 @@
-import { memberController } from '@/controllers/memberController'
-import { validate } from '@/middlewares/validate'
-import { verifyMiddleware } from '@/middlewares/verifyMiddleware'
 import express from 'express'
+import { memberController } from '@/controllers/memberController'
+// Common
+import { verifyMiddleware } from '@loopme/common'
 
 const Router = express.Router()
 

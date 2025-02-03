@@ -1,6 +1,6 @@
-import { PaginatedResponse } from "@/dtos/PaginatedResponse"
 import ChannelModel from "@/models/channel"
 import mongoose from "mongoose"
+import { PaginatedResponse } from "@loopme/common";
 
 const getDetail = async (myId, channelId) => {
     try {

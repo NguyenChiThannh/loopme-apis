@@ -1,5 +1,5 @@
-import { otpController } from '../../controllers/otpController'
 import express from 'express'
+import { otpController } from '../../controllers/otpController'
 
 const Router = express.Router()
 

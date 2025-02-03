@@ -1,8 +1,9 @@
 import { commentController } from '@/controllers/commentController';
-import { validate } from '@/middlewares/validate';
-import { verifyMiddleware } from '@/middlewares/verifyMiddleware';
 import { CommentReqSchema } from '@/validations/CommentReq';
 import express from 'express'
+// Common
+import { validate } from '@loopme/common'
+import { verifyMiddleware } from '@loopme/common'
 
 const Router = express.Router()
 

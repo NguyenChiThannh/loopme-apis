@@ -1,9 +1,9 @@
-import { sendMail } from "@/mail/sendMail";
-import { CustomError } from "../configs/customError";
 import OtpModel from "../models/otp";
-import { generateOTP } from "../utils/algorithms";
-import { ResponseMessages } from "../utils/messages";
-import { GMAIL_TYPE } from "@/mail/gmailType";
+import { sendMail } from "@loopme/common";
+import { CustomError } from "@loopme/common";
+import { generateOTP } from "@loopme/common";
+import { ResponseMessages } from "@loopme/common";
+import { GMAIL_TYPE } from "@loopme/common";
 
 
 const createOtp = async (email: string): Promise<number> => {

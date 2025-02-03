@@ -1,7 +1,7 @@
-import { CustomError } from "@/configs/customError";
 import GroupModel from "@/models/group"
-import { ResponseMessages } from "@/utils/messages";
 import mongoose from "mongoose"
+import { CustomError } from "@loopme/common";
+import { ResponseMessages } from "@loopme/common";
 
 const getMembersInGroup = async (groupId?: string) => {
     try {

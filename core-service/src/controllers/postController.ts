@@ -1,9 +1,10 @@
-import { PaginatedResponse } from "@/dtos/PaginatedResponse"
 import { postService } from "../services/postService"
-import { AuthenticatedRequest } from "../types"
-import { ResponseMessages } from "../utils/messages"
-import { successResponse } from "../utils/responses"
-import { NextFunction, Request, Response } from "express"
+import { NextFunction, Response } from "express"
+// Common
+import { AuthenticatedRequest } from "@loopme/common"
+import { ResponseMessages } from "@loopme/common"
+import { successResponse } from "@loopme/common"
+import { PaginatedResponse } from "@loopme/common"
 
 const create = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {

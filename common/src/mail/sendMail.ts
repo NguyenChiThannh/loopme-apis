@@ -35,6 +35,6 @@ export const sendMail = async (
       html: customMail(GMAIL_TYPE.title, GMAIL_TYPE.content, code),
     });
   } catch (error) {
-    throw new Error(error)
+    throw new Error(String(error));
   }
 };

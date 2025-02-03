@@ -1,8 +1,9 @@
-import { CustomError } from "../configs/customError";
 import { groupService } from "../services/groupService";
-import { AuthenticatedRequest } from "../types";
-import { ResponseMessages } from "../utils/messages";
 import { NextFunction, Response } from "express";
+// Common
+import { AuthenticatedRequest } from "@loopme/common";
+import { ResponseMessages } from "@loopme/common";
+import { CustomError } from "@loopme/common";
 
 const checkGroupMembership = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {

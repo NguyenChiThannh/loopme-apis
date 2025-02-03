@@ -1,8 +1,9 @@
 import { userService } from "@/services/userService"
-import { AuthenticatedRequest } from "@/types"
-import { ResponseMessages } from "@/utils/messages"
-import { successResponse } from "@/utils/responses"
 import { NextFunction, Response } from "express"
+// Common
+import { AuthenticatedRequest } from "@loopme/common"
+import { ResponseMessages } from "@loopme/common"
+import { successResponse } from "@loopme/common"
 
 const searchUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {

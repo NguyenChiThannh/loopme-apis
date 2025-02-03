@@ -1,9 +1,8 @@
 import UserModel from "@/models/user"
 import FriendModel from "../models/friend"
 import mongoose from "mongoose"
-import { notificationService } from "@/services/notificationService"
-import { PaginatedResponse } from "@/dtos/PaginatedResponse"
-import notificationEmitter from "@/configs/eventEmitter"
+import { PaginatedResponse } from "@loopme/common"
+import { notificationEmitter } from "@loopme/common"
 
 const addPendingInvitations = async (myId: string, friendId: string): Promise<void> => {
     try {

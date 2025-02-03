@@ -1,9 +1,9 @@
-import { CustomError } from "@/configs/customError";
-import { PaginatedResponse } from "@/dtos/PaginatedResponse"
 import ChannelModel from "@/models/channel"
 import MessageModel from "@/models/message"
-import { ResponseMessages } from "@/utils/messages";
 import mongoose from "mongoose"
+import { CustomError } from "@loopme/common"
+import { PaginatedResponse } from "@loopme/common"
+import { ResponseMessages } from "@loopme/common"
 
 const getAllMessage = async ({
     myId,

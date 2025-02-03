@@ -6,7 +6,7 @@ import { corsOptions } from './configs/cors'
 import exitHook from 'async-exit-hook'
 // import { CONNECT_DB, CLOSE_DB } from '@/config/mongodb'
 import { APIs_V1 } from './routes/v1'
-import { errorHandlingMiddleware } from './middlewares/errorHandlingMiddleware'
+import { errorHandlingMiddleware } from '@loopme/common'
 import cookieParser from 'cookie-parser'
 import connectDB from './configs/mongodb'
 

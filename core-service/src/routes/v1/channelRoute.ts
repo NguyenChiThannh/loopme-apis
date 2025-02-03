@@ -1,8 +1,9 @@
 import { channelController } from '@/controllers/channelController';
-import { validate } from '@/middlewares/validate';
-import { verifyMiddleware } from '@/middlewares/verifyMiddleware';
 import { ChannelReqSchema } from '@/validations/ChannelReq';
 import express from 'express'
+// Common
+import { validate } from '@loopme/common'
+import { verifyMiddleware } from '@loopme/common'
 
 const Router = express.Router()
 

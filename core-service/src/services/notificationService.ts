@@ -1,7 +1,7 @@
-import notificationEmitter from "@/configs/eventEmitter";
-import NotificationModel from "@/models/notification"
-import RabbitMQService from "@/utils/amqp";
 import mongoose from "mongoose"
+import NotificationModel from "@/models/notification"
+import { notificationEmitter } from "@loopme/common";
+import { RabbitMQService } from '@loopme/common'
 
 interface INotification {
     actor: string;

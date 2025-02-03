@@ -1,5 +1,5 @@
-export const customMail = (title, content, code) => {
-    return `<html dir="ltr" lang="en">
+export const customMail = (title: string, content: string, code: string | number) => {
+  return `<html dir="ltr" lang="en">
     <head>
       <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
     </head>

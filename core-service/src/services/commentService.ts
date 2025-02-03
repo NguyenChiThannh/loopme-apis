@@ -1,9 +1,8 @@
-import { CustomError } from "@/configs/customError";
-import notificationEmitter from "@/configs/eventEmitter";
 import CommentModel from "@/models/comment";
 import PostModel from "@/models/post";
-import { ResponseMessages } from "@/utils/messages";
 import mongoose from "mongoose";
+import { CustomError, notificationEmitter } from "@loopme/common";
+import { ResponseMessages } from "@loopme/common";
 
 const create = async ({ userId, postId, content }: {
     userId: string,

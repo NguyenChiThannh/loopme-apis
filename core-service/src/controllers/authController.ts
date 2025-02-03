@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from 'express'
 import { authService } from '../services/authService';
 import { ChangePassworReq, LoginReq, RegisterReq } from '../validations/AuthReq';
-import { successResponse } from '../utils/responses';
-import { ResponseMessages } from '../utils/messages';
 import { otpService } from '../services/otpService';
-import { AuthenticatedRequest } from '../types';
+// Common
+import { successResponse } from '@loopme/common';
+import { ResponseMessages } from '@loopme/common';
+import { AuthenticatedRequest } from '@loopme/common';
 
 const registerUser = async (req: Request, res: Response, next: NextFunction) => {
     try {

@@ -1,6 +1,7 @@
-import { notificationController } from "@/controllers/notificationController";
-import { verifyMiddleware } from "@/middlewares/verifyMiddleware";
 import express from "express"
+import { notificationController } from "@/controllers/notificationController";
+// Common
+import { verifyMiddleware } from '@loopme/common'
 
 const Router = express.Router()
 

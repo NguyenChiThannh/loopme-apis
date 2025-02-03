@@ -1,6 +1,7 @@
-import { voteController } from '@/controllers/voteController';
-import { verifyMiddleware } from '@/middlewares/verifyMiddleware';
 import express from 'express'
+import { voteController } from '@/controllers/voteController';
+// Common
+import { verifyMiddleware } from '@loopme/common'
 
 const Router = express.Router()
 

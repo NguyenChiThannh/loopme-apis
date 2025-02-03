@@ -1,9 +1,10 @@
+import express from 'express'
 import { postController } from '../../controllers/postController'
 import { groupMiddleware } from '../../middlewares/groupMiddleware'
-import { validate } from '../../middlewares/validate'
-import { verifyMiddleware } from '../../middlewares/verifyMiddleware'
 import { PostReqSchema } from '../../validations/PostReq'
-import express from 'express'
+// Common
+import { validate } from '@loopme/common'
+import { verifyMiddleware } from '@loopme/common'
 
 const Router = express.Router()
 

@@ -1,7 +1,8 @@
+import express from "express"
 import { groupController } from "../../controllers/groupController"
 import { groupMiddleware } from "../../middlewares/groupMiddleware";
-import { verifyMiddleware } from "../../middlewares/verifyMiddleware"
-import express from "express"
+// Common
+import { verifyMiddleware } from '@loopme/common'
 
 const Router = express.Router()
 

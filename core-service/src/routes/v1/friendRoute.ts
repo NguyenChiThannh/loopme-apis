@@ -1,6 +1,8 @@
-import { verifyMiddleware } from "@/middlewares/verifyMiddleware";
 import { friendController } from "../../controllers/friendController"
 import express from "express"
+// Common
+import { verifyMiddleware } from '@loopme/common'
+
 const Router = express.Router()
 
 Router.use(verifyMiddleware.verifyToken);

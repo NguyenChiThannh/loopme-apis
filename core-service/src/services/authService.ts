@@ -1,16 +1,14 @@
-import { } from './../../node_modules/@types/jsonwebtoken/index.d';
-import { CustomError } from '../configs/customError';
-import { genarateToken } from '../configs/token';
 import UserModel, { IUser } from '../models/user';
 import { ChangePassworReq, LoginReq, RegisterReq } from '../validations/AuthReq';
 import { otpService } from './otpService';
-import { generateRandomString } from '../utils/algorithms';
-import { ResponseMessages } from '../utils/messages';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { sendMail } from '@/mail/sendMail';
-import { GMAIL_TYPE } from '@/mail/gmailType';
-
+import { CustomError } from '@loopme/common';
+import { genarateToken } from '@loopme/common';
+import { generateRandomString } from '@loopme/common'
+import { ResponseMessages } from '@loopme/common';
+import { sendMail } from '@loopme/common'
+import { GMAIL_TYPE } from '@loopme/common';
 
 let refreshTokens: string[] = [];
 

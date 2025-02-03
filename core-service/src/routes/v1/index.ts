@@ -1,4 +1,3 @@
-import Logger from '@/utils/amqp'
 import { authRoute } from './authRoute'
 import { friendRoute } from './friendRoute'
 import { groupRoute } from './groupRoute'
@@ -13,20 +12,10 @@ import { voteRoute } from '@/routes/v1/voteRoute'
 import { commentRoute } from '@/routes/v1/commentRoute'
 import { memberRoute } from '@/routes/v1/memberRoute'
 
-const logger = new Logger(process.env.ExchangeName_Logger_Service);
 const Router = express.Router()
 
 Router.get('/status', (req: Request, res: Response) => {
     res.status(200).json({ message: 'Hello world' })
-})
-
-
-Router.get('/test-error-logger', (req: Request, res: Response) => {
-    logger.publishMessage("Error", {
-        message: 'Test Internal Server Error',
-        stack: 'Error in line test'
-    })
-    res.status(200).json({ message: 'Success' })
 })
 
 // Auth api
