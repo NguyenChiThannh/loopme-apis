@@ -12,3 +12,13 @@ realtime-service/dist
 # logger-service/.env
 # gateway-api/.env
 # realtime-service/.env
+
+# Global ignores
+node_modules/
+dist/
+.env
+
+# Specific ignores for services
+app/*/node_modules/
+app/*/dist/
+app/*/.env
