@@ -1,7 +1,6 @@
 import nodemailer, { Transporter } from 'nodemailer';
 import { customMail } from './customMail';
-import dotenv from 'dotenv';
-dotenv.config();
+import env from '../configs/env';
 
 interface GmailType {
   subject: string;
@@ -16,10 +15,16 @@ const transporter: Transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: process.env.USERNAME_GMAIL as string,
-    pass: process.env.PASSWORD_GMAIL as string,
+    user: 'thanh.161003@gmail.com',
+    pass: 'vibi yivt nohj voej',
   }
 });
+
+console.log('🚀 ~ env.SMTP_USER:', env.SMTP_USER)
+console.log('🚀 ~ env.SMTP_PASS:', env.SMTP_PASS)
+console.log('🚀 ~ env.JWT_ACCESS_TOKEN:', env.JWT_ACCESS_TOKEN)
+
+
 
 export const sendMail = async (
   GMAIL_TYPE: GmailType,
@@ -35,6 +40,6 @@ export const sendMail = async (
       html: customMail(GMAIL_TYPE.title, GMAIL_TYPE.content, code),
     });
   } catch (error) {
-    throw new Error(String(error));
+    throw new Error(error as string);
   }
 };
