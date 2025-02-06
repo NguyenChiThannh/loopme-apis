@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import { corsOptions } from './configs/cors'
 import exitHook from 'async-exit-hook'
-import { APIs_V1 } from './routes'
+import { APIs_V1 } from './routes/v1'
 import { errorHandlingMiddleware } from '@loopme/common'
 import cookieParser from 'cookie-parser'
 import connectDB from './configs/mongodb'
@@ -30,7 +30,7 @@ const START_SEVER = () => {
 
     app.listen(Number(process.env.APP_PORT), process.env.APP_HOST || 'localhost', () => {
         // eslint-disable-next-line no-console
-        console.log(`3.Core-service running at PORT ${process.env.APP_HOST}:${process.env.APP_PORT}`)
+        console.log(`3.Post-service running at PORT ${process.env.APP_HOST}:${process.env.APP_PORT}`)
     })
     exitHook(() => {
         // CLOSE_DB()

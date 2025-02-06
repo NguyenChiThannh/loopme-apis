@@ -1,4 +1,4 @@
-import { WHITELIST_DOMAINS } from '../utils/constants'
+import { WHITELIST_DOMAINS } from '@loopme/common'
 import { ApiError } from '@loopme/common'
 
 // Cấu hình CORS Option

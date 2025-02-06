@@ -30,7 +30,7 @@ const START_SEVER = () => {
 
     app.listen(Number(process.env.APP_PORT), process.env.APP_HOST || 'localhost', () => {
         // eslint-disable-next-line no-console
-        console.log(`3.Core-service running at PORT ${process.env.APP_HOST}:${process.env.APP_PORT}`)
+        console.log(`3.Comment-service running at PORT ${process.env.APP_HOST}:${process.env.APP_PORT}`)
     })
     exitHook(() => {
         // CLOSE_DB()

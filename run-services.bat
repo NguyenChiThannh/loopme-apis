@@ -26,9 +26,17 @@ if errorlevel 1 (
 )
 
 echo Starting services...
-start "Gateway Service" cmd /k "cd gateway-api && npm run dev"
-start "Core Service" cmd /k "cd core-service && npm run dev"
-start "Realtime Service" cmd /k "cd realtime-service && npm run dev"
-start "Logger Service" cmd /k "cd logger-service && npm run dev"
+start "Gateway Service" cmd /k "cd app && cd gateway-api && npm run dev"
+start "Auth Service" cmd /k "cd app && cd auth-service && npm run dev"
+start "Chat Service" cmd /k "cd app && cd chat-service && npm run dev"
+start "Comment Service" cmd /k "cd app && cd comment-service && npm run dev"
+start "Friend Service" cmd /k "cd app && cd friend-service && npm run dev"
+start "Group Service" cmd /k "cd app && cd group-service && npm run dev"
+start "Notification Service" cmd /k "cd app && cd notification-service && npm run dev"
+start "Post Service" cmd /k "cd app && cd post-service && npm run dev"
+start "Post Vote Service" cmd /k "cd app && cd post-vote-service && npm run dev"
+start "Realtime Service" cmd /k "cd app && cd realtime-service && npm run dev"
+
+echo All services have been started!
 
 echo All services have been started!

@@ -3,14 +3,13 @@ import { Response, NextFunction } from 'express'
 import { CustomError } from '../configs/customError';
 import { ResponseMessages } from '../utils/messages';
 import { AuthenticatedRequest } from '../types/index';
-import env from '../configs/env';
-
+import { ENV_Common } from '../configs/env';
 
 const verifyToken = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
-        const accessToken = req.cookies?.access_token
+        const accessToken = req.cookies?.access_token || req.headers.authorization?.replace("Bearer ", "");
         if (accessToken) {
-            jwt.verify(accessToken, env.JWT_ACCESS_TOKEN, (err: any, user: any) => {
+            jwt.verify(accessToken, ENV_Common.JWT_ACCESS_TOKEN, (err: any, user: any) => {
                 if (err) {
                     if (err.message.includes('jwt expired'))
                         throw new CustomError(401, ResponseMessages.USER.TOKEN_EXPIRED)

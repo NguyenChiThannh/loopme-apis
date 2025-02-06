@@ -1,4 +1,5 @@
 import amqp, { Channel, Connection } from 'amqplib';
+import { ENV_Common } from '../configs/env';
 
 class RabbitMQService {
     private channel: Channel | null = null;
@@ -13,7 +14,7 @@ class RabbitMQService {
         if (this.channel) return
 
         try {
-            const connectionURL = process.env.AMQP_URL as string
+            const connectionURL = ENV_Common.AMQP_PORT as string
             this.connection = await amqp.connect(connectionURL)
             this.channel = await this.connection.createChannel()
 

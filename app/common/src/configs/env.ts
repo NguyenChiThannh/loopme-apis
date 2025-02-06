@@ -1,9 +1,36 @@
 import 'dotenv/config'
 
-const env = {
-    JWT_ACCESS_TOKEN: process.env.JWT_ACCESS_TOKEN || '',
-    SMTP_USER: process.env.SMTP_USER,
-    SMTP_PASS: process.env.SMTP_PASS
+const processEnv = {
+    DATABASE_NAME: 'mxh',
+
+    BUILD_MODE: 'dev',
+    APP_HOST: 'localhost',
+    APP_PORT: '8001',
+    JWT_ACCESS_TOKEN: 'access',
+    JWT_REFRESH_TOKEN: 'refresh',
+
+    AMQP_PORT: 'amqp://localhost:5672/',
+
+    EXCHANGENAME_REALTIME_SERVICE: 'REALTIME',
+    EXCHANGENAME_NOTIFICATION_SERVICE: 'NOTIFICATION',
+
+    SMTP_USER: 'thanh.161003@gmail.com',
+    SMTP_PASS: 'vibi yivt nohj voej',
 }
 
-export default env
+export const ENV_Common = {
+    JWT_ACCESS_TOKEN: processEnv.JWT_ACCESS_TOKEN,
+    JWT_REFRESH_TOKEN: processEnv.JWT_REFRESH_TOKEN,
+
+    AMQP_PORT: processEnv.AMQP_PORT,
+
+    SMTP_USER: processEnv.SMTP_USER,
+    SMTP_PASS: processEnv.SMTP_PASS,
+
+    EXCHANGENAME_REALTIME_SERVICE: processEnv.EXCHANGENAME_REALTIME_SERVICE,
+    EXCHANGENAME_NOTIFICATION_SERVICE: processEnv.EXCHANGENAME_NOTIFICATION_SERVICE,
+
+}
+
+
+

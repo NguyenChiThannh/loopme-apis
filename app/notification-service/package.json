@@ -12,13 +12,15 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@loopme/common": "^1.0.12",
+    "@loopme/common": "^1.0.47",
     "@types/node": "^22.13.0",
+    "amqplib": "^0.10.5",
     "async-exit-hook": "^2.0.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "mongoose": "^8.9.6",
     "typescript": "^5.7.3"
   }
 }

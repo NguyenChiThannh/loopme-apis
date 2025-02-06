@@ -1,6 +1,6 @@
 import { Server, Socket } from "socket.io";
 import { Server as HTTPServer } from "http";
-import { corsOptions } from "@/config/cor";
+import { corsOptions } from "@/config/cors";
 import redisClient from "../config/redis";
 
 function setupSocketIO(httpServer: HTTPServer): Server {

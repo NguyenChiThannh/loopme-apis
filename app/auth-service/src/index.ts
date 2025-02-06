@@ -8,7 +8,6 @@ import cookieParser from 'cookie-parser'
 import connectDB from './configs/mongodb'
 import 'dotenv/config'
 
-
 const app = express()
 
 const START_SEVER = () => {
@@ -25,12 +24,24 @@ const START_SEVER = () => {
     // use APIs V1
     app.use('/v1', APIs_V1)
 
+    // use APIs V1
+    app.use('/', (req, res) => {
+        console.log('🚀 ~ Request received');
+        console.log('Method:', req.method);
+        console.log('Full URL:', `${req.protocol}://${req.get('host')}${req.originalUrl}`);
+        console.log('Headers:', req.headers);
+        console.log('Body:', req.body);
+
+        res.send('Check server logs for details.');
+    });
+
+
     // Middleware xử lý lỗi tập trung
     app.use(errorHandlingMiddleware)
 
     app.listen(Number(process.env.APP_PORT), process.env.APP_HOST || 'localhost', () => {
         // eslint-disable-next-line no-console
-        console.log(`3.Core-service running at PORT ${process.env.APP_HOST}:${process.env.APP_PORT}`)
+        console.log(`3.Auth-service running at PORT ${process.env.APP_HOST}:${process.env.APP_PORT}`)
     })
     exitHook(() => {
         // CLOSE_DB()

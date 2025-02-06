@@ -7,6 +7,7 @@ import { errorHandlingMiddleware } from '@loopme/common'
 import cookieParser from 'cookie-parser'
 import connectDB from './configs/mongodb'
 import 'dotenv/config'
+import { consumeMessages } from '@/configs/consumeMessages'
 
 
 const app = express()
@@ -30,7 +31,7 @@ const START_SEVER = () => {
 
     app.listen(Number(process.env.APP_PORT), process.env.APP_HOST || 'localhost', () => {
         // eslint-disable-next-line no-console
-        console.log(`3.Core-service running at PORT ${process.env.APP_HOST}:${process.env.APP_PORT}`)
+        console.log(`3.Notification-service running at PORT ${process.env.APP_HOST}:${process.env.APP_PORT}`)
     })
     exitHook(() => {
         // CLOSE_DB()
@@ -44,6 +45,7 @@ const START_SEVER = () => {
         await connectDB()
         console.log('2.Connected to MongoDB')
         await START_SEVER()
+        // await consumeMessages()
     } catch (error) {
         console.error(error)
         process.exit(0)

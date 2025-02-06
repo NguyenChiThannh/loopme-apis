@@ -2,7 +2,6 @@ import express from "express";
 import { createServer, Server as HTTPServer } from "http";
 import setupSocketIO from "@/config/socket";
 import 'dotenv/config';
-import redisClient from "@/config/redis";
 import { consumeMessages } from "@/config/consumeMessages";
 
 const app = express();

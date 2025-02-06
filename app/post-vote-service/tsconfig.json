@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        // "strict": true,
+        // "noImplicitAny": true,
+        "baseUrl": ".",
+        "esModuleInterop": true,
+        "paths": {
+            "@/*": [
+                "src/*"
+            ],
+        },
+    }
+}

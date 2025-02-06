@@ -48,19 +48,46 @@ app.use((req, res, next) => {
 
 // Socket.IO proxy
 app.use('/socket.io', createProxyMiddleware({
-    target: process.env.SOCKET_SERVICE,
+    target: process.env.REALTIME_SERVICE,
     changeOrigin: true,
     ws: true,
 }));
 
 // API proxy
-app.use('/', proxy(process.env.CORE_SERVICE, {
-    proxyReqPathResolver: (req) => req.url,
-    proxyErrorHandler: (err, res, next) => {
-        console.error('API Proxy Error:', err);
-        next(err);
+const services = {
+    'auth': process.env.AUTH_SERVICE,
+    'user': process.env.AUTH_SERVICE,
+    'otps': process.env.AUTH_SERVICE,
+    'channels': process.env.CHAT_SERVICE,
+    'messages': process.env.CHAT_SERVICE,
+    'comments': process.env.COMMENT_SERVICE,
+    'friends': process.env.FRIEND_SERVICE,
+    'groups': process.env.GROUP_SERVICE,
+    'notifications': process.env.NOTIFICATION_SERVICE,
+    'posts': process.env.POST_SERVICE,
+    'votes': process.env.POST_VOTE_SERVICE,
+};
+
+// Dynamic proxy middleware
+app.use('/v1/:service', (req, res, next) => {
+    const service = req.params.service;
+    const target = services[service];
+
+    console.log(`Proxying request to: ${target}`);
+
+    if (target) {
+        return proxy(target, {
+            proxyReqPathResolver: (req) => '/v1/' + service + req.url,
+            proxyErrorHandler: (err, res, next) => {
+                console.error('API Proxy Error:', err);
+                next(err);
+            }
+        })(req, res, next); // Gọi proxy như một middleware
+    } else {
+        console.error(`Service not found for: ${service}`);
+        res.status(404).json({ error: 'Service not found' });
     }
-}));
+});
 
 
 app.listen(Number(process.env.PORT), () => {

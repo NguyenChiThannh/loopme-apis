@@ -1,6 +1,6 @@
 import nodemailer, { Transporter } from 'nodemailer';
 import { customMail } from './customMail';
-import env from '../configs/env';
+import { ENV_Common } from '../configs/env';
 
 interface GmailType {
   subject: string;
@@ -15,16 +15,10 @@ const transporter: Transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: 'thanh.161003@gmail.com',
-    pass: 'vibi yivt nohj voej',
+    user: ENV_Common.SMTP_USER,
+    pass: ENV_Common.SMTP_PASS,
   }
 });
-
-console.log('🚀 ~ env.SMTP_USER:', env.SMTP_USER)
-console.log('🚀 ~ env.SMTP_PASS:', env.SMTP_PASS)
-console.log('🚀 ~ env.JWT_ACCESS_TOKEN:', env.JWT_ACCESS_TOKEN)
-
-
 
 export const sendMail = async (
   GMAIL_TYPE: GmailType,

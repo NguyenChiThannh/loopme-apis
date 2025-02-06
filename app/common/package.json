@@ -1,6 +1,6 @@
 {
   "name": "@loopme/common",
-  "version": "1.0.27",
+  "version": "1.0.47",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "files": [
@@ -27,6 +27,7 @@
     "@types/cookie-session": "^2.0.39",
     "@types/jsonwebtoken": "^8.3.9",
     "amqplib": "^0.10.5",
+    "axios": "^1.7.9",
     "cookie-session": "^1.4.0",
     "dotenv": "^16.4.7",
     "express": "^4.17.1",

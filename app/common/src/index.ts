@@ -1,4 +1,5 @@
 // configs 
+export * from './configs/axios'
 export * from './configs/customError'
 export * from './configs/env'
 export * from './configs/eventEmitter'
