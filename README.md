@@ -5,7 +5,8 @@ LoopMe is a social networking platform similar to Facebook.
 
 ### 1.1. Architecture:
 
-![loopme](https://github.com/user-attachments/assets/0b867803-ed2a-4a99-9c25-ba1bb5ec1c47)
+![image](https://github.com/user-attachments/assets/1d09b205-ae42-4625-91ca-f9ea289601f5)
+
 
 
 #### Gateway Service (Port: 8000)
@@ -15,25 +16,6 @@ LoopMe is a social networking platform similar to Facebook.
 - WebSocket proxy for real-time communications
 - Single entry point for all client requests
 
-#### Core Service (Port: 8001)
-- Handles main business logic and API endpoints
-- User authentication & authorization
-- CRUD operations for users, posts, messages
-- Database interactions with MongoDB
-- Message queue producer for notifications and real-time events
-
-#### Realtime Service (Port: 8002)
-- Handles real-time communications using Socket.IO
-- Message queue consumer for real-time events
-- Manages WebSocket connections
-- Real-time notifications and messaging
-- Redis for socket session management
-
-#### Logger Service (Port: 8003)
-- Centralized logging system
-- Consumes log events from message queue
-- Stores system logs and audit trails
-- Error tracking and monitoring
 
 ### 1.2. Technology used:
 
