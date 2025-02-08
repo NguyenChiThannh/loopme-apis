@@ -12,7 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@loopme/common": "^1.0.47",
+    "@loopme/common": "^1.0.57",
     "@types/node": "^22.13.0",
     "amqplib": "^0.10.5",
     "async-exit-hook": "^2.0.1",

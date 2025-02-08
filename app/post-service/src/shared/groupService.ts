@@ -1,5 +1,6 @@
+
+import { GroupModel } from '@loopme/common'
 import mongoose from "mongoose"
-import { GroupModel } from "@/models/post"
 
 const isOwnerGroup = async (userId: string, groupId: string): Promise<boolean> => {
     try {

@@ -15,7 +15,7 @@ const OtpSchema: Schema = new Schema({
             validator: function (v: number) {
                 return /^\d{6}$/.test(String(v));
             },
-            message: (props) => `${props.value} is not a valid OTP! OTP must be a 6-digit number.`,
+            message: (props: any) => `${props.value} is not a valid OTP! OTP must be a 6-digit number.`,
         },
         unique: true,
     },

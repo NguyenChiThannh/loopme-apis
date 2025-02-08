@@ -10,6 +10,9 @@ export * from './middlewares/errorHandlingMiddleware'
 export * from './middlewares/validateMiddleware'
 export * from './middlewares/verifyAuthMiddleware'
 
+// models
+export * from './models/index'
+
 // types
 export * from './types/index'
 

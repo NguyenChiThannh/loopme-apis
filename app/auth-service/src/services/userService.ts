@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import UserModel, { filterData, UserUpdateData } from "@/models/user";
 import { PaginatedResponse } from "@loopme/common";
+import { UserModel, filterDataUser, UserUpdateData } from "@loopme/common";
 
 const searchUser = async ({ userId, name, page, size, sort }: {
     userId: string,
@@ -89,7 +89,7 @@ const searchUser = async ({ userId, name, page, size, sort }: {
 
 const updateUser = async (data: Partial<UserUpdateData>, userId: string) => {
     try {
-        const filteredData = filterData(data, ["displayName", "avatar"]);
+        const filteredData = filterDataUser(data, ["displayName", "avatar"]);
 
         const updatedUser = await UserModel.findByIdAndUpdate(
             new mongoose.Types.ObjectId(userId),

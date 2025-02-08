@@ -1,8 +1,8 @@
 import mongoose from "mongoose"
-import GroupModel from "../models/group"
 import { CustomError, ENV_Common, RabbitMQService } from "@loopme/common"
 import { ResponseMessages } from "@loopme/common"
 import { PaginatedResponse } from "@loopme/common"
+import { GroupModel, UserModel } from "@loopme/common"
 
 const create = async (data) => {
     try {
@@ -107,6 +107,7 @@ const addPendingInvitations = async (userId: string, groupId: string): Promise<v
             groupId: groupId,
             type: 'request_to_join_group',
         }
+        console.log('🚀 ~ addPendingInvitations ~ notificationData:', notificationData)
 
         // Pub message to the notification service 
 

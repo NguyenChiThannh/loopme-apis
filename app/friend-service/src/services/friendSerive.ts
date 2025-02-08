@@ -1,7 +1,6 @@
-import UserModel from "@/models/user"
-import FriendModel from "@/models/friend"
 import mongoose from "mongoose"
 import { ENV_Common, PaginatedResponse, RabbitMQService } from "@loopme/common"
+import { FriendModel, UserModel } from "@loopme/common"
 
 const addPendingInvitations = async (myId: string, friendId: string): Promise<void> => {
     try {

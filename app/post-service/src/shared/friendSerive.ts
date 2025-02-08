@@ -1,5 +1,4 @@
-import { FriendModel } from "@/models/post";
-
+import { FriendModel } from '@loopme/common'
 
 const getFriendIds = async (userObjectId) => {
     const friendIdsResult = await FriendModel.aggregate([

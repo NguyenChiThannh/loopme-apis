@@ -1,4 +1,4 @@
-import { VoteModel } from "@/models/post"
+import { VoteModel } from "@loopme/common";
 import mongoose from "mongoose"
 
 const getValueVote = async (userId, postId) => {

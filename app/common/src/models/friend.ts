@@ -1,6 +1,6 @@
 import { IUser } from './user';
 import mongoose, { Schema, Document, Types } from 'mongoose';
-interface IFriend extends Document {
+export interface IFriend extends Document {
     _id: Types.ObjectId;
     sender: Types.ObjectId | IUser;
     receiver: Types.ObjectId | IUser;

@@ -1,9 +1,8 @@
-import ChannelModel from "@/models/channel"
-import MessageModel from "@/models/message"
 import mongoose from "mongoose"
 import { CustomError } from "@loopme/common"
 import { PaginatedResponse } from "@loopme/common"
 import { ResponseMessages } from "@loopme/common"
+import { ChannelModel, MessageModel } from "@loopme/common"
 
 const getAllMessage = async ({
     myId,

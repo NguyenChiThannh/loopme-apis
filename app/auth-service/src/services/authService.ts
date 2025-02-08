@@ -1,4 +1,3 @@
-import UserModel, { IUser } from '../models/user';
 import { ChangePassworReq, LoginReq, RegisterReq } from '../validations/AuthReq';
 import { otpService } from './otpService';
 import bcrypt from 'bcrypt';
@@ -9,6 +8,7 @@ import { generateRandomString } from '@loopme/common'
 import { ResponseMessages } from '@loopme/common';
 import { sendMail } from '@loopme/common'
 import { GMAIL_TYPE } from '@loopme/common';
+import { UserModel, IUser } from '@loopme/common';
 
 let refreshTokens: string[] = [];
 

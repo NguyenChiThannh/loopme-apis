@@ -1,7 +1,6 @@
-import VoteModel from "@/models/vote"
+import { VoteModel } from '@loopme/common'
 import mongoose from "mongoose"
-import { CustomError, ENV_Common, http, RabbitMQService } from "@loopme/common"
-import { notificationEmitter } from "@loopme/common"
+import { CustomError, ENV_Common, RabbitMQService } from "@loopme/common"
 import { ResponseMessages } from "@loopme/common"
 import { transport } from "@/transport"
 

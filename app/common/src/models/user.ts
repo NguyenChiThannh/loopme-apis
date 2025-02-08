@@ -14,7 +14,7 @@ export interface IUser extends Document {
 
 export type UserUpdateData = Pick<IUser, 'displayName' | 'avatar'>;
 
-const validateEmail = function (email) {
+const validateEmail = function (email: string) {
     const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(email)
 };
@@ -57,7 +57,7 @@ const UserModel = mongoose.model<IUser>('User', UserSchema);
 
 export default UserModel;
 
-export const filterData = (data: Partial<UserUpdateData>, keys: (keyof UserUpdateData)[]): Partial<UserUpdateData> => {
+export const filterDataUser = (data: Partial<UserUpdateData>, keys: (keyof UserUpdateData)[]): Partial<UserUpdateData> => {
     const filteredData: Partial<UserUpdateData> = {};
     keys.forEach((key) => {
         if (key in data) {

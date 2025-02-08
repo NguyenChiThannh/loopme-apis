@@ -5,13 +5,13 @@ import exitHook from 'async-exit-hook'
 import { APIs_V1 } from './routes'
 import { errorHandlingMiddleware } from '@loopme/common'
 import cookieParser from 'cookie-parser'
-import connectDB from './configs/mongodb'
+import connectDB from '@/configs/mongodb'
 import 'dotenv/config'
 
 
 const app = express()
 
-const START_SEVER = () => {
+const START_SEVER = async () => {
 
     // Cors
     app.use(cors(corsOptions))

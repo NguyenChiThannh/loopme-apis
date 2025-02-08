@@ -45,7 +45,7 @@ const START_SEVER = () => {
         await connectDB()
         console.log('2.Connected to MongoDB')
         await START_SEVER()
-        // await consumeMessages()
+        await consumeMessages()
     } catch (error) {
         console.error(error)
         process.exit(0)

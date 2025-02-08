@@ -1,13 +1,11 @@
 import mongoose from 'mongoose';
-import PostModel, { filterData } from "../models/post"
-import { GroupModel } from '../models/post';
-import { FriendModel } from '../models/post';
 import { friendService } from '@/shared/friendSerive';
 import { groupService } from '@/shared/groupService';
 import { commentService } from '@/shared/commentService';
 import { voteService } from '@/shared/voteService';
 import { CustomError } from '@loopme/common';
 import { ResponseMessages } from '@loopme/common';
+import { PostModel, filterDataPost, FriendModel, GroupModel } from '@loopme/common'
 
 const create = async (data) => {
     try {
@@ -101,7 +99,7 @@ const updateById = async (postId: string, userId: string, data: any) => {
             throw new CustomError(403, ResponseMessages.FORBIDDEN);
         }
 
-        const validData = filterData(data, ["privacy", "content", "images"]);
+        const validData = filterDataPost(data, ["privacy", "content", "images"]);
 
         await PostModel.updateOne({ _id: postObjectId }, { $set: validData });
 

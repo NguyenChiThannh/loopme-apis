@@ -1,4 +1,4 @@
-import { CommentModel } from "@/models/post";
+import { CommentModel } from '@loopme/common'
 import mongoose from "mongoose";
 
 const getCommentsInPost = async (postId: string) => {

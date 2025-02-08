@@ -1,8 +1,8 @@
-import CommentModel from "@/models/comment";
 import mongoose from "mongoose";
 import { CustomError, ENV_Common, RabbitMQService } from "@loopme/common";
 import { ResponseMessages } from "@loopme/common";
 import { transport } from "@/transport";
+import { CommentModel } from "@loopme/common";
 
 const create = async ({ userId, postId, content, accessToken }: {
     userId: string,
@@ -27,7 +27,7 @@ const create = async ({ userId, postId, content, accessToken }: {
         if (userId !== post.user.toString()) {
             const notificationData = {
                 actor: userId,
-                receiver: post.user.toString(),
+                receiver: post.user._id.toString(),
                 postId: postId,
                 type: 'comment',
             }

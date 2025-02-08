@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
-import NotificationModel from "@/models/notification"
 import { ENV_Common, notificationEmitter } from "@loopme/common";
 import { RabbitMQService } from '@loopme/common'
+import { NotificationModel, UserModel } from '@loopme/common'
 
 interface INotification {
     actor: string;
