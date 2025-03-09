@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat-service
+  template:
+    metadata:
+      labels:
+        app: chat-service
+    spec:
+      containers:
+        - name: chat-service
+          image: your-docker-repo/chat-service:latest
+          ports:
+            - containerPort: 8001
+          env:
+            - name: MONGO_URI
+              value: "mongodb://mongo:27017/loopme"
+            - name: APP_PORT
+              value: "8001"

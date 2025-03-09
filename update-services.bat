@@ -9,4 +9,4 @@ start "Post Service" cmd /k "cd app && cd post-service && npm i @loopme/common"
 start "Post Vote Service" cmd /k "cd app && cd post-vote-service && npm i @loopme/common"
 start "Realtime Service" cmd /k "cd app && cd realtime-service && npm i @loopme/common"
 
-echo All services have been started!
+echo All services have been updated !

@@ -1,0 +1,131 @@
+version: "3.8"
+services:
+  redis:
+    image: redis
+    container_name: redis_service
+    restart: always
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq_service
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  mongodb:
+    image: mongo
+    container_name: mongodb_service
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+
+  gateway-service:
+    build: ./app/gateway-api
+    image: loopme-api/gateway-service
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis
+      - rabbitmq
+      - mongodb
+
+  auth-service:
+    build: ./app/auth-service
+    image: loopme-api/auth-service
+    ports:
+      - 8001:8001
+    depends_on:
+      - redis
+      - rabbitmq
+      - mongodb
+
+  chat-service:
+    build: ./app/chat-service
+    image: loopme-api/chat-service
+    ports:
+      - 8002:8002
+    depends_on:
+      - redis
+      - rabbitmq
+      - mongodb
+
+  comment-service:
+    build: ./app/comment-service
+    image: loopme-api/comment-service
+    ports:
+      - 8003:8003
+    depends_on:
+      - redis
+      - rabbitmq
+      - mongodb
+
+  friend-service:
+    build: ./app/friend-service
+    image: loopme-api/friend-service
+    ports:
+      - 8004:8004
+    depends_on:
+      - redis
+      - rabbitmq
+      - mongodb
+
+  group-service:
+    build: ./app/group-service
+    image: loopme-api/group-service
+    ports:
+      - 8005:8005
+    depends_on:
+      - redis
+      - rabbitmq
+      - mongodb
+
+  notification-service:
+    build: ./app/notification-service
+    image: loopme-api/notification-service
+    ports:
+      - 8006:8006
+    depends_on:
+      - redis
+      - rabbitmq
+      - mongodb
+
+  post-service:
+    build: ./app/post-service
+    image: loopme-api/post-service
+    ports:
+      - 8007:8007
+    depends_on:
+      - redis
+      - rabbitmq
+      - mongodb
+
+  post-vote-service:
+    build: ./app/post-vote-service
+    image: loopme-api/post-vote-service
+    ports:
+      - 8008:8008
+    depends_on:
+      - redis
+      - rabbitmq
+      - mongodb
+
+  realtime-service:
+    build: ./app/realtime-service
+    image: loopme-api/realtime-service
+    ports:
+      - 8009:8009
+    depends_on:
+      - redis
+      - rabbitmq
+      - mongodb
+
+volumes:
+  mongo_data:

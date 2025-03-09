@@ -38,5 +38,3 @@ start "Post Vote Service" cmd /k "cd app && cd post-vote-service && npm run dev"
 start "Realtime Service" cmd /k "cd app && cd realtime-service && npm run dev"
 
 echo All services have been started!
-
-echo All services have been started!

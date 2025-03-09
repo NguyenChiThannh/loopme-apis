@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-vote-service
+spec:
+  type: ClusterIP
+  selector:
+    app: post-vote-service
+  ports:
+    - port: 8001
+      targetPort: 8001

@@ -16,10 +16,10 @@
   resolved "https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.23.1.tgz"
   integrity sha512-BHpFFeslkWrXWyUPnbKm+xYYVYruCinGcftSBaa8zoF9hZO4BcSCFUvHVTtzpIY6YzUnYtuEhZ+C9iEXjxnasg==
 
-"@loopme/common@^1.0.57":
-  version "1.0.57"
-  resolved "https://registry.npmjs.org/@loopme/common/-/common-1.0.57.tgz"
-  integrity sha512-J4bSWJY6mGvaEjOLtssOFJVZt1gbZ8igRipCQTPffwv91m3ZakWF5MmountBvEVGz3xeskXPknrB7dZW/AUJig==
+"@loopme/common@^1.0.58":
+  version "1.0.58"
+  resolved "https://registry.npmjs.org/@loopme/common/-/common-1.0.58.tgz"
+  integrity sha512-B4BK8bPP4tjoMgXb2ZCf2zTNGUBFQrksCBHFwEdoYqv4G4vkjNHO3U0J9YUgaQ+cXsbDyJp8blM8TYQFkrs72Q==
   dependencies:
     "@types/cookie-session" "^2.0.39"
     "@types/jsonwebtoken" "^8.3.9"

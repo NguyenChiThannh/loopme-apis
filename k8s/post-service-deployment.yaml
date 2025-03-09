@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: post-service
+  template:
+    metadata:
+      labels:
+        app: post-service
+    spec:
+      containers:
+        - name: post-service
+          image: your-docker-repo/post-service:latest
+          ports:
+            - containerPort: 8001
+          env:
+            - name: MONGO_URI
+              value: "mongodb://mongo:27017/loopme"
+            - name: APP_PORT
+              value: "8001"
