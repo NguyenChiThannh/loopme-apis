@@ -7,5 +7,5 @@ spec:
   selector:
     app: group-service
   ports:
-    - port: 8001
-      targetPort: 8001
+    - port: 8005
+      targetPort: 8005

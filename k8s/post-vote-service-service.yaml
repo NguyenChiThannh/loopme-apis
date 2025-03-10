@@ -7,5 +7,5 @@ spec:
   selector:
     app: post-vote-service
   ports:
-    - port: 8001
-      targetPort: 8001
+    - port: 8008
+      targetPort: 8008

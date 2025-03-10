@@ -7,5 +7,5 @@ spec:
   selector:
     app: friend-service
   ports:
-    - port: 8001
-      targetPort: 8001
+    - port: 8004
+      targetPort: 8004

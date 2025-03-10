@@ -14,11 +14,36 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: your-docker-repo/auth-service:latest
+          image: nguyenchithanh/loopme-auth-service:latest
           ports:
             - containerPort: 8001
           env:
             - name: MONGO_URI
-              value: "mongodb://mongo:27017/loopme"
+              valueFrom:
+                configMapKeyRef:
+                  name: loopme-config
+                  key: MONGO_URI
             - name: APP_PORT
               value: "8001"
+            - name: APP_HOST
+              value: "0.0.0.0"
+            - name: BUILD_MODE
+              valueFrom:
+                configMapKeyRef:
+                  name: loopme-config
+                  key: BUILD_MODE
+            - name: AMQP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: loopme-config
+                  key: AMQP_PORT
+            - name: JWT_ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: loopme-secrets
+                  key: JWT_ACCESS_TOKEN
+            - name: JWT_REFRESH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: loopme-secrets
+                  key: JWT_REFRESH_TOKEN

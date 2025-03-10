@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loopme-config
+data:
+  MONGO_URI: "mongodb://mongodb:27017/loopme"
+  REDIS_URL: "redis://redis:6379"
+  AMQP_PORT: "amqp://rabbitmq:5672"
+  BUILD_MODE: "prod"

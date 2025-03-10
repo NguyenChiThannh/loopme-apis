@@ -14,11 +14,26 @@ spec:
     spec:
       containers:
         - name: group-service
-          image: your-docker-repo/group-service:latest
+          image: nguyenchithanh/loopme-group-service:latest
           ports:
-            - containerPort: 8001
+            - containerPort: 8005
           env:
             - name: MONGO_URI
-              value: "mongodb://mongo:27017/loopme"
+              valueFrom:
+                configMapKeyRef:
+                  name: loopme-config
+                  key: MONGO_URI
             - name: APP_PORT
-              value: "8001"
+              value: "8005"
+            - name: APP_HOST
+              value: "0.0.0.0"
+            - name: BUILD_MODE
+              valueFrom:
+                configMapKeyRef:
+                  name: loopme-config
+                  key: BUILD_MODE
+            - name: AMQP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: loopme-config
+                  key: AMQP_PORT

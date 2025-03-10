@@ -30,20 +30,24 @@
 
 import mongoose from "mongoose";
 
-// Hàm kết nối đến cơ sở dữ liệu MongoDB
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/loopme";
+
 const connectDB = async () => {
     try {
-        // Kết nối đến cơ sở dữ liệu MongoDB
-        await mongoose.connect('mongodb://localhost:27017/loopme');
-        // Nếu kết nối thành công, in ra thông báo
-        console.log('Connect Mongodb successful');
+        if (mongoose.connection.readyState >= 1) {
+            console.log("🔄 Using existing MongoDB connection");
+            return mongoose.connection;
+        }
+
+        await mongoose.connect(MONGO_URI);
+
+        console.log("MongoDB Connected Successfully");
+        return mongoose.connection;
     } catch (error) {
-        // Nếu có lỗi trong quá trình kết nối, in ra thông báo lỗi
-        console.error(error.message);
-        // Kết thúc quá trình bằng mã lỗi 1
+        console.error("MongoDB Connection Error:", error.message);
         process.exit(1);
     }
-}
+};
 
 // Xuất hàm connectDB để sử dụng ở nơi khác trong ứng dụng
 export default connectDB;

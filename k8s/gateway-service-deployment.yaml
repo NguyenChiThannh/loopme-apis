@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway-service
+  template:
+    metadata:
+      labels:
+        app: gateway-service
+    spec:
+      containers:
+        - name: gateway-service
+          image: nguyenchithanh/loopme-gateway-service:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: PORT
+              value: "8000"
+            - name: AUTH_SERVICE
+              value: "http://auth-service:8001"
+            - name: CHAT_SERVICE
+              value: "http://chat-service:8002"
+            - name: COMMENT_SERVICE
+              value: "http://comment-service:8003"
+            - name: FRIEND_SERVICE
+              value: "http://friend-service:8004"
+            - name: GROUP_SERVICE
+              value: "http://group-service:8005"
+            - name: NOTIFICATION_SERVICE
+              value: "http://notification-service:8006"
+            - name: POST_SERVICE
+              value: "http://post-service:8007"
+            - name: POST_VOTE_SERVICE
+              value: "http://post-vote-service:8008"
+            - name: REALTIME_SERVICE
+              value: "http://realtime-service:8009"
+            - name: REDIS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: loopme-config
+                  key: REDIS_URL

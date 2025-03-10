@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: notification-service
+  name: realtime-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: notification-service
+      app: realtime-service
   template:
     metadata:
       labels:
-        app: notification-service
+        app: realtime-service
     spec:
       containers:
-        - name: notification-service
-          image: nguyenchithanh/loopme-notification-service:latest
+        - name: realtime-service
+          image: nguyenchithanh/loopme-realtime-service:latest
           ports:
-            - containerPort: 8006
+            - containerPort: 8009
           env:
             - name: MONGO_URI
               valueFrom:
@@ -24,7 +24,7 @@ spec:
                   name: loopme-config
                   key: MONGO_URI
             - name: APP_PORT
-              value: "8006"
+              value: "8009"
             - name: APP_HOST
               value: "0.0.0.0"
             - name: BUILD_MODE
@@ -32,18 +32,8 @@ spec:
                 configMapKeyRef:
                   name: loopme-config
                   key: BUILD_MODE
-            - name: AMQP_PORT
+            - name: REDIS_URL
               valueFrom:
                 configMapKeyRef:
                   name: loopme-config
-                  key: AMQP_PORT
-            - name: SMTP_USER
-              valueFrom:
-                secretKeyRef:
-                  name: loopme-secrets
-                  key: SMTP_USER
-            - name: SMTP_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: loopme-secrets
-                  key: SMTP_PASS
+                  key: REDIS_URL
