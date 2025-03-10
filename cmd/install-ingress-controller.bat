@@ -14,4 +14,4 @@ echo.
 echo ===== NGINX INGRESS CONTROLLER INSTALLATION COMPLETE =====
 echo.
 
-pause
+pause 
