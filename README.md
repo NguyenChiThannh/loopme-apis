@@ -1,7 +1,7 @@
 # Loopme-apis
 
 ## 1. Introduction
-LoopMe is a social networking platform similar to Facebook.
+LoopMe is a social networking platform similar to Facebook, built with a microservices architecture, containerized using Docker, and deployed on Kubernetes (K8s).
 
 ### 1.1. Architecture:
 
@@ -16,6 +16,23 @@ LoopMe is a social networking platform similar to Facebook.
 - WebSocket proxy for real-time communications
 - Single entry point for all client requests
 
+#### Auth Service (Port: 8001)
+
+#### Chat Service (Port: 8002)
+
+#### Comment Service (Port: 8003)
+
+#### Friend Service (Port: 8004)
+
+#### Group Service (Port: 8005)
+
+#### Notification Service (Port: 8006)
+
+#### Post Service (Port: 8007)
+
+#### Post Vote Service (Port: 8008)
+
+#### Realtime Service (Port: 8009)
 
 ### 1.2. Technology used:
 
@@ -31,7 +48,8 @@ LoopMe is a social networking platform similar to Facebook.
 - **Nodemail**: A module for Node.js used to send emails easily.
 - **Zod**: A TypeScript-first schema declaration and validation library.
 - **Winston**: A versatile logging library for Node.js, used for logging application activity.
-
+- **Docker**: A containerization platform that enables applications to run consistently across different environments.
+- **Kubernetes**: A container orchestration system for automating deployment, scaling, and management of applications.
 ## 2. Setup
 
 ### 2.1. Prerequisites
@@ -48,29 +66,26 @@ LoopMe is a social networking platform similar to Facebook.
    git clone https://github.com/NguyenChiThannh/loopme-apis.git
    cd loopme-apis
    ```
-2. Install node module for each service
+2. Run docker
+   
+![image](https://github.com/user-attachments/assets/cb73a73a-fdfb-42f7-9722-dcd957155e32)
+
+3. Run project locally:
+   
+   ```bash
+   run-services-local.bat
+   ```
+   
+4. Run project in Docker using Docker Compose:
 
    ```bash
-   cd gateway-api
-   npm i
-   cd .. 
-   cd core-service
-   npm i
-   cd ..
-   cd realtime-service
-   npm i
-   cd ..
-   cd logger-service
-   npm i
-   cd ..
+   docker compose up
    ```
-3. Create .env files for each service
+   
+5. Deploy project in Kubernetes:
 
-4. Run docker
-
-5. On cmd: 
-      ```bash
-   run-services.bat
+   ```bash
+   deploy-loopme-k8s.bat
    ```
 
 ## 3. API Documentation
@@ -154,3 +169,4 @@ LoopMe is a social networking platform similar to Facebook.
 - **POST** `/:postId`: Add a comment to a post by its Id.
 - **DELETE** `/:id`: Delete a comment from a post by its Id.
 - **PATCH** `/:id`: Update a comment from a post by its Id.
+
