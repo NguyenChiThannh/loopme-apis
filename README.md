@@ -1,12 +1,17 @@
 # Loopme-apis
 
+## Table of Contents
+1. [Introduction](#introduction)  
+2. [Setup](#setup)  
+3. [API Documentation](#api-documentation)  
+4. [Deployment Results on Kubernetes](#deployment-results-on-kubernetes)
+
 ## 1. Introduction
 LoopMe is a social networking platform similar to Facebook, built with a microservices architecture, containerized using Docker, and deployed on Kubernetes (K8s).
 
 ### 1.1. Architecture:
 
 ![image](https://github.com/user-attachments/assets/1d09b205-ae42-4625-91ca-f9ea289601f5)
-
 
 
 #### Gateway Service (Port: 8000)
@@ -50,6 +55,7 @@ LoopMe is a social networking platform similar to Facebook, built with a microse
 - **Winston**: A versatile logging library for Node.js, used for logging application activity.
 - **Docker**: A containerization platform that enables applications to run consistently across different environments.
 - **Kubernetes**: A container orchestration system for automating deployment, scaling, and management of applications.
+
 ## 2. Setup
 
 ### 2.1. Prerequisites
@@ -169,4 +175,23 @@ LoopMe is a social networking platform similar to Facebook, built with a microse
 - **POST** `/:postId`: Add a comment to a post by its Id.
 - **DELETE** `/:id`: Delete a comment from a post by its Id.
 - **PATCH** `/:id`: Update a comment from a post by its Id.
+
+### 3.2. CMD
+
+![image](https://github.com/user-attachments/assets/cb73a73a-fdfb-42f7-9722-dcd957155e32)
+
+- **check-status-k8s.bat** Checks the status of all pods, services, and resources in Kubernetes.
+- **cleanup-loopme-k8s.bat** Deletes the loopme namespace in Kubernetes.
+- **deploy-loopme-k8s.bat** Executes the deployment process, including configuring ConfigMap and Secret, deploying PVCs, database services, microservices, and Ingress in Kubernetes.
+- **install-ingress-controller.bat** Installs the Ingress controller in Kubernetes.
+- **push-image-to-docker-hub.bat** Pushes all service images to Docker Hub.
+- **run-all.bat** Pushes images to Docker Hub and runs deploy-loopme-k8s.bat.
+- **run-services-local.bat** Runs each service in the local environment.
+- **update-deployments.bat** Updates deployments with the specified Docker image.
+- **update-services-loopme-common.bat** Installs the loopme-common package from npm.
+
+## 4. Deployment Results on Kubernetes
+
+
+
 
