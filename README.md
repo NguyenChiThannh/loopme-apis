@@ -192,6 +192,43 @@ LoopMe is a social networking platform similar to Facebook, built with a microse
 
 ## 4. Deployment Results on Kubernetes
 
+**Dashboard**:
 
+![1](https://github.com/user-attachments/assets/89d95d62-9c11-47d2-8dcf-91c08e346da3)
 
+**Pods**:
+
+![2](https://github.com/user-attachments/assets/17751e1a-23fc-462c-8f01-b94c9f33a1bf)
+
+![3](https://github.com/user-attachments/assets/713b0a9c-d631-4c8c-9f2a-9882cf048c90)
+
+**Database**:
+
+![5](https://github.com/user-attachments/assets/0b6141d6-bf8d-4533-8fc8-216bf5772e1b)
+
+![4](https://github.com/user-attachments/assets/6fb7b718-d928-4f91-baa0-2a1a39762c7e)
+
+**Replica set**:
+
+![6](https://github.com/user-attachments/assets/1f9cab48-a2d6-4bb0-852b-bfc40a442f4a)
+
+**Services**:
+
+![7](https://github.com/user-attachments/assets/4ba299b8-1895-42c3-9a14-ca65fdbbf6af)
+
+![8](https://github.com/user-attachments/assets/4b0ae423-66fd-4cfd-b57c-9135b8890961)
+
+**Deployments**:
+
+![9](https://github.com/user-attachments/assets/edf2f704-83cf-4cdd-885c-ea12fe2be979)
+
+**Ingress**:
+
+![10](https://github.com/user-attachments/assets/9de56809-4335-4139-a302-f0adef643496)
+
+**Config and Secrets**:
+
+![11](https://github.com/user-attachments/assets/c42e31e6-1e68-407e-8ecb-0c9eba9d7503)
+
+![12](https://github.com/user-attachments/assets/f06b5b6c-6c60-4ff3-a172-b05fad172b18)
 
