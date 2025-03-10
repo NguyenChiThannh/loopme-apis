@@ -1,10 +1,10 @@
 # Loopme-apis
 
 ## Table of Contents
-1. [Introduction](#introduction)  
-2. [Setup](#setup)  
-3. [API Documentation](#api-documentation)  
-4. [Deployment Results on Kubernetes](#deployment-results-on-kubernetes)
+1. [Introduction](#1-introduction)  
+2. [Setup](#2-setup)  
+3. [API Documentation](#3-api-documentation)  
+4. [Deployment Results on Kubernetes](#4-deployment-results-on-kubernetes)
 
 ## 1. Introduction
 LoopMe is a social networking platform similar to Facebook, built with a microservices architecture, containerized using Docker, and deployed on Kubernetes (K8s).
